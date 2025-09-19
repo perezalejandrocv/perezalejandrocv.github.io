@@ -88,7 +88,7 @@
       border: none;
       border-radius: 6px;
       background-color: #ffffff;
-      font-size: 13px;
+      font-size: 14px; /* antes 13px */
       font-family: 'Century Gothic', sans-serif;
       width: 100%;
       box-sizing: border-box;
@@ -99,57 +99,21 @@
       min-height: 100px;
     }
 
-    /* Adjuntar arxiu */
-    .file-upload-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 20px; /* Aproximadamente 1cm */
-    }
-
-    .file-upload-label {
-      font-size: 13px;
-      color: white;
-      font-family: 'Century Gothic', sans-serif;
-    }
-
-    .file-upload-input {
-      background-color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 6px;
+    /* Enlace de compartir archivo */
+    .share-link {
+      text-align: right;
       font-size: 13px;
       font-family: 'Century Gothic', sans-serif;
-      width: 180px;
-      text-align: center;
-      cursor: pointer;
+      margin-top: -10px;
     }
 
-    /* Botón de archivo nativo */
-    .file-upload-input::-webkit-file-upload-button {
-      font-family: 'Century Gothic', sans-serif;
-      font-size: 13px;
-      background-color: white;
-      color: #2F5496;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      display: block;
-      margin: 0 auto;
+    .share-link a {
+      color: #FFD700;
+      text-decoration: none;
     }
 
-    .file-upload-input::file-selector-button {
-      font-family: 'Century Gothic', sans-serif;
-      font-size: 13px;
-      background-color: white;
-      color: #2F5496;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      display: block;
-      margin: 0 auto;
+    .share-link a:hover {
+      text-decoration: underline;
     }
 
     .checkbox-container {
@@ -227,17 +191,6 @@
         height: 60px;
         margin-left: 10px;
       }
-
-      .file-upload-wrapper {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-
-      .file-upload-input {
-        width: 100%;
-        margin-left: 0;
-      }
     }
   </style>
 </head>
@@ -256,7 +209,9 @@
     <div class="form-container">
       <h2>Formulari de Contacte</h2>
 
-      <form action="https://formspree.io/f/xgvlgewo" method="POST" enctype="multipart/form-data">
+      <form action="https://formsubmit.co/perezalejandro.cv@outlook.com" method="POST">
+        <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html" />
+        <input type="hidden" name="_captcha" value="false" />
 
         <!-- Nom i Cognoms -->
         <div class="row">
@@ -273,10 +228,9 @@
         <!-- Comentaris -->
         <textarea name="comentarios" placeholder="Comentaris" required></textarea>
 
-        <!-- Adjuntar Arxiu (alineado a la derecha) -->
-        <div class="file-upload-wrapper">
-          <span class="file-upload-label">Adjuntar arxiu</span>
-          <input type="file" name="archivo" class="file-upload-input" required>
+        <!-- Compartir arxiu -->
+        <div class="share-link">
+          Compartir arxiu: <a href="https://1drv.ms/f/c/88bffd0bc0fda1ad/EqJsYyNziTlIqsubHFfqOc0BMQGLWF3P9QH70u_6IbixNw?e=3VPTky" target="_blank">Seleccionar arxiu</a>
         </div>
 
         <!-- Casella d'acceptació -->
