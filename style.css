@@ -1,0 +1,257 @@
+body {
+    font-family: 'Century Gothic', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    left: 12%;
+}
+
+.left-column,
+.right-column {
+    padding: 20px;
+}
+
+.left-column {
+    width: 35%;
+    background-color: #2F5496;
+    color: white;
+    position: relative;
+}
+
+.right-column {
+    width: 65%;
+    background-color: #fff;
+    position: relative;
+}
+
+.cvap-image {
+    position: fixed;
+    top: 2cm;
+    left: 2cm;
+    width: 200px;
+    height: auto;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: zoomFadeIn 6s ease forwards;
+    z-index: 999;
+}
+
+@keyframes zoomFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.foto-personal {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-top: 0.5cm;
+}
+
+h1 {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+    color: white;
+}
+
+h2 {
+    font-weight: normal;
+    margin-top: 0;
+    font-size: 1.1em;
+    text-align: center;
+    color: white;
+}
+
+.subido {
+    margin-top: 0.25cm;
+    margin-bottom: 5px;
+    color: white;
+    padding-bottom: 0;
+}
+
+.subido span.spaces {
+    margin-left: 1em;
+}
+
+.at-icon {
+    font-size: 50px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    display: inline-block;
+    animation: spinY 6s linear infinite;
+}
+
+@keyframes spinY {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.email-link,
+.email-link:visited,
+.email-link:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.right-column h3 {
+    color: #006600;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.left-column h3 {
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p,
+ul,
+li {
+    font-size: 12px;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+.adjust-space {
+    height: 0.25cm;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-column,
+    .right-column {
+        width: 100%;
+    }
+
+    .foto-personal {
+        width: 80%;
+    }
+
+    .subido {
+        text-align: center;
+    }
+
+    .top-right-section {
+        position: static !important;
+        margin: 20px 0;
+        text-align: center;
+        width: 100% !important;
+    }
+}
+
+.top-right-section {
+    font-family: 'Century Gothic', Arial, sans-serif;
+    font-size: 14px;
+    color: #404040;
+    position: fixed;
+    top: 2cm;
+    right: 2cm; /* Ahora a 2 cm del borde derecho */
+    width: max-content;
+    z-index: 998;
+}
+
+.top-right-section .lang-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2mm;
+}
+
+/* Oculta el espacio sobre Documents */
+.top-right-section .lang-row.spacer {
+    display: none;
+}
+
+.top-right-section .lang-row a {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+    color: #404040;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.top-right-section .lang-row a:hover {
+    cursor: pointer;
+    transform: scale(1.09);
+}
+
+.top-right-section .icon {
+    width: 16px;
+    height: auto;
+    display: inline-block;
+}
+
+.top-right-section .separator-line {
+    width: 5cm;
+    height: 0.25pt;
+    background-color: #AEAAAA;
+    margin-left: -0.3cm;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+/* Espacio reducido en “Reunió.” */
+.top-right-link[href*="zoom.us"] {
+    letter-spacing: 0;
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Botón flotante */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 26px;
+    text-decoration: none;
+    background-color: #2F5496;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top:hover {
+    background-color: #1d3b6c;
+    transform: scale(1.1);
+    cursor: pointer;
+}

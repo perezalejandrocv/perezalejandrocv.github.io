@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background-color: black; /* Fondo para contraste */
+    }
+
+    .at-icon {
+      font-size: 25px; /* 25% más grande que 20px */
+      color: white;
+      font-family: 'Times New Roman', Times, serif;
+      display: inline-block;
+      animation: spinY 3.6s linear infinite; /* 20% más lenta que 3s */
+    }
+
+    @keyframes spinY {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="at-icon">@</div>
+</body>
+</html>

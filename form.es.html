@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV | Alejandro Pérez</title>
+  <style>
+    body {
+      background-color: #FFFFFF;
+      font-family: 'Century Gothic', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: scale(0.8);
+      transform-origin: center;
+      height: 100vh;
+    }
+
+    .page-title {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 23px;
+      font-weight: bold;
+      color: #606060;
+      z-index: 1000;
+      font-family: 'Century Gothic', sans-serif;
+    }
+
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      right: 14cm;
+      height: 72px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      z-index: 1001;
+    }
+
+    .back-arrow:hover {
+      transform: scale(1.1);
+    }
+
+    .form-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .form-container {
+      background-color: #2F5496;
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      color: white;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .row input {
+      flex: 1;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background-color: #ffffff;
+      font-size: 13px;
+      font-family: 'Century Gothic', sans-serif;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Adjuntar archivo */
+    .file-upload-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px; /* Aproximadamente 1cm */
+      font-family: 'Century Gothic', sans-serif;
+      font-size: 13px;
+      color: white;
+    }
+
+    .file-upload-label {
+      cursor: pointer;
+    }
+
+    .file-upload-input {
+      background-color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px;
+      font-size: 13px;
+      font-family: 'Century Gothic', sans-serif;
+      width: 180px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    /* Botón de archivo nativo */
+    .file-upload-input::-webkit-file-upload-button {
+      font-family: 'Century Gothic', sans-serif;
+      font-size: 13px;
+      background-color: white;
+      color: #2F5496;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .file-upload-input::file-selector-button {
+      font-family: 'Century Gothic', sans-serif;
+      font-size: 13px;
+      background-color: white;
+      color: #2F5496;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .checkbox-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .checkbox-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .checkbox-inner input[type="checkbox"] {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+
+    .checkbox-inner label {
+      cursor: pointer;
+      color: white;
+    }
+
+    .checkbox-inner label a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .checkbox-inner label a:hover {
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      padding: 12px;
+      background-color: white;
+      color: #4472C4;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #e0e0e0;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        transform: scale(1);
+        height: auto;
+        position: relative;
+      }
+
+      .row {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .file-upload-wrapper, .checkbox-container {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .checkbox-inner {
+        justify-content: center;
+      }
+
+      .page-title {
+        font-size: 19px;
+        color: #606060;
+        left: 15px;
+        top: 10px;
+        position: relative;
+      }
+
+      .back-arrow {
+        position: relative;
+        right: auto;
+        top: auto;
+        height: 60px;
+        margin-left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Título en la esquina superior izquierda -->
+  <div class="page-title">CV | Alejandro Pérez</div>
+
+  <!-- Imagen flecha a la derecha -->
+  <a href="index.es.html">
+    <img src="images/flechaazul.jpg" alt="Volver al inicio" class="back-arrow" />
+  </a>
+
+  <!-- Formulario -->
+  <div class="form-wrapper">
+    <div class="form-container">
+      <h2>Formulario de Contacto</h2>
+
+      <form action="https://formspree.io/f/mdklqodl" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_next" value="https://perezalejandro.cv.github.io/web/gracias.html" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="Nuevo mensaje desde el formulario" />
+
+        <!-- Nombre y Apellido -->
+        <div class="row">
+          <input type="text" name="nombre" placeholder="Nombre" required>
+          <input type="text" name="apellido" placeholder="Apellido" required>
+        </div>
+
+        <!-- Teléfono -->
+        <input type="tel" name="telefono" placeholder="Teléfono" required>
+
+        <!-- Email -->
+        <input type="email" name="email" placeholder="Email" required>
+
+        <!-- Comentarios -->
+        <textarea name="comentarios" placeholder="Comentarios" required></textarea>
+
+        <!-- Adjuntar archivo -->
+        <div class="file-upload-wrapper">
+          <span class="file-upload-label">Adjuntar archivo</span>
+          <input type="file" name="archivo" class="file-upload-input" />
+        </div>
+
+        <!-- Casilla de aceptación -->
+        <div class="checkbox-container">
+          <div class="checkbox-inner">
+            <input type="checkbox" id="privacidad" required>
+            <label for="privacidad">
+              He leído y acepto la
+              <a href="pprivacidad.es.html" target="_blank">Política de Privacidad</a>
+            </label>
+          </div>
+        </div>
+
+        <!-- Botón de envío -->
+        <button class="submit-btn" type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
