@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -88,7 +88,7 @@
       border: none;
       border-radius: 6px;
       background-color: #ffffff;
-      font-size: 13px;
+      font-size: 14px; /* Increased 1pt */
       font-family: 'Century Gothic', sans-serif;
       width: 100%;
       box-sizing: border-box;
@@ -99,44 +99,30 @@
       min-height: 100px;
     }
 
-    /* Attach file */
-    .file-upload-wrapper {
+    .file-share-wrapper {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 20px;
-    }
-
-    .file-upload-label {
+      font-family: 'Century Gothic', sans-serif;
       font-size: 13px;
       color: white;
-      font-family: 'Century Gothic', sans-serif;
     }
 
-    .file-upload-input {
-      background-color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 6px;
+    .file-share-label {
       font-size: 13px;
-      font-family: 'Century Gothic', sans-serif;
-      width: 180px;
-      text-align: center;
-      cursor: pointer;
+      color: white;
     }
 
-    .file-upload-input::-webkit-file-upload-button,
-    .file-upload-input::file-selector-button {
-      font-family: 'Century Gothic', sans-serif;
+    .file-share-link {
       font-size: 13px;
       background-color: white;
       color: #2F5496;
       border: none;
-      padding: 8px 12px;
+      padding: 6px 12px;
       border-radius: 6px;
       cursor: pointer;
-      display: block;
-      margin: 0 auto;
+      text-decoration: none;
     }
 
     .checkbox-container {
@@ -166,6 +152,10 @@
     .checkbox-inner label a {
       color: white;
       text-decoration: none;
+    }
+
+    .checkbox-inner label a:hover {
+      text-decoration: underline;
     }
 
     .submit-btn {
@@ -215,15 +205,10 @@
         margin-left: 10px;
       }
 
-      .file-upload-wrapper {
+      .file-share-wrapper {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
-      }
-
-      .file-upload-input {
-        width: 100%;
-        margin-left: 0;
       }
     }
   </style>
@@ -243,47 +228,46 @@
     <div class="form-container">
       <h2>Contact Form</h2>
 
-      <form action="https://formspree.io/f/xblanjzo" method="POST" enctype="multipart/form-data">
-
-        <!-- Hidden Fields -->
-        <input type="hidden" name="_next" value="https://perezalejandro.cv.github.io/web/gracias.html" />
+      <form action="https://formsubmit.co/perezalejandro.cv@outlook.com" method="POST">
+        <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_subject" value="New message from the form" />
 
-        <!-- First and Last Name -->
+        <!-- Name and Surname -->
         <div class="row">
           <input type="text" name="nombre" placeholder="First Name" required>
           <input type="text" name="apellido" placeholder="Last Name" required>
         </div>
 
         <!-- Phone -->
-        <input type="tel" name="telefono" placeholder="Phone" required>
+        <input type="tel" name="telefono" placeholder="Phone number" required>
 
         <!-- Email -->
-        <input type="email" name="email" placeholder="Email" required>
+        <input type="email" name="email" placeholder="Email address" required>
 
         <!-- Comments -->
         <textarea name="comentarios" placeholder="Comments" required></textarea>
 
-        <!-- Attach file -->
-        <div class="file-upload-wrapper">
-          <span class="file-upload-label">Attach file</span>
-          <input type="file" name="archivo" class="file-upload-input" />
+        <!-- Share file via OneDrive -->
+        <div class="file-share-wrapper">
+          <span class="file-share-label">Share file</span>
+          <a class="file-share-link" href="https://1drv.ms/f/c/88bffd0bc0fda1ad/EqJsYyNziTlIqsubHFfqOc0BMQGLWF3P9QH70u_6IbixNw?e=3VPTky" target="_blank">
+            Select file
+          </a>
         </div>
 
-        <!-- Checkbox -->
+        <!-- Privacy checkbox -->
         <div class="checkbox-container">
           <div class="checkbox-inner">
-            <input type="checkbox" id="privacidad" required>
-            <label for="privacidad">
+            <input type="checkbox" id="privacy" required>
+            <label for="privacy">
               I have read and accept the
               <a href="pprivacidad.en.html" target="_blank">Privacy Policy</a>
             </label>
           </div>
         </div>
 
-        <!-- Submit -->
-        <button class="submit-btn" type="submit">Send</button>
+        <!-- Submit button -->
+        <button class="submit-btn" type="submit">Submit</button>
       </form>
     </div>
   </div>
