@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Previsión Biorritmos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'Century Gothic', sans-serif;
+      margin: 2cm 8cm;
+      text-align: center;
+      color: #3B3838;
+    }
+
+    #contenedor {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    #titulo {
+      font-weight: normal;
+      font-size: 23px;
+      text-align: left;
+      margin-bottom: 1em;
+    }
+
+    table {
+      width: 100%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      font-size: 12px;
+      table-layout: fixed;
+    }
+
+    th, td {
+      border: 1px solid #4a4a4a;
+      padding: 6px;
+      text-align: center;
+      background-color: transparent;
+    }
+
+    th {
+      background-color: #3B3838;
+      color: #ffffff;
+      font-weight: normal;
+    }
+
+    .positivo {
+      color: #5A8B39;
+    }
+
+    .negativo {
+      color: #FF0000;
+    }
+
+    .critico {
+      background-color: #FF0000 !important;
+      color: #ffffff !important;
+    }
+
+    #estadoActualTitulo {
+      font-size: 16px;
+      margin-top: 1.5cm;
+      text-align: left;
+      font-weight: normal;
+    }
+
+    #descripcion {
+      font-size: 14px;
+      text-align: left;
+      margin-top: 1cm;
+      line-height: 1.5em;
+    }
+
+    #graficoBiorritmos {
+      display: none;
+      margin: 2cm auto 0 auto;
+      max-width: 800px;
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="contenedor">
+    <h1 id="titulo">Previsión Biorritmos, a --/--/----</h1>
+
+    <table id="tablaBiorritmos">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Estado Emocional</th>
+          <th>Estado Físico</th>
+          <th>Estado Intelectual</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <canvas id="graficoBiorritmos"></canvas>
+
+    <div id="estadoActualTitulo">Estado Actual.</div>
+    <div id="descripcion"></div>
+  </div>
+
+  <script>
+    (() => {
+      const fechaNacimiento = new Date(Date.UTC(1970, 11, 18, 12, 0, 0));
+      const diasCriticos = {
+        emocional: "26/10/2025",
+        fisico: "30/09/2025",
+        intelectual: "05/10/2025"
+      };
+      const periodos = { fisico: 23, emocional: 28, intelectual: 33 };
+
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
+
+      const formatearFecha = (date) => {
+        return `${date.getDate().toString().padStart(2, '0')}/${
+          (date.getMonth() + 1).toString().padStart(2, '0')
+        }/${date.getFullYear()}`;
+      };
+
+      const calcularDiasDesdeNacimiento = (date) => {
+        return Math.floor((date - fechaNacimiento) / (1000 * 60 * 60 * 24));
+      };
+
+      const calcularBiorritmo = (dias, periodo) => {
+        return Math.sin((2 * Math.PI * dias) / periodo);
+      };
+
+      const mismaFechaStr = (date, str) => {
+        return formatearFecha(date) === str;
+      };
+
+      const tabla = document.getElementById("tablaBiorritmos").getElementsByTagName("tbody")[0];
+      const titulo = document.getElementById("titulo");
+      const descripcion = document.getElementById("descripcion");
+      const canvas = document.getElementById("graficoBiorritmos");
+
+      titulo.textContent = `Previsión Biorritmos, a ${formatearFecha(hoy)}.`;
+
+      const fechasEmoNeg = [], fechasFisNeg = [], fechasIntNeg = [];
+      const etiquetas = [], dataEmo = [], dataFis = [], dataInt = [];
+
+      for (let i = 0; i < 14; i++) {
+        const fecha = new Date(hoy);
+        fecha.setDate(hoy.getDate() + i);
+        const dias = calcularDiasDesdeNacimiento(fecha);
+
+        const valE = calcularBiorritmo(dias, periodos.emocional);
+        const valF = calcularBiorritmo(dias, periodos.fisico);
+        const valI = calcularBiorritmo(dias, periodos.intelectual);
+
+        const esCritico = (valor, fecha, tipo) => {
+          return Math.abs(valor) < 0.05 || mismaFechaStr(fecha, diasCriticos[tipo]);
+        };
+
+        const estado = (valor, fecha, tipo) => {
+          const critico = esCritico(valor, fecha, tipo);
+          const negativo = valor <= 0 || critico;
+          if (critico) return { texto: "Negativo", clase: "critico" };
+          if (negativo) return { texto: "Negativo", clase: "negativo" };
+          return { texto: "Positivo", clase: "positivo" };
+        };
+
+        const emo = estado(valE, fecha, "emocional");
+        const fis = estado(valF, fecha, "fisico");
+        const intel = estado(valI, fecha, "intelectual");
+
+        if (emo.texto === "Negativo") fechasEmoNeg.push(formatearFecha(fecha));
+        if (fis.texto === "Negativo") fechasFisNeg.push(formatearFecha(fecha));
+        if (intel.texto === "Negativo") fechasIntNeg.push(formatearFecha(fecha));
+
+        etiquetas.push(formatearFecha(fecha));
+        dataEmo.push(valE);
+        dataFis.push(valF);
+        dataInt.push(valI);
+
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td><strong>${formatearFecha(fecha)}</strong></td>
+          <td class="${emo.clase}">${emo.texto}</td>
+          <td class="${fis.clase}">${fis.texto}</td>
+          <td class="${intel.clase}">${intel.texto}</td>
+        `;
+        tabla.appendChild(fila);
+      }
+
+      let texto = "";
+      if (fechasEmoNeg.length)
+        texto += `<b>Estado Emocional Negativo [${fechasEmoNeg.join(", ")}]:</b> Mantenga la calma y sea prudente ! <b>EVITE</b> todos los enfrentamientos emocionales. No empiece ni afronte ningún problema que conlleve gasto emocional. Sea prudente y tenga paciencia, todo en esta vida cambia.<br><br>`;
+      if (fechasFisNeg.length)
+        texto += `<b>Estado Físico Negativo [${fechasFisNeg.join(", ")}]:</b> Sea Prudente !<br><br>`;
+      if (fechasIntNeg.length)
+        texto += `<b>Estado Intelectual Negativo [${fechasIntNeg.join(", ")}]:</b> Sea Prudente !<br><br>`;
+
+      descripcion.innerHTML = texto;
+
+      if (texto !== "") {
+        canvas.style.display = "block";
+        new Chart(canvas, {
+          type: "line",
+          data: {
+            labels: etiquetas,
+            datasets: [
+              {
+                label: "Emocional",
+                data: dataEmo,
+                borderColor: "red",
+                fill: false,
+                tension: 0.2
+              },
+              {
+                label: "Físico",
+                data: dataFis,
+                borderColor: "green",
+                fill: false,
+                tension: 0.2
+              },
+              {
+                label: "Intelectual",
+                data: dataInt,
+                borderColor: "blue",
+                fill: false,
+                tension: 0.2
+              },
+              {
+                label: "Línea 0",
+                data: new Array(dataEmo.length).fill(0),
+                borderColor: "black",
+                borderWidth: 1,
+                borderDash: [5, 5],
+                pointRadius: 0
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                min: -1,
+                max: 1,
+                ticks: {
+                  stepSize: 0.5
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                    size: 10
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
