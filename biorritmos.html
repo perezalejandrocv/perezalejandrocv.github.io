@@ -263,15 +263,10 @@
         });
 
         // Envío email si hay negativos
-        const mensajeEmail = `
-          Se detectaron estados negativos en las siguientes fechas:
-          Estado Emocional: ${fechasEmoNeg.join(", ") || "Ninguno"}
-          Estado Físico: ${fechasFisNeg.join(", ") || "Ninguno"}
-          Estado Intelectual: ${fechasIntNeg.join(", ") || "Ninguno"}
-        `;
-
         emailjs.send("service_sn16s6s", "template_ps4ekef", {
-          message: mensajeEmail.trim()
+          emocional_neg: fechasEmoNeg.length ? fechasEmoNeg.join(", ") : "Ninguno",
+          fisico_neg: fechasFisNeg.length ? fechasFisNeg.join(", ") : "Ninguno",
+          intelectual_neg: fechasIntNeg.length ? fechasIntNeg.join(", ") : "Ninguno"
         }).then(() => {
           console.log("Email enviado correctamente.");
         }).catch((error) => {
