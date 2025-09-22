@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Previsión Biorritmos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       background-color: #ffffff;
@@ -18,15 +18,20 @@
       margin: 0 auto;
     }
 
+    /* Aquí el título alineado a la izquierda */
     #titulo {
       font-weight: normal;
       font-size: 23px;
       text-align: left;
       margin-bottom: 1em;
+      color: #3B3838;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     table {
-      width: 100%;
+      width: 90%;
       margin: 0 auto;
       border-collapse: collapse;
       font-size: 12px;
@@ -48,10 +53,12 @@
 
     .positivo {
       color: #5A8B39;
+      background-color: transparent !important;
     }
 
     .negativo {
       color: #FF0000;
+      background-color: transparent !important;
     }
 
     .critico {
@@ -61,9 +68,13 @@
 
     #estadoActualTitulo {
       font-size: 16px;
-      margin-top: 1.5cm;
+      margin-top: 1cm;
       text-align: left;
       font-weight: normal;
+      color: #3B3838;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     #descripcion {
@@ -71,6 +82,10 @@
       text-align: left;
       margin-top: 1cm;
       line-height: 1.5em;
+      color: #3B3838;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     #graficoBiorritmos {
@@ -82,6 +97,7 @@
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
 <body>
   <div id="contenedor">
@@ -106,7 +122,9 @@
   </div>
 
   <script>
-    (() => {
+    (function() {
+      emailjs.init("XSO0uTppZOswCHkxq");
+
       const fechaNacimiento = new Date(Date.UTC(1970, 11, 18, 12, 0, 0));
       const diasCriticos = {
         emocional: "26/10/2025",
@@ -119,9 +137,8 @@
       hoy.setHours(0, 0, 0, 0);
 
       const formatearFecha = (date) => {
-        return `${date.getDate().toString().padStart(2, '0')}/${
-          (date.getMonth() + 1).toString().padStart(2, '0')
-        }/${date.getFullYear()}`;
+        return `${date.getDate().toString().padStart(2,'0')}/${
+          (date.getMonth() + 1).toString().padStart(2,'0')}/${date.getFullYear()}`
       };
 
       const calcularDiasDesdeNacimiento = (date) => {
@@ -132,9 +149,7 @@
         return Math.sin((2 * Math.PI * dias) / periodo);
       };
 
-      const mismaFechaStr = (date, str) => {
-        return formatearFecha(date) === str;
-      };
+      const mismaFechaStr = (date, str) => formatearFecha(date) === str;
 
       const tabla = document.getElementById("tablaBiorritmos").getElementsByTagName("tbody")[0];
       const titulo = document.getElementById("titulo");
@@ -146,7 +161,7 @@
       const fechasEmoNeg = [], fechasFisNeg = [], fechasIntNeg = [];
       const etiquetas = [], dataEmo = [], dataFis = [], dataInt = [];
 
-      for (let i = 0; i < 14; i++) {
+      for(let i=0; i<14; i++) {
         const fecha = new Date(hoy);
         fecha.setDate(hoy.getDate() + i);
         const dias = calcularDiasDesdeNacimiento(fecha);
@@ -162,8 +177,8 @@
         const estado = (valor, fecha, tipo) => {
           const critico = esCritico(valor, fecha, tipo);
           const negativo = valor <= 0 || critico;
-          if (critico) return { texto: "Negativo", clase: "critico" };
-          if (negativo) return { texto: "Negativo", clase: "negativo" };
+          if(critico) return { texto: "Negativo", clase: "critico" };
+          if(negativo) return { texto: "Negativo", clase: "negativo" };
           return { texto: "Positivo", clase: "positivo" };
         };
 
@@ -171,9 +186,9 @@
         const fis = estado(valF, fecha, "fisico");
         const intel = estado(valI, fecha, "intelectual");
 
-        if (emo.texto === "Negativo") fechasEmoNeg.push(formatearFecha(fecha));
-        if (fis.texto === "Negativo") fechasFisNeg.push(formatearFecha(fecha));
-        if (intel.texto === "Negativo") fechasIntNeg.push(formatearFecha(fecha));
+        if(emo.texto === "Negativo") fechasEmoNeg.push(formatearFecha(fecha));
+        if(fis.texto === "Negativo") fechasFisNeg.push(formatearFecha(fecha));
+        if(intel.texto === "Negativo") fechasIntNeg.push(formatearFecha(fecha));
 
         etiquetas.push(formatearFecha(fecha));
         dataEmo.push(valE);
@@ -191,16 +206,16 @@
       }
 
       let texto = "";
-      if (fechasEmoNeg.length)
+      if(fechasEmoNeg.length)
         texto += `<b>Estado Emocional Negativo [${fechasEmoNeg.join(", ")}]:</b> Mantenga la calma y sea prudente ! <b>EVITE</b> todos los enfrentamientos emocionales. No empiece ni afronte ningún problema que conlleve gasto emocional. Sea prudente y tenga paciencia, todo en esta vida cambia.<br><br>`;
-      if (fechasFisNeg.length)
+      if(fechasFisNeg.length)
         texto += `<b>Estado Físico Negativo [${fechasFisNeg.join(", ")}]:</b> Sea Prudente !<br><br>`;
-      if (fechasIntNeg.length)
+      if(fechasIntNeg.length)
         texto += `<b>Estado Intelectual Negativo [${fechasIntNeg.join(", ")}]:</b> Sea Prudente !<br><br>`;
 
       descripcion.innerHTML = texto;
 
-      if (texto !== "") {
+      if(texto !== "") {
         canvas.style.display = "block";
         new Chart(canvas, {
           type: "line",
@@ -241,24 +256,26 @@
           options: {
             responsive: true,
             scales: {
-              y: {
-                min: -1,
-                max: 1,
-                ticks: {
-                  stepSize: 0.5
-                }
-              }
+              y: { min: -1, max: 1, ticks: { stepSize: 0.5 } }
             },
-            plugins: {
-              legend: {
-                labels: {
-                  font: {
-                    size: 10
-                  }
-                }
-              }
-            }
+            plugins: { legend: { labels: { font: { size: 10 } } } }
           }
+        });
+
+        // Envío email si hay negativos
+        const mensajeEmail = `
+          Se detectaron estados negativos en las siguientes fechas:
+          Estado Emocional: ${fechasEmoNeg.join(", ") || "Ninguno"}
+          Estado Físico: ${fechasFisNeg.join(", ") || "Ninguno"}
+          Estado Intelectual: ${fechasIntNeg.join(", ") || "Ninguno"}
+        `;
+
+        emailjs.send("service_sn16s6s", "template_ps4ekef", {
+          message: mensajeEmail.trim()
+        }).then(() => {
+          console.log("Email enviado correctamente.");
+        }).catch((error) => {
+          console.error("Error enviando email:", error);
         });
       }
     })();
