@@ -262,25 +262,62 @@
           }
         });
 
-        // NUEVO BLOQUE DE ENVÍO CORREGIDO
-        const emocionalStr = fechasEmoNeg.length > 0 ? fechasEmoNeg.join(", ") : "Ninguno";
-        const fisicoStr = fechasFisNeg.length > 0 ? fechasFisNeg.join(", ") : "Ninguno";
-        const intelectualStr = fechasIntNeg.length > 0 ? fechasIntNeg.join(", ") : "Ninguno";
+        // ENVÍO SOLO DE DÍAS CRÍTICOS + VECINOS
 
-        console.log("Datos enviados por email:");
-        console.log("Emocional:", emocionalStr);
-        console.log("Físico:", fisicoStr);
-        console.log("Intelectual:", intelectualStr);
+        function agregarDias(date, dias) {
+          const nuevaFecha = new Date(date);
+          nuevaFecha.setDate(nuevaFecha.getDate() + dias);
+          return nuevaFecha;
+        }
 
-        emailjs.send("service_sn16s6s", "template_ps4ekef", {
-          emocional_neg: emocionalStr,
-          fisico_neg: fisicoStr,
-          intelectual_neg: intelectualStr
-        }).then(() => {
-          console.log("Email enviado correctamente.");
-        }).catch((error) => {
-          console.error("Error enviando email:", error);
-        });
+        function obtenerFechasCriticasYVecinas(data, tipo) {
+          const fechas = [];
+          for (let i = 0; i < data.length; i++) {
+            const valor = data[i];
+            const fechaActual = new Date(hoy);
+            fechaActual.setDate(hoy.getDate() + i);
+
+            const esCritico = Math.abs(valor) < 0.05 || mismaFechaStr(fechaActual, diasCriticos[tipo]);
+            if (esCritico) {
+              const fechasExpandida = [
+                formatearFecha(agregarDias(fechaActual, -1)),
+                formatearFecha(fechaActual),
+                formatearFecha(agregarDias(fechaActual, 1))
+              ];
+              fechas.push(...fechasExpandida);
+            }
+          }
+          return [...new Set(fechas)].sort((a, b) => {
+            const [d1, m1, y1] = a.split("/").map(Number);
+            const [d2, m2, y2] = b.split("/").map(Number);
+            return new Date(y1, m1 - 1, d1) - new Date(y2, m2 - 1, d2);
+          });
+        }
+
+        const fechasCritEmo = obtenerFechasCriticasYVecinas(dataEmo, "emocional");
+        const fechasCritFis = obtenerFechasCriticasYVecinas(dataFis, "fisico");
+        const fechasCritInt = obtenerFechasCriticasYVecinas(dataInt, "intelectual");
+
+        const emocionalStr = fechasCritEmo.length > 0 ? fechasCritEmo.join(", ") : "Ninguno";
+        const fisicoStr = fechasCritFis.length > 0 ? fechasCritFis.join(", ") : "Ninguno";
+        const intelectualStr = fechasCritInt.length > 0 ? fechasCritInt.join(", ") : "Ninguno";
+
+        if (emocionalStr !== "Ninguno" || fisicoStr !== "Ninguno" || intelectualStr !== "Ninguno") {
+          console.log("Email enviado con días críticos:");
+          console.log("Emocional:", emocionalStr);
+          console.log("Físico:", fisicoStr);
+          console.log("Intelectual:", intelectualStr);
+
+          emailjs.send("service_sn16s6s", "template_ps4ekef", {
+            emocional_neg: emocionalStr,
+            fisico_neg: fisicoStr,
+            intelectual_neg: intelectualStr
+          }).then(() => {
+            console.log("Email enviado correctamente.");
+          }).catch((error) => {
+            console.error("Error enviando email:", error);
+          });
+        }
       }
     })();
   </script>
