@@ -123,35 +123,45 @@
 </div>
 
 
-  <script>
-    (function() {
-      emailjs.init("XSO0uTppZOswCHkxq");
+<script>
+(function() {
+  emailjs.init("XSO0uTppZOswCHkxq");
 
-      // Fecha de nacimiento (sin UTC para evitar desfases)
-      const fechaNacimiento = new Date(1970, 11, 18, 12, 0, 0);
+  // ✅ Fecha de nacimiento (18 diciembre 1970, sin hora)
+  const fechaNacimiento = new Date(1970, 11, 18);
 
-      const diasCriticos = {
-        emocional: "26/10/2025",
-        fisico: "30/09/2025",
-        intelectual: "05/10/2025"
-      };
-      const periodos = { fisico: 23, emocional: 28, intelectual: 33 };
+  const diasCriticos = {
+    emocional: "26/10/2025",
+    fisico: "30/09/2025",
+    intelectual: "05/10/2025"
+  };
 
-      const hoy = new Date();
-      hoy.setHours(0, 0, 0, 0);
+  const periodos = {
+    fisico: 23,
+    emocional: 28,
+    intelectual: 33
+  };
 
-      const formatearFecha = (date) => {
-        return `${date.getDate().toString().padStart(2,'0')}/${
-          (date.getMonth() + 1).toString().padStart(2,'0')}/${date.getFullYear()}`;
-      };
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0); // Normalizamos hora
 
-      const calcularDiasDesdeNacimiento = (date) => {
-        return Math.floor((date - fechaNacimiento) / (1000 * 60 * 60 * 24));
-      };
+  const formatearFecha = (date) => {
+    return `${date.getDate().toString().padStart(2, '0')}/${
+      (date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+  };
 
-      const calcularBiorritmo = (dias, periodo) => {
-        return Math.sin((2 * Math.PI * dias) / periodo);
-      };
+  // ✅ Corrección clave: usamos fechas sin hora y redondeamos
+  const calcularDiasDesdeNacimiento = (fecha) => {
+    const fNac = new Date(fechaNacimiento.getFullYear(), fechaNacimiento.getMonth(), fechaNacimiento.getDate());
+    const fDia = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate());
+    return Math.round((fDia - fNac) / (1000 * 60 * 60 * 24));
+  };
+
+  const calcularBiorritmo = (dias, periodo) => {
+    return Math.sin((2 * Math.PI * dias) / periodo);
+  };
+
+  // 👇 desde aquí continúa el resto de tu código como ya lo tienes
 
       const mismaFechaStr = (date, str) => formatearFecha(date) === str;
 
