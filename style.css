@@ -96,7 +96,7 @@ h2 {
     color: white;
     font-family: 'Times New Roman', Times, serif;
     display: inline-block;
-    animation: spinY 8s linear infinite;
+    animation: spinY 11s linear infinite;
 }
 
 @keyframes spinY {
@@ -236,22 +236,25 @@ html {
 
 /* Botón flotante */
 .back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 26px;
-    text-decoration: none;
-    background-color: #2F5496;
-    color: white;
-    padding: 10px 14px;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    z-index: 1000;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #2F5496; /* Fondo azul oscuro */
+  color: white;              /* Flecha blanca */
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 50px;         /* Centrado vertical */
+  text-decoration: none;
+  border-radius: 50%;        /* Círculo perfecto */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .back-to-top:hover {
-    background-color: #1d3b6c;
-    transform: scale(1.1);
-    cursor: pointer;
+  background-color: #4472C4; /* Color más claro al pasar el cursor */
+  transform: scale(1.1);
 }
