@@ -160,6 +160,36 @@
       background-color: #e0e0e0;
     }
 
+.file-share-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 13px;
+  color: white;
+}
+
+.file-share-label {
+  font-size: 13px;
+  color: white;
+}
+
+.file-share-link {
+  font-size: 13px;
+  background-color: white;
+  color: #2F5496;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.file-share-link:hover {
+  background-color: #e0e0e0;
+}
+
     @media (max-width: 480px) {
       body {
         transform: scale(1);
@@ -232,9 +262,13 @@
         <textarea name="Comentaris" placeholder="Comentaris" required></textarea>
 
         <!-- Compartir arxiu -->
-        <div class="share-link">
-          Compartir arxiu: <a href="https://1drv.ms/f/c/88bffd0bc0fda1ad/EqJsYyNziTlIqsubHFfqOc0BMQGLWF3P9QH70u_6IbixNw?e=3VPTky" target="_blank">Seleccionar arxiu</a>
-        </div>
+<div class="file-share-wrapper">
+  <span class="file-share-label">Compartir arxiu</span>
+  <a class="file-share-link" href="https://1drv.ms/f/c/88bffd0bc0fda1ad/EqJsYyNziTlIqsubHFfqOc0BMQGLWF3P9QH70u_6IbixNw?e=3VPTky" target="_blank">
+    Seleccionar arxiu
+  </a>
+</div>
+
 
         <!-- Casella d'acceptació -->
         <div class="checkbox-container">
