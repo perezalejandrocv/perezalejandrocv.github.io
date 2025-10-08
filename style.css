@@ -96,7 +96,7 @@ h2 {
     color: white;
     font-family: 'Times New Roman', Times, serif;
     display: inline-block;
-    animation: spinY 13s linear infinite;
+    animation: spinY 15s linear infinite;
 }
 
 @keyframes spinY {
