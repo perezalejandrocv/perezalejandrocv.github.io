@@ -26,13 +26,13 @@
     }
 
     .name {
-      font-size: 3em;
+      font-size: 2em;
       opacity: 0;
       animation: fadeInScale 7s ease-out forwards;
     }
 
     .cv-link {
-      font-size: 12em;
+      font-size: 10em;
       margin-top: 30px;
       color: white;
       text-decoration: none;
@@ -56,10 +56,12 @@
       opacity: 0;
       animation: fadeInScale 4s ease-out forwards;
       animation-delay: 0.5s;
+      table-layout: fixed;
+      width: 300px;
     }
 
     .language-table td {
-      padding: 0 30px;
+      width: 100px;
       text-align: center;
     }
 
@@ -71,14 +73,17 @@
     .language-link {
       display: inline-block;
       margin-top: 8px;
-      font-size: 1em;
       color: white;
       text-decoration: none;
-      transition: font-size 0.3s ease;
     }
 
-    .language-link:hover {
-      font-size: 1.125em; /* Aumenta 2 puntos aprox. */
+    .language-link span {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .language-link:hover span {
+      transform: scale(1.126);
     }
 
     @keyframes fadeInScale {
@@ -114,9 +119,9 @@
       <td><img src="images/en.png" alt="English" /></td>
     </tr>
     <tr>
-      <td><a class="language-link" href="index.es.html">Español</a></td>
-      <td><a class="language-link" href="index.ca.html">Català</a></td>
-      <td><a class="language-link" href="index.en.html">English</a></td>
+      <td><a class="language-link" href="index.es.html"><span>Español</span></a></td>
+      <td><a class="language-link" href="index.ca.html"><span>Català</span></a></td>
+      <td><a class="language-link" href="index.en.html"><span>English</span></a></td>
     </tr>
   </table>
 
