@@ -2,10 +2,119 @@
 <html lang="ca">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=index.ca.html" />
-  <title>Redireccionando...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV | Alejandro Pérez</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      background-color: #2F5496;
+      color: white;
+      font-family: 'Century Gothic', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .name {
+      font-size: 3em;
+      opacity: 0;
+      animation: fadeIn 8s ease-out forwards;
+    }
+
+    .cv-link {
+      font-size: 12em;
+      margin-top: 30px;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-block;
+      opacity: 0;
+      animation: fadeIn 8s ease-out forwards, spinY 20s linear infinite;
+      animation-delay: 0s, 0s;
+      transform-origin: center;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+
+    .cv-link:hover {
+      border: 2px solid white;
+      border-radius: 50%;
+    }
+
+    .language-table {
+      margin-top: 2cm;
+      opacity: 0;
+      animation: fadeIn 4s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    .language-table td {
+      padding: 0 30px;
+      text-align: center;
+    }
+
+    .language-table img {
+      width: 32px;
+      height: auto;
+    }
+
+    .language-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 1em;
+      color: white;
+      text-decoration: none;
+      transition: font-size 0.3s ease;
+    }
+
+    .language-link:hover {
+      font-size: 1.125em; /* Aumenta 2 puntos aprox. */
+      /* Sin subrayado, sin cambio de color */
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes spinY {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
-  <p>Si no eres redirigido automáticamente, haz clic <a href="index.ca.html">aquí</a>.</p>
+
+  <div class="name">Alejandro Pérez</div>
+  <a class="cv-link" href="index.ca.html" aria-label="Entrar al CV">CV</a>
+
+  <table class="language-table">
+    <tr>
+      <td><img src="images/es.png" alt="Español" /></td>
+      <td><img src="images/ca.png" alt="Català" /></td>
+      <td><img src="images/en.png" alt="English" /></td>
+    </tr>
+    <tr>
+      <td><a class="language-link" href="index.es.html">Español</a></td>
+      <td><a class="language-link" href="index.ca.html">Català</a></td>
+      <td><a class="language-link" href="index.en.html">English</a></td>
+    </tr>
+  </table>
+
 </body>
 </html>
