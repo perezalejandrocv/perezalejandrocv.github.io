@@ -21,7 +21,6 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      /* Cambiado a visible para que se vea la animación completa */
       overflow: visible;
       text-align: center;
     }
@@ -48,7 +47,6 @@
       transition: all 0.3s ease;
       padding: 20px;
       transform-origin: center;
-      /* quitamos spinY inicialmente */
       animation: none;
     }
 
@@ -61,7 +59,7 @@
       display: inline-block;
     }
 
-    /* Animaciones de entrada muy lentas, 8 segundos */
+    /* Animaciones de entrada */
     .cv-left {
       animation: slideInLeft 6s ease-out forwards;
     }
@@ -69,9 +67,6 @@
     .cv-right {
       animation: slideInRight 6s ease-out forwards;
     }
-
-    /* Al acabar la animación de entrada, inicia spinY */
-    /* Usamos JavaScript para añadir esta animación tras 8s */
 
     .language-table {
       margin: 2cm auto 0 auto;
@@ -105,6 +100,7 @@
       transform: scale(1.126);
     }
 
+    /* Animaciones */
     @keyframes fadeInScale {
       from {
         transform: scale(0.7);
@@ -157,9 +153,9 @@
 
     <table class="language-table">
       <tr>
-        <td><img src="images/es.png" alt="Español" /></td>
-        <td><img src="images/ca.png" alt="Català" /></td>
-        <td><img src="images/en.png" alt="English" /></td>
+        <td><img src="images/es.png" alt="Bandera de España - Español" /></td>
+        <td><img src="images/ca.png" alt="Bandera de Catalunya - Català" /></td>
+        <td><img src="images/en.png" alt="Bandera del Regne Unit - English" /></td>
       </tr>
       <tr>
         <td><a class="language-link" href="index.es.html"><span>Español</span></a></td>
@@ -170,11 +166,11 @@
   </div>
 
   <script>
-    // Tras 8s (duración animación entrada), activamos spinY en el enlace CV
+    // Tras 6s (cuando acaban las animaciones de entrada), activamos spinY en el enlace CV
     setTimeout(() => {
       const cvLink = document.getElementById('cv-link');
       cvLink.style.animation = 'spinY 24s linear infinite';
-    }, 8000);
+    }, 6000);
   </script>
 
 </body>
