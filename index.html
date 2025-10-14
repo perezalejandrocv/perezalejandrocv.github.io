@@ -2,114 +2,90 @@
 <html lang="ca">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CV | Alejandro Pérez</title>
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="images/favicon.png" />
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     html, body {
       height: 100%;
       background-color: #2F5496;
       color: white;
       font-family: 'Century Gothic', sans-serif;
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
-      overflow: visible;
+      align-items: center;
+      justify-content: flex-start;
       text-align: center;
     }
-
-    .content {
+    .main-content {
+      margin-top: 20vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      animation: fadeInScale 4s ease-out forwards;
-      transform-origin: center;
     }
-
     .name {
       font-size: 2.4em;
+      margin-bottom: 0.5cm;
+      animation: fadeInScale 4s ease forwards;
     }
-
     .cv-link {
       font-size: 10em;
-      margin-top: 30px;
       color: white;
       text-decoration: none;
       cursor: pointer;
       display: inline-block;
-      transition: all 0.3s ease;
       padding: 20px;
+      margin-bottom: 0.5cm;
       transform-origin: center;
-      animation: none;
+      z-index: 5;
     }
-
     .cv-link:hover {
       border: 2px solid white;
       border-radius: 50%;
     }
-
     .cv-letter {
       display: inline-block;
+      will-change: transform, opacity;
     }
-
-    /* Animaciones de entrada */
     .cv-left {
-      animation: slideInLeft 6s ease-out forwards;
+      animation: slideInLeft 4s ease forwards;
     }
-
     .cv-right {
-      animation: slideInRight 6s ease-out forwards;
+      animation: slideInRight 4s ease forwards;
     }
-
     .language-table {
-      margin: 2cm auto 0 auto;
       table-layout: fixed;
       width: 300px;
+      margin: 0 auto;
+      animation: fadeInScale 4s ease forwards;
     }
-
     .language-table td {
       width: 100px;
       text-align: center;
     }
-
     .language-table img {
       width: 32px;
       height: auto;
     }
-
     .language-link {
       display: inline-block;
       margin-top: 8px;
       color: white;
       text-decoration: none;
     }
-
     .language-link span {
       display: inline-block;
       transition: transform 0.3s ease;
+      font-size: 17px; /* AUMENTADO 1 PUNTO */
     }
-
     .language-link:hover span {
       transform: scale(1.126);
     }
-
-    /* Animaciones */
-    @keyframes fadeInScale {
-      from {
-        transform: scale(0.7);
-      }
-      to {
-        transform: scale(1);
-      }
-    }
-
     @keyframes slideInLeft {
       from {
         transform: translateX(-100vw);
@@ -120,7 +96,6 @@
         opacity: 1;
       }
     }
-
     @keyframes slideInRight {
       from {
         transform: translateX(100vw);
@@ -131,7 +106,16 @@
         opacity: 1;
       }
     }
-
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
     @keyframes spinY {
       from {
         transform: rotateY(0deg);
@@ -140,11 +124,14 @@
         transform: rotateY(360deg);
       }
     }
+    .spin {
+      animation: spinY 24s linear infinite;
+    }
   </style>
 </head>
 <body>
 
-  <div class="content">
+  <div class="main-content">
     <div class="name">Alejandro Pérez</div>
 
     <a id="cv-link" class="cv-link" href="index.ca.html" aria-label="Entrar al CV">
@@ -153,9 +140,9 @@
 
     <table class="language-table">
       <tr>
-        <td><img src="images/es.png" alt="Bandera de España - Español" /></td>
-        <td><img src="images/ca.png" alt="Bandera de Catalunya - Català" /></td>
-        <td><img src="images/en.png" alt="Bandera del Regne Unit - English" /></td>
+        <td><img src="images/es.png" alt="Español" /></td>
+        <td><img src="images/ca.png" alt="Català" /></td>
+        <td><img src="images/en.png" alt="English" /></td>
       </tr>
       <tr>
         <td><a class="language-link" href="index.es.html"><span>Español</span></a></td>
@@ -166,11 +153,10 @@
   </div>
 
   <script>
-    // Tras 6s (cuando acaban las animaciones de entrada), activamos spinY en el enlace CV
+    // Tras 2s, activa el giro del CV
     setTimeout(() => {
-      const cvLink = document.getElementById('cv-link');
-      cvLink.style.animation = 'spinY 24s linear infinite';
-    }, 6000);
+      document.getElementById('cv-link').classList.add('spin');
+    }, 2000);
   </script>
 
 </body>
