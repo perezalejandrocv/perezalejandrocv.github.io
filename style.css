@@ -1,237 +1,256 @@
 body {
-    font-family: 'Century Gothic', Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f8f8f8;
+  font-family: 'Century Gothic', Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f8f8f8;
 }
 
 .container {
-    display: flex;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    left: 12%;
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  left: 12%;
 }
 
 .left-column,
 .right-column {
-    padding: 20px;
+  padding: 20px;
 }
 
 .left-column {
-    width: 35%;
-    background-color: #2F5496;
-    color: white;
-    position: relative;
+  width: 35%;
+  background-color: #2F5496;
+  color: white;
+  position: relative;
 }
 
 .right-column {
-    width: 65%;
-    background-color: #fff;
-    position: relative;
+  width: 65%;
+  background-color: #fff;
+  position: relative;
 }
 
 .cvap-image {
-    position: fixed;
-    top: 2cm;
-    left: 2cm;
-    width: 200px;
-    height: auto;
-    opacity: 0;
-    transform: scale(0.8);
-    animation: zoomFadeIn 6s ease forwards;
-    z-index: 999;
+  position: fixed;
+  top: 4.74em;   /* 7.1em - 2.36em = 4.74em ≈ 2 cm desde el borde superior */
+  left: 5.9em;   /* 2.5 cm desde el borde izquierdo */
+  width: 200px;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: zoomFadeIn 6s ease forwards;
+  z-index: 999;
 }
 
 @keyframes zoomFadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .foto-personal {
-    width: 50%;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    margin-top: 0.5cm;
+  width: 50%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 1.2em; /* antes: 0.5cm */
+  border-radius: 22px; /* <- Añadido para redondear esquinas */
 }
 
 h1 {
-    font-weight: bold;
-    margin-bottom: 5px;
-    text-align: center;
-    color: white;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+  color: white;
 }
 
 h2 {
-    font-weight: normal;
-    margin-top: 0;
-    font-size: 1.1em;
-    text-align: center;
-    color: white;
+  font-weight: normal;
+  margin-top: 0;
+  font-size: 1.1em;
+  text-align: center;
+  color: white;
 }
 
 .subido {
-    margin-top: 0.25cm;
-    margin-bottom: 5px;
-    color: white;
-    padding-bottom: 0;
+  margin-top: 0.6em; /* antes: 0.25cm */
+  margin-bottom: 5px;
+  color: white;
+  padding-bottom: 0;
 }
 
 .subido span.spaces {
-    margin-left: 1em;
+  margin-left: 1em;
+}
+
+/* ANIMACIÓN GIRATORIA Y PULSACIÓN */
+@keyframes spinYandScale {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.05);
+  }
+  100% {
+    transform: rotateY(360deg) scale(1);
+  }
 }
 
 .at-icon {
-    font-size: 50px;
-    color: white;
-    font-family: 'Times New Roman', Times, serif;
-    display: inline-block;
-    animation: spinY 15s linear infinite;
+  font-size: 50px;
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  display: inline-block;
+  animation: spinYandScale 15s linear infinite;
+  will-change: transform;
 }
 
-@keyframes spinY {
-    from {
-        transform: rotateY(0deg);
-    }
-    to {
-        transform: rotateY(360deg);
-    }
+/* Contenedor para efecto hover */
+.email-link {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Agrandar al pasar el ratón */
+@media (hover: hover) and (pointer: fine) {
+  .email-link:hover {
+    transform: scale(1.1);
+  }
 }
 
 .email-link,
 .email-link:visited,
 .email-link:hover {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .right-column h3 {
-    color: #006600;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  color: #006600;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .left-column h3 {
-    color: white;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 p,
 ul,
 li {
-    font-size: 12px;
-    text-align: justify;
-    line-height: 1.6;
+  font-size: 12px;
+  text-align: justify;
+  line-height: 1.6;
 }
 
 ul {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .adjust-space {
-    height: 0.25cm;
+  height: 0.6em; /* antes: 0.25cm */
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .left-column,
-    .right-column {
-        width: 100%;
-    }
+  .left-column,
+  .right-column {
+    width: 100%;
+  }
 
-    .foto-personal {
+ .foto-personal {
         width: 80%;
-    }
+  }
 
-    .subido {
-        text-align: center;
-    }
+  .subido {
+    text-align: center;
+  }
 
-    .top-right-section {
-        position: static !important;
-        margin: 20px 0;
-        text-align: center;
-        width: 100% !important;
-    }
+  .top-right-section {
+    position: static !important;
+    margin: 20px 0;
+    text-align: center;
+    width: 100% !important;
+  }
 }
 
 .top-right-section {
-    font-family: 'Century Gothic', Arial, sans-serif;
-    font-size: 14px;
-    color: #404040;
-    position: fixed;
-    top: 2cm;
-    right: 2cm; /* Ahora a 2 cm del borde derecho */
-    width: max-content;
-    z-index: 998;
+  font-family: 'Century Gothic', Arial, sans-serif;
+  font-size: 0.875em;
+  color: #404040;
+  position: fixed;
+  top: 7.1em;    /* 3 cm del borde superior */
+  right: 5.9em;  /* 2.5 cm del borde derecho */
+  width: max-content;
+  z-index: 998;
 }
 
 .top-right-section .lang-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 2mm;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.5em; /* ≈ 7.6px */
 }
 
-/* Oculta el espacio sobre Documents */
 .top-right-section .lang-row.spacer {
-    display: none;
+  display: none;
 }
 
 .top-right-section .lang-row a {
-    display: flex;
-    align-items: center;
-    gap: 0.25em;
-    color: #404040;
-    text-decoration: none;
-    transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  color: #404040;
+  text-decoration: none;
+  transition: transform 0.2s ease;
 }
 
 .top-right-section .lang-row a:hover {
-    cursor: pointer;
-    transform: scale(1.09);
+  cursor: pointer;
+  transform: scale(1.09);
 }
 
 .top-right-section .icon {
-    width: 16px;
-    height: auto;
-    display: inline-block;
+  width: 16px;
+  height: auto;
+  display: inline-block;
 }
 
 .top-right-section .separator-line {
-    width: 5cm;
-    height: 0.25pt;
-    background-color: #AEAAAA;
-    margin-left: -0.3cm;
-    margin-top: 4px;
-    margin-bottom: 4px;
+  width: 11.8em;       /* antes: 5cm */
+  height: 0.015em;     /* antes: 0.25pt */
+  background-color: #AEAAAA;
+  margin-left: -0.7em; /* antes: -0.3cm */
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
 }
 
-/* Espacio reducido en “Reunió.” */
+/* Zoom link específico */
 .top-right-link[href*="zoom.us"] {
-    letter-spacing: 0;
+  letter-spacing: 0;
 }
 
 /* Scroll suave */
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 /* Botón flotante */
@@ -241,20 +260,49 @@ html {
   right: 30px;
   width: 50px;
   height: 50px;
-  background-color: #2F5496; /* Fondo azul oscuro */
-  color: white;              /* Flecha blanca */
+  background-color: #2F5496;
+  color: white;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  line-height: 50px;         /* Centrado vertical */
+  line-height: 50px;
   text-decoration: none;
-  border-radius: 50%;        /* Círculo perfecto */
+  border-radius: 50%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   z-index: 999;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .back-to-top:hover {
-  background-color: #4472C4; /* Color más claro al pasar el cursor */
+  background-color: #4472C4;
   transform: scale(1.1);
+}
+
+h1 {
+  margin-bottom: 0.02em;
+}
+
+h2 {
+  margin-top: 0.1em;
+}
+
+.white-line {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  margin: 0 auto;
+  animation: fadeOutLine 4s forwards;
+  opacity: 1;
+}
+
+@keyframes fadeOutLine {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

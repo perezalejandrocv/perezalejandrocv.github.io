@@ -11,6 +11,7 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     html, body {
       height: 100%;
       background-color: #2F5496;
@@ -22,70 +23,97 @@
       justify-content: flex-start;
       text-align: center;
     }
+
     .main-content {
       margin-top: 20vh;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     .name {
       font-size: 2.4em;
       margin-bottom: 0.5cm;
       animation: fadeInScale 4s ease forwards;
     }
+
+    .cv-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 0.5cm;
+    }
+
     .cv-link {
-      font-size: 10em;
+      font-size: 20em;
       color: white;
       text-decoration: none;
       cursor: pointer;
       display: inline-block;
-      padding: 20px;
-      margin-bottom: 0.5cm;
       transform-origin: center;
       z-index: 5;
+      letter-spacing: normal;
+      white-space: nowrap;
     }
+
     .cv-link:hover {
       border: 2px solid white;
       border-radius: 50%;
     }
+
+    .cv-link {
+      border: 2px solid transparent;
+    }
+
+
     .cv-letter {
       display: inline-block;
       will-change: transform, opacity;
     }
+
     .cv-left {
       animation: slideInLeft 4s ease forwards;
     }
+
     .cv-right {
       animation: slideInRight 4s ease forwards;
     }
+
     .language-table {
       table-layout: fixed;
       width: 300px;
       margin: 0 auto;
       animation: fadeInScale 4s ease forwards;
     }
+
     .language-table td {
       width: 100px;
       text-align: center;
     }
+
     .language-table img {
       width: 32px;
       height: auto;
     }
+
     .language-link {
       display: inline-block;
       margin-top: 8px;
       color: white;
       text-decoration: none;
     }
+
     .language-link span {
       display: inline-block;
       transition: transform 0.3s ease;
-      font-size: 17px; /* AUMENTADO 1 PUNTO */
+      font-size: 17px;
     }
+
     .language-link:hover span {
       transform: scale(1.126);
     }
+
     @keyframes slideInLeft {
       from {
         transform: translateX(-100vw);
@@ -96,6 +124,7 @@
         opacity: 1;
       }
     }
+
     @keyframes slideInRight {
       from {
         transform: translateX(100vw);
@@ -106,6 +135,7 @@
         opacity: 1;
       }
     }
+
     @keyframes fadeInScale {
       from {
         opacity: 0;
@@ -116,6 +146,7 @@
         transform: scale(1);
       }
     }
+
     @keyframes spinY {
       from {
         transform: rotateY(0deg);
@@ -124,8 +155,29 @@
         transform: rotateY(360deg);
       }
     }
+
     .spin {
-      animation: spinY 24s linear infinite;
+      animation: spinY 26s linear infinite;
+    }
+
+    .cv-line {
+      width: 15cm;
+      height: 2px;
+      background: white;
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    .cv-line.visible {
+      opacity: 1;
+    }
+
+    .line-left {
+      margin-right: 20px;
+    }
+
+    .line-right {
+      margin-left: 20px;
     }
   </style>
 </head>
@@ -134,9 +186,15 @@
   <div class="main-content">
     <div class="name">Alejandro Pérez</div>
 
-    <a id="cv-link" class="cv-link" href="index.ca.html" aria-label="Entrar al CV">
-      <span class="cv-letter cv-left">C</span><span class="cv-letter cv-right">V</span>
-    </a>
+    <div class="cv-wrapper">
+      <div class="cv-line line-left"></div>
+
+      <a id="cv-link" class="cv-link" href="index.ca.html" aria-label="Entrar al CV">
+        <span class="cv-letter cv-left">C</span><span class="cv-letter cv-right">V</span>
+      </a>
+
+      <div class="cv-line line-right"></div>
+    </div>
 
     <table class="language-table">
       <tr>
@@ -153,9 +211,40 @@
   </div>
 
   <script>
-    // Tras 2s, activa el giro del CV
+    const cvLeft = document.querySelector('.cv-left');
+    const cvRight = document.querySelector('.cv-right');
+    const leftLine = document.querySelector('.line-left');
+    const rightLine = document.querySelector('.line-right');
+    const cvLink = document.getElementById('cv-link');
+
+    let leftDone = false;
+    let rightDone = false;
+
+    function showLines() {
+      if (leftDone && rightDone) {
+        leftLine.classList.add('visible');
+        rightLine.classList.add('visible');
+
+        setTimeout(() => {
+          leftLine.classList.remove('visible');
+          rightLine.classList.remove('visible');
+        }, 800);
+      }
+    }
+
+    cvLeft.addEventListener('animationend', () => {
+      leftDone = true;
+      showLines();
+    });
+
+    cvRight.addEventListener('animationend', () => {
+      rightDone = true;
+      showLines();
+    });
+
+    // Iniciar el spin 2 segundos después del inicio (2 segundos antes de fin de animación)
     setTimeout(() => {
-      document.getElementById('cv-link').classList.add('spin');
+      cvLink.classList.add('spin');
     }, 2000);
   </script>
 
