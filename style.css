@@ -286,8 +286,18 @@ ul {
 }
 
 /* ===============================
-   Responsive - Móviles
+   Responsive - Móviles y Tablets
    =============================== */
+
+/* Ocultar imágenes en dispositivos táctiles y tablets horizontales */
+@media (max-width: 1366px), (hover: none) and (pointer: coarse) {
+  .cvap-image,
+  .qr-fixed {
+    display: none !important;
+  }
+}
+
+/* Ajustes de layout para móviles (pantallas ≤ 1024px) */
 @media (max-width: 1024px) {
   .container {
     flex-direction: column;
@@ -295,11 +305,17 @@ ul {
   }
 
   .left-column,
-  .right-column { width: 100%; }
+  .right-column { 
+    width: 100%; 
+  }
 
-  .foto-personal { width: 80%; }
+  .foto-personal { 
+    width: 80%; 
+  }
 
-  .subido { text-align: center; }
+  .subido { 
+    text-align: center; 
+  }
 
   .top-right-section {
     position: static !important;
@@ -307,7 +323,4 @@ ul {
     text-align: center;
     width: 100% !important;
   }
-
-  .cvap-image,
-  .qr-fixed { display: none !important; }
 }
