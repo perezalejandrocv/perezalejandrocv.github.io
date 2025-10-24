@@ -9,7 +9,10 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
-  <style>
+   <style>
+    /* ===========================
+       Body y contenedor principal
+    ============================ */
     body {
       background-color: #FFFFFF;
       font-family: 'Century Gothic', sans-serif;
@@ -20,7 +23,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transform: scale(0.8);
+      transform: scale(0.8); /* contenido reducido -20% en PC */
       transform-origin: center;
       height: 100vh;
     }
@@ -35,11 +38,15 @@
       z-index: 1000;
     }
 
+    /* ===========================
+       Flecha de volver atrás
+    ============================ */
     .back-arrow {
-      position: absolute;
+      position: fixed;
       top: 20px;
-      right: 14cm;
-      height: 72px;
+      right: 10cm;       /* distancia del borde derecho en PC */
+      max-width: 6%;      /* ancho proporcional en PC */
+      height: auto;
       cursor: pointer;
       transition: transform 0.2s ease;
       z-index: 1001;
@@ -49,6 +56,35 @@
       transform: scale(1.1);
     }
 
+    /* Ajuste para tablets grandes */
+    @media (max-width: 1366px) {
+      .back-arrow {
+        right: 8%;       /* proporcional */
+        max-width: 8%;
+      }
+    }
+
+    /* Ajuste para tablets y laptops medianos */
+    @media (max-width: 1024px) {
+      .back-arrow {
+        right: 5%;       /* proporcional a pantallas más pequeñas */
+        max-width: 10%;
+        top: 2%;
+      }
+    }
+
+    /* Ajuste para móviles pequeños */
+    @media (max-width: 480px) {
+      .back-arrow {
+        right: 3%;
+        max-width: 12%;
+        top: 1.5%;
+      }
+    }
+
+    /* ===========================
+       Formulario
+    ============================ */
     .form-wrapper {
       display: flex;
       justify-content: center;
@@ -93,7 +129,7 @@
       border: none;
       border-radius: 6px;
       background-color: #ffffff;
-      font-size: 14px; /* Increased 1pt */
+      font-size: 14px;
       font-family: 'Century Gothic', sans-serif;
       width: 100%;
       box-sizing: border-box;
@@ -104,30 +140,20 @@
       min-height: 100px;
     }
 
-    .file-share-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 20px;
+    .share-link {
+      text-align: right;
+      font-size: 13px;
       font-family: 'Century Gothic', sans-serif;
-      font-size: 13px;
-      color: white;
+      margin-top: -10px;
     }
 
-    .file-share-label {
-      font-size: 13px;
-      color: white;
-    }
-
-    .file-share-link {
-      font-size: 13px;
-      background-color: white;
-      color: #2F5496;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
+    .share-link a {
+      color: #FFD700;
       text-decoration: none;
+    }
+
+    .share-link a:hover {
+      text-decoration: underline;
     }
 
     .checkbox-container {
@@ -159,10 +185,6 @@
       text-decoration: none;
     }
 
-    .checkbox-inner label a:hover {
-      text-decoration: underline;
-    }
-
     .submit-btn {
       padding: 12px;
       background-color: white;
@@ -178,6 +200,39 @@
       background-color: #e0e0e0;
     }
 
+    .file-share-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px;
+      font-family: 'Century Gothic', sans-serif;
+      font-size: 13px;
+      color: white;
+    }
+
+    .file-share-label {
+      font-size: 13px;
+      color: white;
+    }
+
+    .file-share-link {
+      font-size: 13px;
+      background-color: white;
+      color: #2F5496;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .file-share-link:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* ===========================
+       Responsive para móviles
+    ============================ */
     @media (max-width: 480px) {
       body {
         transform: scale(1);
@@ -203,19 +258,8 @@
         left: 15px;
         top: 10px;
       }
-
-      .back-arrow {
-        position: relative;
-        height: 60px;
-        margin-left: 10px;
-      }
-
-      .file-share-wrapper {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
     }
+
   </style>
 </head>
 <body>
@@ -224,7 +268,7 @@
   <div class="page-title">CV | Alejandro Pérez</div>
 
   <!-- Back arrow -->
-  <a href="nota.en.html">
+  <a href="index.en.html">
     <img src="images/flechaazul.jpg" alt="Back to home" class="back-arrow" />
   </a>
 
@@ -239,14 +283,15 @@
 
         <!-- Name and Surname -->
         <div class="row">
-          <input type="text" name="First Name" placeholder="First Name" required>
-          <input type="text" name="Last Name" placeholder="Last Name" required>
+          <input type="text" name="First_Name" placeholder="First Name" required>
+          <input type="text" name="Last_Name" placeholder="Last Name" required>
         </div>
 
 	<input type="text" name="Hotel_Company" placeholder="Hotel Company">
 
+
         <!-- Phone -->
-        <input type="tel" name="Phone number" placeholder="Phone number" required>
+        <input type="tel" name="Phone_Number" placeholder="Phone number" required>
 
         <!-- Email -->
         <input type="email" name="Email" placeholder="Email address" required>
