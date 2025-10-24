@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CV | Alejandro Pérez</title>
-<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
   <style>
     body {
@@ -55,39 +55,44 @@
       text-decoration: underline;
     }
 
-    /* Imagen flecha en esquina superior derecha a 11cm del borde derecho */
-    .back-arrow {
-      position: absolute;
-      top: 15px;
-      right: 11cm;
-      display: block;
-      width: 60px;
-      height: auto;
-      transition: transform 0.2s ease;
-    }
+.back-arrow {
+  position: absolute;
+  top: 2%;
+  right: clamp(40px, 23vw, 567px); /* antes 530px (~14cm), ahora 567px (~15cm) */
+  width: clamp(25px, 5vw, 60px);
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 1000;
+}
 
-    .back-arrow:hover {
-      transform: scale(1.044); /* Aumento equivalente a 2 puntos ≈ 2.66px */
-    }
+.back-arrow:hover {
+  transform: scale(1.044);
+}
 
-    /* Responsive */
-    @media (max-width: 480px) {
-      body {
-        padding: 15px 7px;
-      }
-      h1 {
-        font-size: 18px;
-        margin-bottom: 15px;
-      }
-      p, li, ul {
-        max-width: 100%;
-      }
-      .back-arrow {
-        width: 40px;
-        right: 10px;
-        top: 10px;
-      }
-    }
+
+@media (max-width: 1024px) {
+  .back-arrow {
+    right: clamp(25px, 15vw, 400px); 
+    width: clamp(25px, 6vw, 55px);
+  }
+}
+
+@media (max-width: 768px) {
+  .back-arrow {
+    right: clamp(20px, 13vw, 280px);
+    width: clamp(20px, 8vw, 45px);
+  }
+}
+
+@media (max-width: 480px) {
+  .back-arrow {
+    right: 12px; 
+    top: 10px;
+    width: clamp(20px, 10vw, 35px);
+  }
+}
+
   </style>
 </head>
 <body>
