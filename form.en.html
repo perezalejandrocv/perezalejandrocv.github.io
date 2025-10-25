@@ -8,7 +8,6 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-
   <style>
     /* ===========================
        Body y contenedor principal
@@ -33,14 +32,14 @@
     ============================ */
     .page-title {
       position: absolute;
-      top: calc(20px + 0.5cm); /* 0.5 cm más abajo */
-      left: calc(30px - 0.5cm); /* desplazado 0.5 cm a la izquierda */
-      font-size: 31px; /* tamaño reducido un 10% */
+      top: calc(20px + 0.5cm); 
+      left: calc(30px - 0.5cm); 
+      font-size: 26px; 
       font-weight: bold;
       color: #606060;
       z-index: 1000;
       opacity: 1;
-      transform: translateY(-50px); /* inicia solo un poco arriba */
+      transform: translateY(-50px); 
       animation: slideFromTop 4s ease-out forwards;
     }
 
@@ -49,7 +48,7 @@
       100% { transform: translateY(0); }
     }
 
-    /* Ajuste responsive para móviles */
+    
     @media (max-width: 480px) {
       .page-title {
         font-size: 25px;
@@ -104,7 +103,7 @@
     .file-share-link { font-size: 13px; background-color: white; color: #2F5496; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; text-decoration: none; }
     .file-share-link:hover { background-color: #e0e0e0; }
 
-    /* Responsive para móviles */
+    
     @media (max-width: 480px) {
       body { transform: scale(1); height: auto; }
       .row { flex-direction: column; gap: 10px; }
