@@ -1,10 +1,10 @@
 /* ===============================
-   Estilos generales del body
+   ESTILOS GENERALES DEL BODY
    =============================== */
 body {
-  font-family: 'Century Gothic', Arial, sans-serif;
+  font-family: 'Century Gothic', Poppins, Arial, sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 1.25em;
   background-color: #ffffff;
 }
 
@@ -13,20 +13,20 @@ html {
 }
 
 /* ===============================
-   Contenedor principal y columnas
+   CONTENEDOR PRINCIPAL Y COLUMNAS
    =============================== */
 .container {
   display: flex;
-  gap: 20px;
-  max-width: 1200px;
+  gap: 1.25em;
+  max-width: 75em; /* 1200px */
   margin: 0 auto;
   position: relative;
-  left: 12%;
+  left: 7.5em;
 }
 
 .left-column,
 .right-column {
-  padding: 20px;
+  padding: 1.25em;
 }
 
 .left-column {
@@ -43,7 +43,7 @@ html {
 }
 
 /* ===============================
-   Títulos y subtítulos
+   TÍTULOS Y SUBTÍTULOS
    =============================== */
 h1 {
   font-weight: bold;
@@ -63,8 +63,9 @@ h2 {
 .left-column h3,
 .right-column h3 {
   font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0.625em;
+  margin-bottom: 0.625em;
+  font-size: 1em;
 }
 
 .left-column h3 {
@@ -73,12 +74,12 @@ h2 {
 
 .right-column h3 {
   color: #006600;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 1.25em;
+  margin-bottom: 0.625em;
 }
 
 .subido {
-  margin: 0.6em 0 5px;
+  margin: 0.6em 0 0.3125em;
   color: white;
   padding-bottom: 0;
 }
@@ -88,61 +89,75 @@ h2 {
 }
 
 /* ===============================
-   Texto y listas
+   TEXTO Y LISTAS (UNIFORME EN AMBAS COLUMNAS)
    =============================== */
-p,
-ul,
-li {
-  font-size: 12px;
+.left-column p,
+.left-column ul,
+.left-column li,
+.right-column p,
+.right-column ul,
+.right-column li {
+  font-size: 0.75rem;  /* tamaño uniforme */
   text-align: justify;
   line-height: 1.6;
 }
 
-ul {
-  padding-left: 20px;
-}
-
-.adjust-space {
-  height: 0.6em;
+.left-column ul,
+.right-column ul {
+  padding-left: 1.25em;
 }
 
 /* ===============================
-   Imágenes y foto personal
+   IMÁGENES Y FOTO PERSONAL
    =============================== */
 .foto-personal {
   width: 50%;
   height: auto;
   display: block;
-  margin: 1.2em auto 10px auto;
-  border-radius: 22px;
-}
-
-.cvap-image {
-  position: fixed;
-  top: 4.74em;
-  left: 7em;
-  width: 280px;
-  height: auto;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: zoomFadeIn 6s ease forwards;
-  z-index: 999;
-}
-
-.qr-fixed {
-  position: fixed;
-  bottom: 3.1em;
-  left: 8.55em;
-  width: 150px;
-  height: auto;
-  z-index: 999;
-  opacity: 0;
-  transform: translateX(-100vw); 
-  animation: slideInRight 6s ease forwards;
+  margin: 1.2em auto 0.625em auto;
+  border-radius: 1.375em;
 }
 
 /* ===============================
-   Animaciones
+   BLOQUE FIJO IZQUIERDO CV y QR
+   =============================== */
+.bloque-fijo-izquierdo {
+  position: fixed;
+  left: 6.5em;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.cvap-image {
+  width: 16.25em;
+  max-width: 90%;
+  height: auto;
+  margin-top: 7.08em;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: zoomFadeIn 6s ease forwards;
+  pointer-events: auto;
+}
+
+.qr-fixed {
+  width: 9.375em;
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 3.54em;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: slideInRight 6s ease forwards;
+  pointer-events: auto;
+}
+
+/* ===============================
+   ANIMACIONES
    =============================== */
 @keyframes zoomFadeIn {
   0% { opacity: 0; transform: scale(0.8); }
@@ -166,10 +181,10 @@ ul {
 }
 
 /* ===============================
-   Iconos y enlaces
+   ICONOS Y ENLACES
    =============================== */
 .at-icon {
-  font-size: 50px;
+  font-size: 3.125em;
   color: white;
   font-family: 'Times New Roman', Times, serif;
   display: inline-block;
@@ -193,7 +208,7 @@ ul {
 }
 
 /* ===============================
-   Sección superior derecha
+   SECCIÓN SUPERIOR DERECHA
    =============================== */
 .top-right-section {
   font-family: 'Century Gothic', Arial, sans-serif;
@@ -201,7 +216,7 @@ ul {
   color: #404040;
   position: fixed;
   top: 7.1em;
-  right: 5.9em;
+  right: 9.4em;
   width: max-content;
   z-index: 998;
 }
@@ -209,7 +224,7 @@ ul {
 .top-right-section .lang-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.375em;
   margin-bottom: 0.5em;
 }
 
@@ -230,7 +245,7 @@ ul {
 }
 
 .top-right-section .icon {
-  width: 16px;
+  width: 1em;
   height: auto;
   display: inline-block;
 }
@@ -247,23 +262,23 @@ ul {
 }
 
 /* ===============================
-   Botón volver arriba
+   BOTÓN DE VOLVER ARRIBA
    =============================== */
 .back-to-top {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
+  bottom: 1.875em;
+  right: 1.875em;
+  width: 3.125em;
+  height: 3.125em;
   background-color: #2F5496;
   color: white;
-  font-size: 24px;
+  font-size: 1.5em;
   font-weight: bold;
   text-align: center;
-  line-height: 50px;
+  line-height: 3.125em;
   text-decoration: none;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.125em 0.375em rgba(0, 0, 0, 0.3);
   z-index: 999;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -274,11 +289,11 @@ ul {
 }
 
 /* ===============================
-   Línea blanca animada
+   LÍNEA BLANCA ANIMADA
    =============================== */
 .white-line {
   width: 100%;
-  height: 1px;
+  height: 0.0625em;
   background-color: white;
   margin: 0 auto;
   animation: fadeOutLine 4s forwards;
@@ -286,46 +301,31 @@ ul {
 }
 
 /* ===============================
-   Responsive - Móviles y Tablets
+   RESPONSIVE
    =============================== */
-
-/* Ocultar imágenes en dispositivos táctiles y tablets horizontales */
-@media (max-width: 1366px), (hover: none) and (pointer: coarse) {
-  .cvap-image,
-  .qr-fixed {
+@media (max-width: 85.375em), (hover: none) and (pointer: coarse) {
+  .bloque-fijo-izquierdo {
     display: none !important;
   }
 }
 
-/* Ajustes de layout para móviles (pantallas ≤ 1024px) */
-@media (max-width: 1024px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 64em) {
+  .bloque-fijo-izquierdo {
+    left: 3em;
+    width: 10em;
   }
 
-  .left-column,
-  .right-column { 
-    width: 100%; 
+  .cvap-image {
+    width: 11.25em;
   }
 
-  .foto-personal { 
-    width: 80%; 
-  }
-
-  .subido { 
-    text-align: center; 
-  }
-
-  .top-right-section {
-    position: static !important;
-    margin: 20px 0;
-    text-align: center;
-    width: 100% !important;
+  .qr-fixed {
+    width: 7.5em;
   }
 }
 
-
-
-
-
+@media (max-width: 37.5em) {
+  .bloque-fijo-izquierdo {
+    display: none !important;
+  }
+}
