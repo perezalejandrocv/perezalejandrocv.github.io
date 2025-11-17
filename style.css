@@ -1,4 +1,4 @@
-/* ===============================
+﻿/* ===============================
    ESTILOS GENERALES DEL BODY
    =============================== */
 body {
@@ -18,7 +18,7 @@ html {
 .container {
   display: flex;
   gap: 1.25em;
-  max-width: 75em; /* 1200px */
+  max-width: 75em;
   margin: 0 auto;
   position: relative;
   left: 7.5em;
@@ -97,7 +97,7 @@ h2 {
 .right-column p,
 .right-column ul,
 .right-column li {
-  font-size: 0.75rem;  /* tamaño uniforme */
+  font-size: 0.75rem;
   text-align: justify;
   line-height: 1.6;
 }
@@ -270,23 +270,27 @@ h2 {
   right: 1.875em;
   width: 3.125em;
   height: 3.125em;
-  background-color: #2F5496;
-  color: white;
-  font-size: 1.5em;
-  font-weight: bold;
-  text-align: center;
-  line-height: 3.125em;
+  background-color: transparent;
   text-decoration: none;
-  border-radius: 50%;
-  box-shadow: 0 0.125em 0.375em rgba(0, 0, 0, 0.3);
   z-index: 999;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.back-to-top:hover {
-  background-color: #4472C4;
-  transform: scale(1.1);
+.back-to-top-img {
+  width: 3.125em;
+  height: 3.125em;
+  border-radius: 50%;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
+
+.back-to-top:hover .back-to-top-img {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
 
 /* ===============================
    LÍNEA BLANCA ANIMADA
