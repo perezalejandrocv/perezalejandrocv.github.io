@@ -34,7 +34,7 @@
        TÍTULO PRINCIPAL CON ANIMACIÓN
     ============================ */
 .page-title {
-  position: fixed; /* FIX: fuera del flujo del body con transform */
+  position: fixed;
   top: 40px;
   left: 68px;
   font-size: 26px;
@@ -42,15 +42,18 @@
   color: #606060;
   z-index: 1000;
   opacity: 1;
-  transform: translateY(-50px); 
+  transform: translateY(-50px);
   animation: slideFromTop 4s ease-out forwards;
 }
 
+/* OCULTAR EN MÓVILES/TABLETS */
 @media (max-width: 1024px) {
   .page-title {
-    display: none;
+    display: none !important;  /* el !important fuerza la ocultación */
+    animation: none;           /* elimina la animación que estaba causando conflicto */
   }
 }
+
 
 
     /* ===========================
