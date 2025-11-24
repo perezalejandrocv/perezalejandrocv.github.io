@@ -11,7 +11,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
- <style>
+<style>
 
 /* ===========================
    BODY Y CONTENEDOR PRINCIPAL
@@ -35,7 +35,7 @@ body {
    TÍTULO PRINCIPAL CON ANIMACIÓN
 ============================ */
 .page-title {
-  position: absolute;
+  position: fixed; /* <── CAMBIADO: ahora sí funciona */
   top: 40px;
   left: 68px;
   font-size: 26px;
@@ -52,19 +52,19 @@ body {
   100% { transform: translateY(0); }
 }
 
-/* ========= MÓVILES (ACTUALIZADO 1CM IZQUIERDA) ========= */
+/* ========= MÓVILES (1CM IZQUIERDA) ========= */
 @media (max-width: 480px) {
   .page-title {
     font-size: 25px;
-    left: -41.8px;   /* -4px - 1cm convertido a PX */
+    left: -41.8px;  /* -4px - 1cm convertido a PX */
     top: 29px;
   }
 }
 
-/* ========= TABLETS (NUEVO: 1CM IZQUIERDA) ========= */
+/* ========= TABLETS (1CM IZQUIERDA) ========= */
 @media (min-width: 481px) and (max-width: 1024px) {
   .page-title {
-    left: 30.2px;    /* 68px - 1cm convertido a PX */
+    left: 30.2px;   /* 68px - 1cm convertido a PX */
   }
 }
 
