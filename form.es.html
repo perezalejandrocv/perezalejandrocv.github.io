@@ -44,7 +44,6 @@
       opacity: 1;
       transform: translateY(-50px); 
       animation: slideFromTop 4s ease-out forwards;
-      display: none; /* Oculto por defecto */
     }
 
     @keyframes slideFromTop {
@@ -104,7 +103,6 @@
       .checkbox-inner { justify-content: center; }
     }
 
-    /* Ajuste de título en móviles si algún día se muestra */
     @media (max-width: 480px) {
       .page-title {
         font-size: 25px;
@@ -115,8 +113,6 @@
   </style>
 </head>
 <body>
-
-  <div class="page-title">CV | Alejandro Pérez</div>
 
   <a href="index.es.html">
     <img src="images/flechaazul.jpg" alt="Volver al inicio" class="back-arrow" />
@@ -162,10 +158,13 @@
     </div>
   </div>
 
-  <!-- Script para mostrar título solo en escritorio -->
+  <!-- Script para crear título solo en escritorio -->
   <script>
     if (window.innerWidth >= 1200) {
-      document.querySelector('.page-title').style.display = 'block';
+      const title = document.createElement('div');
+      title.className = 'page-title';
+      title.textContent = 'CV | Alejandro Pérez';
+      document.body.appendChild(title);
     }
   </script>
 </body>
