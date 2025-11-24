@@ -31,34 +31,41 @@
     }
 
     /* ===========================
-       TÍTULO PRINCIPAL CON ANIMACIÓN
-    ============================ */
-    .page-title {
-      position: absolute;
-      top: 40px; 
-      left: 68px; 
-      font-size: 26px; 
-      font-weight: bold;
-      color: #606060;
-      z-index: 1000;
-      opacity: 1;
-      transform: translateY(-50px); 
-      animation: slideFromTop 4s ease-out forwards;
-    }
+   TÍTULO PRINCIPAL CON ANIMACIÓN
+============================ */
+.page-title {
+  position: absolute;
+  top: 40px; 
+  left: 68px; 
+  font-size: 26px; 
+  font-weight: bold;
+  color: #606060;
+  z-index: 1000;
+  opacity: 1;
+  transform: translateY(-50px); 
+  animation: slideFromTop 4s ease-out forwards;
+}
 
-    @keyframes slideFromTop {
-      0% { transform: translateY(-50px); }
-      100% { transform: translateY(0); }
-    }
+@keyframes slideFromTop {
+  0% { transform: translateY(-50px); }
+  100% { transform: translateY(0); }
+}
 
-    
-    @media (max-width: 480px) {
-      .page-title {
-        font-size: 25px;
-        left: -4px;
-        top: 29px;
-      }
-    }
+/* --- Tus ajustes previos para móviles --- */
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 25px;
+    left: -41.8px; /* 1 cm más a la izquierda */
+    top: 29px;
+  }
+}
+
+/* --- Ajuste nuevo para tablets --- */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .page-title {
+    left: 30.2px; /* 1 cm más a la izquierda */
+  }
+}
 
     /* ===========================
        FLECHA DE VOLVER ATRÁS
