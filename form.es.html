@@ -114,17 +114,25 @@
       .checkbox-inner { justify-content: center; }
     }
 
-/* OCULTAR EL TÍTULO POR DEFECTO */
+/* Mostrar en PC de escritorio por defecto */
 .page-title {
-  display: none !important;
+  display: block !important;
 }
 
-/* MOSTRAR SOLO EN PANTALLAS GRANDES (ESCRITORIO REAL) */
-@media screen and (min-width: 1200px) {
+/* Ocultar en móviles (vertical y horizontal) */
+@media screen and (max-device-width: 1024px) {
   .page-title {
-    display: block !important;
+    display: none !important;
   }
 }
+
+/* Ocultar en tablets aunque pidan “vista escritorio” */
+@media screen and (orientation: portrait) {
+  .page-title {
+    display: none !important;
+  }
+}
+
 
   </style>
 </head>
