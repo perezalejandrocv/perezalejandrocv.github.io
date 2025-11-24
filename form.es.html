@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     /* ===========================
@@ -44,20 +44,12 @@
       opacity: 1;
       transform: translateY(-50px); 
       animation: slideFromTop 4s ease-out forwards;
+      display: none; /* Oculto por defecto */
     }
 
     @keyframes slideFromTop {
       0% { transform: translateY(-50px); }
       100% { transform: translateY(0); }
-    }
-
-    
-    @media (max-width: 480px) {
-      .page-title {
-        font-size: 25px;
-        left: -4px;
-        top: 29px;
-      }
     }
 
     /* ===========================
@@ -73,7 +65,6 @@
       transition: transform 0.2s ease;
       z-index: 1001;
     }
-
     .back-arrow:hover { transform: scale(1.1); }
 
     @media (max-width: 1366px) { .back-arrow { right: 8%; max-width: 8%; } }
@@ -106,7 +97,6 @@
     .file-share-link { font-size: 13px; background-color: white; color: #2F5496; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; text-decoration: none; }
     .file-share-link:hover { background-color: #e0e0e0; }
 
-    
     @media (max-width: 480px) {
       body { transform: scale(1); height: auto; }
       .row { flex-direction: column; gap: 10px; }
@@ -114,26 +104,14 @@
       .checkbox-inner { justify-content: center; }
     }
 
-/* Mostrar en PC de escritorio por defecto */
-.page-title {
-  display: block !important;
-}
-
-/* Ocultar en móviles (vertical y horizontal) */
-@media screen and (max-device-width: 1024px) {
-  .page-title {
-    display: none !important;
-  }
-}
-
-/* Ocultar en tablets aunque pidan “vista escritorio” */
-@media screen and (orientation: portrait) {
-  .page-title {
-    display: none !important;
-  }
-}
-
-
+    /* Ajuste de título en móviles si algún día se muestra */
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 25px;
+        left: -4px;
+        top: 29px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -184,5 +162,11 @@
     </div>
   </div>
 
+  <!-- Script para mostrar título solo en escritorio -->
+  <script>
+    if (window.innerWidth >= 1200) {
+      document.querySelector('.page-title').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
