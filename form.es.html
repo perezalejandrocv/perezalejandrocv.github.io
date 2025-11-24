@@ -114,9 +114,15 @@
       .checkbox-inner { justify-content: center; }
     }
 
-@media screen and (max-width: 1200px) {
+/* OCULTAR EL TÍTULO POR DEFECTO */
+.page-title {
+  display: none !important;
+}
+
+/* MOSTRAR SOLO EN PANTALLAS GRANDES (ESCRITORIO REAL) */
+@media screen and (min-width: 1200px) {
   .page-title {
-    display: none !important;
+    display: block !important;
   }
 }
 
