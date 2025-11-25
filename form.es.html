@@ -51,6 +51,13 @@
       100% { transform: translateY(0); }
     }
 
+    /* ✔ OCULTAR EL TÍTULO EN MÓVILES Y TABLETS */
+    @media (max-width: 1199px) {
+      .page-title {
+        display: none !important;
+      }
+    }
+
     /* ===========================
        FLECHA DE VOLVER ATRÁS
     ============================ */
@@ -158,10 +165,12 @@
     </div>
   </div>
 
-
 <script>
   window.addEventListener('DOMContentLoaded', function() {
-    if (window.innerWidth >= 1200) { // Solo escritorio
+    // ✔ Crear el título SOLO si es escritorio real
+    const isDesktop = window.matchMedia('(min-width: 1200px)').matches;
+
+    if (isDesktop) {
       const title = document.createElement('div');
       title.className = 'page-title';
       title.textContent = 'CV | Alejandro Pérez';
