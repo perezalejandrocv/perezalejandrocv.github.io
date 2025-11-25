@@ -34,34 +34,37 @@
        TÍTULO PRINCIPAL CON ANIMACIÓN
     ============================ */
 .page-title {
-  position: fixed;
-  top: 40px;
+  position: absolute;
+  top: 20px;
   left: 68px;
-  font-size: 26px;
-  font-weight: bold;
-  color: #606060;
+  width: 280px; /* Ajusta el tamaño de la imagen aquí */
+  height: auto;
   z-index: 1000;
   opacity: 1;
   transform: translateY(-50px);
   animation: slideFromTop 4s ease-out forwards;
 }
 
-/* OCULTAR EN MÓVILES/TABLETS */
-@media (max-width: 1024px) {
+    @keyframes slideFromTop {
+      0% { transform: translateY(-50px); }
+      100% { transform: translateY(0); }
+    }
+
+    
+@media (max-width: 480px) {
   .page-title {
-    display: none !important;  /* el !important fuerza la ocultación */
-    animation: none;           /* elimina la animación que estaba causando conflicto */
+    width: 160px; /* tamaño más pequeño en móvil */
+    left: -4px;
+    top: 29px;
   }
 }
-
-
 
     /* ===========================
        FLECHA DE VOLVER ATRÁS
     ============================ */
     .back-arrow {
       position: fixed;
-      top: 20px;
+      top: 30px;
       right: 378px;
       max-width: 6%;
       height: auto;
@@ -109,12 +112,20 @@
       .checkbox-container { justify-content: center; text-align: center; }
       .checkbox-inner { justify-content: center; }
     }
+
+  @media (max-width: 1024px) {
+    .page-title {
+      display: none;
+    }
+  }
+
+
   </style>
 </head>
 <body>
 
   <!-- Títol -->
-  <div class="page-title">CV | Alejandro Pérez</div>
+  <img src="images/cvap.png" alt="CV Alejandro Pérez" class="page-title">
 
   <!-- Fletxa -->
   <a href="index.ca.html">

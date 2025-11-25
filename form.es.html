@@ -9,20 +9,29 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
+    /* ===========================
+       BODY Y CONTENEDOR PRINCIPAL
+    ============================ */
     body {
       background-color: #FFFFFF;
       font-family: 'Century Gothic', Poppins, sans-serif;
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
+      transform: scale(0.8);
+      transform-origin: center;
+      height: 100vh;
     }
 
     /* ===========================
-       TÍTULO PRINCIPAL
+       TÍTULO PRINCIPAL CON ANIMACIÓN
     ============================ */
     .page-title {
       position: absolute;
@@ -32,32 +41,40 @@
       font-weight: bold;
       color: #606060;
       z-index: 1000;
+      opacity: 1;
+      transform: translateY(-50px); 
       animation: slideFromTop 4s ease-out forwards;
     }
 
     @keyframes slideFromTop {
-      0% { transform: translateY(-50px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
+      0% { transform: translateY(-50px); }
+      100% { transform: translateY(0); }
     }
 
-    /* OCULTAR EN MÓVILES / TABLET */
-    @media (max-width: 1199px) {
+    
+    @media (max-width: 480px) {
       .page-title {
-        display: none !important;
+        font-size: 25px;
+        left: -4px;
+        top: 29px;
       }
     }
 
     /* ===========================
-       FLECHA VOLVER
+       FLECHA DE VOLVER ATRÁS
     ============================ */
     .back-arrow {
       position: fixed;
       top: 20px;
       right: 378px;
       max-width: 6%;
+      height: auto;
       cursor: pointer;
+      transition: transform 0.2s ease;
       z-index: 1001;
     }
+
+    .back-arrow:hover { transform: scale(1.1); }
 
     @media (max-width: 1366px) { .back-arrow { right: 8%; max-width: 8%; } }
     @media (max-width: 1024px) { .back-arrow { right: 5%; max-width: 10%; top: 2%; } }
@@ -66,62 +83,44 @@
     /* ===========================
        FORMULARIO
     ============================ */
-    .form-wrapper { max-width: 600px; width: 100%; padding: 40px 20px; }
-    .form-container {
-      background-color: #2F5496;
-      padding: 40px;
-      border-radius: 12px;
-      color: white;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
+    .form-wrapper { display: flex; justify-content: center; align-items: center; padding: 40px 20px; width: 100%; max-width: 600px; }
+    .form-container { background-color: #2F5496; padding: 40px; border-radius: 12px; width: 100%; color: white; box-shadow: 0 0 20px rgba(0,0,0,0.2); }
+    .form-container h2 { text-align: center; margin-bottom: 30px; }
     form { display: flex; flex-direction: column; gap: 20px; }
     .row { display: flex; gap: 20px; flex-wrap: wrap; }
     .row input { flex: 1; }
-    input, textarea {
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      background-color: #ffffff;
-      font-size: 14px;
-      width: 100%;
-      box-sizing: border-box;
-    }
+    input, textarea { padding: 10px; border: none; border-radius: 6px; background-color: #ffffff; font-size: 14px; font-family: 'Century Gothic', Poppins, sans-serif; width: 100%; box-sizing: border-box; }
     textarea { resize: vertical; min-height: 100px; }
+    .share-link { text-align: right; font-size: 13px; margin-top: -10px; }
+    .share-link a { color: #FFD700; text-decoration: none; }
+    .share-link a:hover { text-decoration: underline; }
+    .checkbox-container { display: flex; justify-content: flex-end; }
+    .checkbox-inner { display: flex; align-items: center; gap: 8px; font-size: 13px; white-space: nowrap; overflow-x: auto; }
+    .checkbox-inner input[type="checkbox"] { transform: scale(1.1); cursor: pointer; }
+    .checkbox-inner label { cursor: pointer; color: white; }
+    .checkbox-inner label a { color: white; text-decoration: none; }
+    .submit-btn { padding: 12px; background-color: white; color: #4472C4; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease; }
+    .submit-btn:hover { background-color: #e0e0e0; }
+    .file-share-wrapper { display: flex; align-items: center; justify-content: flex-end; gap: 20px; font-family: 'Century Gothic', Poppins, sans-serif; font-size: 13px; color: white; }
+    .file-share-label { font-size: 13px; color: white; }
+    .file-share-link { font-size: 13px; background-color: white; color: #2F5496; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; text-decoration: none; }
+    .file-share-link:hover { background-color: #e0e0e0; }
 
-    .checkbox-container {
-      display: flex;
-      justify-content: flex-end;
-    }
-    .checkbox-inner {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-    }
-
-    .submit-btn {
-      background-color: white;
-      color: #4472C4;
-      padding: 12px;
-      border-radius: 6px;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
+    
     @media (max-width: 480px) {
+      body { transform: scale(1); height: auto; }
       .row { flex-direction: column; gap: 10px; }
+      .checkbox-container { justify-content: center; text-align: center; }
+      .checkbox-inner { justify-content: center; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- TÍTULO FIJO EN HTML (NO JS) -->
   <div class="page-title">CV | Alejandro Pérez</div>
 
   <a href="index.es.html">
-    <img src="images/flechaazul.jpg" class="back-arrow" alt="Volver">
+    <img src="images/flechaazul.jpg" alt="Volver al inicio" class="back-arrow" />
   </a>
 
   <div class="form-wrapper">
@@ -129,8 +128,8 @@
       <h2>Formulario de Contacto</h2>
 
       <form action="https://formsubmit.co/0c1e37899107facf38fae330a1dd6127" method="POST">
-        <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html">
-        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html" />
+        <input type="hidden" name="_captcha" value="false" />
 
         <div class="row">
           <input type="text" name="Nombre" placeholder="Nombre" required>
@@ -142,17 +141,24 @@
         <input type="email" name="Email" placeholder="Correo electrónico" required>
         <textarea name="Comentarios" placeholder="Comentarios" required></textarea>
 
+        <div class="file-share-wrapper">
+          <span class="file-share-label">Compartir archivo</span>
+          <a class="file-share-link" href="https://www.dropbox.com/request/H87MBNvSGyTdQn83QyDm" target="_blank">
+            Seleccionar archivo
+          </a>
+        </div>
+
         <div class="checkbox-container">
           <div class="checkbox-inner">
             <input type="checkbox" id="privacidad" required>
             <label for="privacidad">
-              He leído y acepto la 
+              He leído y acepto la
               <a href="pprivacidad.es.html" target="_blank">Política de Privacidad</a>
             </label>
           </div>
         </div>
 
-        <button class="submit-btn">Enviar</button>
+        <button class="submit-btn" type="submit">Enviar</button>
       </form>
     </div>
   </div>
