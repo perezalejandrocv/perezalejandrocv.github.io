@@ -16,332 +16,282 @@
 
   <!-- CSS -->
   <style>
-    /* ====================================================
-       CONFIGURACIÓN GENERAL
-    ==================================================== */
-    body {
-      background-color: #FFFFFF;
-      font-family: 'Century Gothic', Poppins, sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform: scale(0.8);
-      transform-origin: center;
-      height: 100vh;
+    :root {
+      --primary: #2F5496;
+      --primary-light: #4472C4;
+      --text-light: #ffffff;
+      --bg: #ffffff;
+      --radius: 12px;
+      --font: Poppins, 'Century Gothic', sans-serif;
     }
 
-    /* ====================================================
-       TÍTULO PRINCIPAL
-    ==================================================== */
+    /* ==============================
+       RESET + GLOBAL
+    ===============================*/
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ==============================
+       CABECERA
+    ===============================*/
     .page-title {
-      position: absolute;
-      top: 20px;
-      left: 68px;
-      width: 280px;
-      z-index: 1000;
-      opacity: 1;
-      transform: translateY(-50px);
-      animation: slideFromTop 4s ease-out forwards;
+      width: 220px;
+      animation: slideFromTop 1.3s ease-out forwards;
+      margin-bottom: 1rem;
     }
 
     @keyframes slideFromTop {
-      0% { transform: translateY(-50px); }
-      100% { transform: translateY(0); }
+      from { transform: translateY(-40px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
     }
 
-    @media (max-width: 480px) {
-      .page-title {
-        width: 160px;
-        left: -4px;
-        top: 29px;
-      }
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      .page-title {
-        display: none !important;
-      }
-    }
-
-    /* ====================================================
-       FLECHA VOLVER
-    ==================================================== */
+    /* Flecha */
     .back-arrow {
       position: fixed;
-      top: 30px;
-      right: 378px;
-      max-width: 6%;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 45px;
       cursor: pointer;
       transition: transform 0.2s ease;
-      z-index: 1001;
+      z-index: 10;
     }
 
     .back-arrow:hover { transform: scale(1.1); }
 
-    @media (max-width: 1366px) { .back-arrow { right: 8%; max-width: 8%; } }
-    @media (max-width: 1024px) { .back-arrow { right: 5%; max-width: 10%; top: 2%; } }
-    @media (max-width: 480px) { .back-arrow { right: 3%; max-width: 12%; top: 1.5%; } }
-
-    /* ====================================================
-       CONTENEDOR FORMULARIO
-    ==================================================== */
-    .form-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;
-      width: 100%;
-      max-width: 640px;
+    @media (max-width: 480px) {
+      .back-arrow {
+        width: 38px;
+      }
     }
 
-    
-    .form-container,
-    .form-container * {
-      font-family: Poppins, 'Century Gothic', sans-serif !important;
-    }
-
+    /* ==============================
+       FORMULARIO
+    ===============================*/
     .form-container {
-      background-color: #2F5496;
-      padding: 40px;
-      border-radius: 12px;
+      background: var(--primary);
+      color: var(--text-light);
       width: 100%;
-      color: white;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 600px;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      animation: fadeIn 1s ease-out forwards;
     }
 
-    /* ====================================================
-       TÍTULOS FORMULARIO
-    ==================================================== */
-    .form-container h2 {
-      text-align: center;
-      margin: 0;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .form-container h2:first-of-type {
-      margin-bottom: 15px;
-      font-weight: 400;
-    }
-
-    .form-container h2:last-of-type {
-      margin-bottom: 40px;
-      font-weight: 400;
-    }
-
-    
     .form-title {
-      display: block;
-      width: 100%;
+      text-align: center;
+      margin-bottom: .5rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 1px;
       opacity: 0;
-      letter-spacing: 10px;
-      animation: juntarLetras 4s ease forwards;
+      animation: titleAnim 1.8s ease forwards;
     }
 
-    @keyframes juntarLetras {
-      0% {
-        opacity: 0;
-        letter-spacing: 10px;
-        transform: translateY(-5px);
-      }
-      40% { opacity: 1; }
-      100% {
-        opacity: 1;
-        letter-spacing: 1px;
-        transform: translateY(0);
-      }
+    .form-subtitle {
+      text-align: center;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: titleAnim 1.8s ease forwards 0.3s;
     }
 
-    /* ====================================================
-       CAMPOS FORMULARIO
-    ==================================================== */
+    @keyframes titleAnim {
+      from { opacity: 0; transform: translateY(-10px); letter-spacing: 4px; }
+      to   { opacity: 1; transform: translateY(0); letter-spacing: 1px; }
+    }
+
+    /* Campos */
     form {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 1rem;
     }
 
     .row {
       display: flex;
-      gap: 20px;
+      gap: 1rem;
       flex-wrap: wrap;
     }
 
-    .row input {
-      flex: 1;
+    input, textarea {
+      width: 100%;
+      padding: .75rem;
+      border-radius: 6px;
+      border: none;
+      background: #fff;
+      font-size: 1rem;
     }
 
-    input,
-    textarea {
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      background-color: #ffffff;
-      font-size: 14px;
-      width: 100%;
-      box-sizing: border-box;
+    label { 
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: .25rem;
     }
 
     textarea {
       resize: vertical;
-      min-height: 100px;
+      min-height: 120px;
     }
 
-    /* ====================================================
-       COMPARTIR ARCHIVO
-    ==================================================== */
+    /* Compartir fichero */
     .file-share-wrapper {
       display: flex;
-      align-items: center;
       justify-content: flex-end;
-      gap: 20px;
-      font-size: 13px;
-      color: white;
+      align-items: center;
+      gap: 1rem;
+      font-size: .9rem;
     }
 
     .file-share-link {
-      font-size: 13px;
-      background-color: white;
-      color: #2F5496;
-      padding: 6px 12px;
+      background: #fff;
+      color: var(--primary);
+      padding: .5rem .9rem;
       border-radius: 6px;
       text-decoration: none;
-      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
     }
 
     .file-share-link:hover {
-      background-color: #e0e0e0;
+      background: #e6e6e6;
     }
 
-    /* ====================================================
-       CHECKBOX PRIVACIDAD
-    ==================================================== */
-    .checkbox-container {
-      display: flex;
-      justify-content: flex-end;
-    }
-
+    /* Checkbox */
     .checkbox-inner {
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      white-space: nowrap;
+      gap: .5rem;
+      font-size: .9rem;
+      text-align: center;
     }
 
-    .checkbox-inner input[type="checkbox"] {
-      transform: scale(1.1);
-      cursor: pointer;
-    }
-
-    .checkbox-inner label a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .checkbox-inner label a:hover {
+    .checkbox-inner a {
+      color: #fff;
       text-decoration: underline;
     }
 
-    /* ====================================================
-       BOTÓN
-    ==================================================== */
+    /* Botón */
     .submit-btn {
-      padding: 12px;
-      background-color: white;
-      color: #4472C4;
-      font-weight: bold;
+      background: #fff;
+      color: var(--primary-light);
       border: none;
+      padding: .8rem;
       border-radius: 6px;
+      font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: .25s;
     }
 
     .submit-btn:hover {
-      background-color: #e0e0e0;
+      background: #e4e4e4;
     }
 
-    /* ====================================================
-       RESPONSIVE
-    ==================================================== */
     @media (max-width: 480px) {
-      body {
-        transform: scale(1);
-        height: auto;
+      .form-container {
+        padding: 1.8rem;
       }
-
       .row {
         flex-direction: column;
-        gap: 10px;
-      }
-
-      .checkbox-container {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .checkbox-inner {
-        justify-content: center;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- TÍTULO -->
-  <img src="images/cvap.png" alt="CV Alejandro Pérez" class="page-title">
-
-  <!-- FLECHA -->
+  <!-- Flecha volver -->
   <a href="index.ca.html">
-    <img src="images/flechaazul.jpg" alt="Torna a l'inici" class="back-arrow">
+    <img src="images/flechaazul.jpg" alt="Tornar a l'inici" class="back-arrow">
   </a>
 
-  <!-- FORMULARIO -->
-  <div class="form-wrapper">
-    <div class="form-container">
-      
-      <h2>CV | Alejandro Pérez</h2>
-      <h2 class="form-title">FORMULARI DE CONTACTE</h2>
+  <!-- Título -->
+  <img src="images/cvap.png" alt="CV Alejandro Pérez" class="page-title">
 
-      <form action="https://formsubmit.co/0c1e37899107facf38fae330a1dd6127" method="POST">
-        
-        <!-- Redirección -->
-        <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html">
-        <input type="hidden" name="_captcha" value="false">
+  <!-- Contenedor formulario -->
+  <div class="form-container">
 
-        <div class="row">
-          <input type="text" name="Nom" placeholder="Nom" required>
-          <input type="text" name="Cognoms" placeholder="Cognoms" required>
+    <h2 class="form-title">CV | Alejandro Pérez</h2>
+    <h3 class="form-subtitle">FORMULARI DE CONTACTE</h3>
+
+    <form action="https://formsubmit.co/0c1e37899107facf38fae330a1dd6127" method="POST">
+
+      <!-- Redirección -->
+      <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html">
+      <input type="hidden" name="_captcha" value="false">
+
+      <div class="row">
+        <div style="flex:1;">
+          <label for="nom">Nom</label>
+          <input id="nom" type="text" name="Nom" placeholder="Nom" required>
         </div>
 
-        <input type="text" name="Hotel/Empresa" placeholder="Hotel/Empresa">
-        <input type="tel" name="Telèfon" placeholder="Telèfon" required>
-        <input type="email" name="Email" placeholder="Email" required>
-        <textarea name="Comentaris" placeholder="Comentaris" required></textarea>
-
-        <div class="file-share-wrapper">
-          <span>Compartir arxiu</span>
-          <a class="file-share-link" href="https://www.dropbox.com/request/H87MBNvSGyTdQn83QyDm" target="_blank">
-            Seleccionar arxiu
-          </a>
+        <div style="flex:1;">
+          <label for="cognoms">Cognoms</label>
+          <input id="cognoms" type="text" name="Cognoms" placeholder="Cognoms" required>
         </div>
+      </div>
 
-        <div class="checkbox-container">
-          <div class="checkbox-inner">
-            <input type="checkbox" id="privacidad" name="Privacitat" value="Acceptada" required>
-            <label for="privacidad">
-              He llegit i accepto la
-              <a href="pprivacidad.ca.html" target="_blank">Política de Privacitat</a>
-            </label>
-          </div>
-        </div>
+      <div>
+        <label for="empresa">Hotel/Empresa</label>
+        <input id="empresa" type="text" name="Hotel/Empresa" placeholder="Hotel/Empresa">
+      </div>
 
-        <button class="submit-btn" type="submit">Enviar</button>
-      </form>
+      <div>
+        <label for="tel">Telèfon</label>
+        <input id="tel" type="tel" name="Telèfon" placeholder="Telèfon" required>
+      </div>
 
-    </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" name="Email" placeholder="Email" required>
+      </div>
+
+      <div>
+        <label for="comentaris">Comentaris</label>
+        <textarea id="comentaris" name="Comentaris" placeholder="Comentaris" required></textarea>
+      </div>
+
+      <!-- Compartir arxiu -->
+      <div class="file-share-wrapper">
+        <span>Compartir arxiu</span>
+        <a class="file-share-link" href="https://www.dropbox.com/request/H87MBNvSGyTdQn83QyDm" target="_blank">Seleccionar arxiu</a>
+      </div>
+
+      <!-- Privacidad -->
+      <div class="checkbox-inner">
+        <input type="checkbox" id="privacidad" name="Privacitat" value="Acceptada" required>
+        <label for="privacidad">
+          He llegit i accepto la <a href="pprivacidad.ca.html" target="_blank">Política de Privacitat</a>
+        </label>
+      </div>
+
+      <button class="submit-btn" type="submit">Enviar</button>
+    </form>
   </div>
 
 </body>
