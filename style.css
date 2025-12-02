@@ -333,3 +333,25 @@ h2 {
     display: none !important;
   }
 }
+
+/* ===============================
+   TABLA CONTACTO
+   =============================== */
+
+.tabla-contacto {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75em;
+}
+
+.tabla-contacto td:first-child {
+  width: 1.2em;
+  text-align: center;
+  vertical-align: top;
+  padding-right: 0.3em;
+}
+
+.tabla-contacto td:last-child {
+  padding-bottom: 0.35em;
+  line-height: 1.2;
+}
