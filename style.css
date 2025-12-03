@@ -261,19 +261,6 @@ h2 {
   letter-spacing: 0;
 }
 
-/* TABLETS */
-@media (max-width: 64em) {
-  .top-right-section {
-    right: 4vw; /* antes 9.4em */
-  }
-}
-
-/* MÓVILES */
-@media (max-width: 37.5em) {
-  .top-right-section {
-    right: 2vw; /* más pegado a la derecha */
-  }
-}
 
 
 /* ===============================
@@ -370,3 +357,21 @@ h2 {
   padding-bottom: 0.35em;
   line-height: 1.2;
 }
+
+/* =========================================
+   AJUSTE REAL PARA MOVILES Y TABLETS
+   ========================================= */
+@media (max-width: 64em) {
+  .top-right-section {
+    right: 2vw !important;
+  }
+}
+
+@media (max-width: 37.5em) {
+  .top-right-section {
+    right: 1vw !important;
+  }
+}
+
+
+
