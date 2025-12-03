@@ -261,15 +261,17 @@ h2 {
   letter-spacing: 0;
 }
 
+/* TABLETS */
 @media (max-width: 64em) {
   .top-right-section {
-    right: 9.4em;
+    right: 4vw; /* antes 9.4em */
   }
 }
 
+/* MÓVILES */
 @media (max-width: 37.5em) {
   .top-right-section {
-    right: 9.4em;
+    right: 2vw; /* más pegado a la derecha */
   }
 }
 
