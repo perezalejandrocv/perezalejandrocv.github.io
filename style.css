@@ -261,6 +261,19 @@ h2 {
   letter-spacing: 0;
 }
 
+@media (max-width: 64em) {
+  .top-right-section {
+    right: 9.4em;
+  }
+}
+
+@media (max-width: 37.5em) {
+  .top-right-section {
+    right: 9.4em;
+  }
+}
+
+
 /* ===============================
    BOTÓN DE VOLVER ARRIBA
    =============================== */
