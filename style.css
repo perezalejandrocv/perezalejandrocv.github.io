@@ -216,7 +216,7 @@ h2 {
   color: #404040;
   position: fixed;
   top: 10.3em;
-  right: 8.8em;
+  right: 7.5em;
   width: max-content;
   z-index: 998;
 }
@@ -260,8 +260,6 @@ h2 {
 .top-right-link[href*="zoom.us"] {
   letter-spacing: 0;
 }
-
-
 
 /* ===============================
    BOTÓN DE VOLVER ARRIBA
@@ -357,21 +355,3 @@ h2 {
   padding-bottom: 0.35em;
   line-height: 1.2;
 }
-
-/* =========================================
-   AJUSTE REAL PARA MOVILES Y TABLETS
-   ========================================= */
-@media (max-width: 64em) {
-  .top-right-section {
-    right: 2vw !important;
-  }
-}
-
-@media (max-width: 37.5em) {
-  .top-right-section {
-    right: 1vw !important;
-  }
-}
-
-
-
