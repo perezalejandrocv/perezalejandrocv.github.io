@@ -345,13 +345,19 @@ h2 {
 }
 
 .tabla-contacto td:first-child {
-  width: 1.2em;
-  text-align: center;
-  vertical-align: top;
-  padding-right: 0.3em;
+  width: 0.85em;              
+  padding-right: 0em;   
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .tabla-contacto td:last-child {
   padding-bottom: 0.35em;
   line-height: 1.2;
+}
+
+
+.tabla-contacto td {
+  line-height: normal !important;  
 }
