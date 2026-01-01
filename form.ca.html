@@ -287,6 +287,9 @@
       }
     }
   </style>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+
 </head>
 <body>
 
@@ -305,21 +308,19 @@
       <h2>CV | Alejandro Pérez</h2>
       <h2 class="form-title">FORMULARI DE CONTACTE</h2>
 
-      <form action="https://formspree.io/f/mqeknzby" method="POST">
-        
-        <!-- Redirección -->
-        <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html">
-        <input type="hidden" name="_captcha" value="false">
+      <form id="contact-form-ca">
 
         <div class="row">
-          <input type="text" name="Nom" placeholder="Nom" required>
-          <input type="text" name="Cognoms" placeholder="Cognoms" required>
+          <input type="text" name="user_name" placeholder="Nom" required>
+	  <input type="text" name="user_lastname" placeholder="Cognoms" required>
         </div>
 
-        <input type="text" name="Hotel/Empresa" placeholder="Hotel/Empresa">
-        <input type="tel" name="Telèfon" placeholder="Telèfon" required>
-        <input type="email" name="Email" placeholder="Email" required>
-        <textarea name="Comentaris" placeholder="Comentaris" required></textarea>
+	  <input type="text" name="user_company" placeholder="Hotel/Empresa">
+	  <input type="tel" name="user_phone" placeholder="Telèfon" required>
+	  <input type="email" name="user_email" placeholder="Email" required>
+
+	  <textarea name="user_message" placeholder="Comentaris" required></textarea>
+
 
         <div class="file-share-wrapper">
           <span>Compartir arxiu</span>
@@ -343,6 +344,32 @@
 
     </div>
   </div>
+
+<script>
+(function(){
+  emailjs.init("XSO0uTppZOswCHkxq");
+})();
+
+document.getElementById("contact-form-ca")
+  .addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm(
+      "service_asp6ffv",
+      "template_c05vibs",
+      this
+    ).then(
+      function() {
+        window.location.href = "https://perezalejandrocv.github.io/gracias.html";
+      },
+      function(error) {
+        alert("Error al enviar el formulario");
+        console.log(error);
+      }
+    );
+  });
+</script>
+
 
 </body>
 </html>
