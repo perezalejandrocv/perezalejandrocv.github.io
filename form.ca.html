@@ -346,44 +346,30 @@
   </div>
 
 <script>
-  // Esperar a que todo el DOM esté cargado
-  document.addEventListener("DOMContentLoaded", function() {
-
-    // Inicializar EmailJS
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("Página cargada y lista"); // Depuración
     emailjs.init("XSO0uTppZOswCHkxq");
-    console.log("EmailJS inicializado ✅");
 
-    // Obtener el formulario
     const form = document.getElementById("contact-form-ca");
     if (!form) {
-      console.error("Formulario no encontrado en el DOM ❌");
-      return;
+        console.error("No se encontró el formulario");
+        return;
     }
-    console.log("Formulario encontrado ✅");
 
-    // Escuchar el envío
     form.addEventListener("submit", function(event) {
-      event.preventDefault(); // Evita que se recargue la página
-      console.log("Formulario enviado, preparando EmailJS...");
+        event.preventDefault();
+        console.log("Formulario enviado, empezando EmailJS...");
 
-      // Mostrar todos los datos del formulario en consola
-      const formData = new FormData(form);
-      for (const [key, value] of formData.entries()) {
-        console.log(key + ": " + value);
-      }
-
-      // Intentar enviar con EmailJS
-      emailjs.sendForm("service_asp6ffv", "template_c05vibs", form)
-        .then(function(response) {
-          console.log("Email enviado correctamente ✅", response);
-          window.location.href = "https://perezalejandrocv.github.io/gracias.html";
-        }, function(error) {
-          console.error("Error al enviar Email ❌", error);
-          alert("Error al enviar el formulario, revisar consola");
-        });
+        emailjs.sendForm("service_asp6ffv", "template_c05vibs", this)
+        .then(() => {
+            console.log("Email enviado correctamente");
+            window.location.href = "https://perezalejandrocv.github.io/gracias.html";
+        })
+        .catch(e => console.error("Error enviando email:", e));
     });
-  });
+});
 </script>
+
 
 
 
