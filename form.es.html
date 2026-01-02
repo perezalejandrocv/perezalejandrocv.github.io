@@ -287,6 +287,9 @@
       }
     }
   </style>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+
 </head>
 <body>
 
@@ -307,6 +310,7 @@
 
       <form id="contact-form-es">
 
+
         <div class="row">
           <input type="text" name="user_name" placeholder="Nombre" required>
 	  <input type="text" name="user_lastname" placeholder="Apellido" required>
@@ -317,6 +321,14 @@
 	  <input type="email" name="user_email" placeholder="Email" required>
 
 	  <textarea name="user_message" placeholder="Comentarios" required></textarea>
+
+
+	  <input type="hidden" name="label_name" value="Nombre">
+	  <input type="hidden" name="label_lastname" value="Apellido">
+	  <input type="hidden" name="label_company" value="Hotel / Empresa">
+	  <input type="hidden" name="label_phone" value="Teléfono">
+	  <input type="hidden" name="label_email" value="Email">
+	  <input type="hidden" name="label_message" value="Comentarios">
 
 
         <div class="file-share-wrapper">
@@ -347,7 +359,7 @@
   emailjs.init("XSO0uTppZOswCHkxq");
 })();
 
-document.getElementById("contact-form-ca")
+document.getElementById("contact-form-es")
   .addEventListener("submit", function(event) {
     event.preventDefault();
 

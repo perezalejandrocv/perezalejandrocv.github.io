@@ -287,6 +287,9 @@
       }
     }
   </style>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+
 </head>
 <body>
 
@@ -304,23 +307,29 @@
       
       <h2>CV | Alejandro Pérez</h2>
       <h2 class="form-title">CONTACT FORM</h2>
-
-      <form action="https://formsubmit.co/perezalejandrocv@gmail.com" method="POST">
-      <input type="hidden" name="_token" value="2f882fb987348f4ff25f0049890d72d5">
         
-        <!-- Redirección -->
-        <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html">
-        <input type="hidden" name="_captcha" value="false">
+      <form id="contact-form-en">
+
 
         <div class="row">
-          <input type="text" name="Name" placeholder="Name" required>
-          <input type="text" name="Last Name" placeholder="Last Name" required>
+          <input type="text" name="user_name" placeholder="Name" required>
+	  <input type="text" name="user_lastname" placeholder="Lastname" required>
         </div>
 
-        <input type="text" name="Hotel/Company" placeholder="Hotel/Company">
-        <input type="tel" name="Phone Nr" placeholder="Phone Nr" required>
-        <input type="email" name="Email" placeholder="Email" required>
-        <textarea name="Comments" placeholder="Comments" required></textarea>
+	  <input type="text" name="user_company" placeholder="Hotel/Company">
+	  <input type="tel" name="user_phone" placeholder="Phone" required>
+	  <input type="email" name="user_email" placeholder="Email" required>
+
+	  <textarea name="user_message" placeholder="Comments" required></textarea>
+
+
+	  <input type="hidden" name="label_name" value="Name">
+	  <input type="hidden" name="label_lastname" value="Lastname">
+	  <input type="hidden" name="label_company" value="Hotel / Company">
+	  <input type="hidden" name="label_phone" value="Phone">
+	  <input type="hidden" name="label_email" value="Email">
+	  <input type="hidden" name="label_message" value="Comments">
+
 
         <div class="file-share-wrapper">
           <span>Share file</span>
@@ -331,8 +340,8 @@
 
         <div class="checkbox-container">
           <div class="checkbox-inner">
-            <input type="checkbox" id="privacidad" name="Privacitat" value="Acceptada" required>
-            <label for="privacidad">
+            <input type="checkbox" id="privacy" name="Privacy" value="Accepted" required>
+            <label for="privacy">
               I have read and accept the
               <a href="pprivacidad.en.html" target="_blank">Privacy Policy</a>
             </label>
@@ -344,6 +353,34 @@
 
     </div>
   </div>
+
+<script>
+(function(){
+  emailjs.init("XSO0uTppZOswCHkxq");
+})();
+
+document.getElementById("contact-form-en")
+  .addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm(
+      "service_asp6ffv",
+      "template_c05vibs",
+      this
+    ).then(
+      function() {
+        window.location.href = "https://perezalejandrocv.github.io/gracias.html";
+      },
+      function(error) {
+        alert("Error al enviar el formulario");
+        console.log(error);
+      }
+    );
+  });
+</script>
+
+
+
 
 </body>
 </html>
