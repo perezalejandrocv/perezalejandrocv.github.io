@@ -305,22 +305,19 @@
       <h2>CV | Alejandro Pérez</h2>
       <h2 class="form-title">FORMULARIO DE CONTACTO</h2>
 
-      <form action="https://formsubmit.co/perezalejandrocv@gmail.com" method="POST">
-      <input type="hidden" name="_token" value="2f882fb987348f4ff25f0049890d72d5">
-        
-        <!-- Redirección -->
-        <input type="hidden" name="_next" value="https://perezalejandrocv.github.io/gracias.html">
-        <input type="hidden" name="_captcha" value="false">
+      <form id="contact-form-es">
 
         <div class="row">
-          <input type="text" name="Nombre" placeholder="Nombre" required>
-          <input type="text" name="Apellido" placeholder="Apellido" required>
+          <input type="text" name="user_name" placeholder="Nombre" required>
+	  <input type="text" name="user_lastname" placeholder="Apellido" required>
         </div>
 
-        <input type="text" name="Hotel/Empresa" placeholder="Hotel/Empresa">
-        <input type="tel" name="Teléfono" placeholder="Teléfono" required>
-        <input type="email" name="Email" placeholder="Email" required>
-        <textarea name="Comentarios" placeholder="Comentarios" required></textarea>
+	  <input type="text" name="user_company" placeholder="Hotel/Empresa">
+	  <input type="tel" name="user_phone" placeholder="Teléfono" required>
+	  <input type="email" name="user_email" placeholder="Email" required>
+
+	  <textarea name="user_message" placeholder="Comentarios" required></textarea>
+
 
         <div class="file-share-wrapper">
           <span>Compartir archivo</span>
@@ -331,7 +328,7 @@
 
         <div class="checkbox-container">
           <div class="checkbox-inner">
-            <input type="checkbox" id="privacidad" name="Privacitat" value="Acceptada" required>
+            <input type="checkbox" id="privacidad" name="Privacidad" value="Aceptada" required>
             <label for="privacidad">
               He leído y acepto la
               <a href="pprivacidad.es.html" target="_blank">Política de Privacidad</a>
@@ -344,6 +341,34 @@
 
     </div>
   </div>
+
+<script>
+(function(){
+  emailjs.init("XSO0uTppZOswCHkxq");
+})();
+
+document.getElementById("contact-form-ca")
+  .addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm(
+      "service_asp6ffv",
+      "template_c05vibs",
+      this
+    ).then(
+      function() {
+        window.location.href = "https://perezalejandrocv.github.io/gracias.html";
+      },
+      function(error) {
+        alert("Error al enviar el formulario");
+        console.log(error);
+      }
+    );
+  });
+</script>
+
+
+
 
 </body>
 </html>

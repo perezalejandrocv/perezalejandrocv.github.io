@@ -311,15 +311,17 @@
       <form id="contact-form-ca">
 
         <div class="row">
-          <input type="text" name="user_name" placeholder="Nom" required>
-	  <input type="text" name="user_lastname" placeholder="Cognoms" required>
+
+	  <input type="hidden" name="label_name" value="Nom">
+	  <input type="hidden" name="label_lastname" value="Cognoms">
+
         </div>
 
-	  <input type="text" name="user_company" placeholder="Hotel/Empresa">
-	  <input type="tel" name="user_phone" placeholder="Telèfon" required>
-	  <input type="email" name="user_email" placeholder="Email" required>
+	  <input type="hidden" name="label_company" value="Hotel / Empresa">
+	  <input type="hidden" name="label_phone" value="Telèfon">
+	  <input type="hidden" name="label_email" value="Email">
 
-	  <textarea name="user_message" placeholder="Comentaris" required></textarea>
+	  <input type="hidden" name="label_message" value="Comentaris">
 
 
         <div class="file-share-wrapper">
@@ -346,28 +348,28 @@
   </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    console.log("Página cargada y lista"); // Depuración
-    emailjs.init("XSO0uTppZOswCHkxq");
+(function(){
+  emailjs.init("XSO0uTppZOswCHkxq");
+})();
 
-    const form = document.getElementById("contact-form-ca");
-    if (!form) {
-        console.error("No se encontró el formulario");
-        return;
-    }
+document.getElementById("contact-form-ca")
+  .addEventListener("submit", function(event) {
+    event.preventDefault();
 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        console.log("Formulario enviado, empezando EmailJS...");
-
-        emailjs.sendForm("service_asp6ffv", "template_c05vibs", this)
-        .then(() => {
-            console.log("Email enviado correctamente");
-            window.location.href = "https://perezalejandrocv.github.io/gracias.html";
-        })
-        .catch(e => console.error("Error enviando email:", e));
-    });
-});
+    emailjs.sendForm(
+      "service_asp6ffv",
+      "template_c05vibs",
+      this
+    ).then(
+      function() {
+        window.location.href = "https://perezalejandrocv.github.io/gracias.html";
+      },
+      function(error) {
+        alert("Error al enviar el formulario");
+        console.log(error);
+      }
+    );
+  });
 </script>
 
 
