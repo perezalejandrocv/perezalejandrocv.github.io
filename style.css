@@ -123,7 +123,7 @@ h2 {
    =============================== */
 .bloque-fijo-izquierdo {
   position: fixed;
-  left: 2.9em;
+  left: 3.0em;
   top: 0;
   bottom: 0;
   display: flex;
