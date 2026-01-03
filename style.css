@@ -136,24 +136,18 @@ h2 {
 
 .cvap-image {
   width: 16.25em;
-  max-width: 90%;
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 7.08em;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: zoomFadeIn 6s ease forwards;
-  pointer-events: auto;
 }
 
 .qr-fixed {
   width: 9.375em;
-  max-width: 80%;
   height: auto;
-  margin-bottom: 3.20em;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: slideInRight 6s ease forwards;
-  pointer-events: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3.2em;
 }
 
 /* ===============================
