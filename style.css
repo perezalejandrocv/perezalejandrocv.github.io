@@ -166,7 +166,7 @@ h2 {
 
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(-100vw); }
-  to   { opacity: 1; transform: translateX(-0.05cm); }
+  to   { opacity: 1; transform: translateX(-2px); }
 }
 
 @keyframes spinYandScale {
@@ -207,59 +207,6 @@ h2 {
   }
 }
 
-/* ===============================
-   SECCIÓN SUPERIOR DERECHA
-   =============================== */
-.top-right-section {
-  font-family: 'Century Gothic', Arial, sans-serif;
-  font-size: 0.875em;
-  color: #404040;
-  position: fixed;
-  top: 10.40em;
-  right: 6.60em;
-  width: max-content;
-  z-index: 998;
-}
-
-.top-right-section .lang-row {
-  display: flex;
-  align-items: center;
-  gap: 0.375em;
-  margin-bottom: 0.5em;
-}
-
-.top-right-section .lang-row.spacer { display: none; }
-
-.top-right-section .lang-row a {
-  display: flex;
-  align-items: center;
-  gap: 0.25em;
-  color: #404040;
-  text-decoration: none;
-  transition: transform 0.2s ease;
-}
-
-.top-right-section .lang-row a:hover {
-  cursor: pointer;
-  transform: scale(1.09);
-}
-
-.top-right-section .icon {
-  width: 1em;
-  height: auto;
-  display: inline-block;
-}
-
-.top-right-section .separator-line {
-  width: 11.8em;
-  height: 0.015em;
-  background-color: #AEAAAA;
-  margin: 0.6em 0 0.6em -0.7em;
-}
-
-.top-right-link[href*="zoom.us"] {
-  letter-spacing: 0;
-}
 
 /* ===============================
    BOTÓN DE VOLVER ARRIBA
@@ -361,3 +308,86 @@ h2 {
 .tabla-contacto td {
   line-height: normal !important;  
 }
+
+
+
+/* ===============================
+   SECCIÓN SUPERIOR DERECHA
+   =============================== */
+
+.top-right-section {
+  font-family: 'Century Gothic', Poppins, Arial, sans-serif;
+  font-size: 0.800em; 
+  color: #404040;
+  position: fixed;
+  top: 10.40em;
+  right: 6.60em;
+  width: max-content;
+  z-index: 998;
+}
+
+.top-right-section .separator-line {
+  width: 14em;
+  height: 0.015em;
+  background-color: #AEAAAA;
+  margin: 0.6em 0 0.6em -0.7em;
+}
+
+/* ===============================
+   TABLA SUPERIOR DERECHA
+   =============================== */
+
+.tabla-top-right {
+  font-size: 1.03em; 
+  border-collapse: collapse;
+}
+
+.tabla-top-right tr {
+  height: 1.92em;             
+}
+
+.tabla-top-right td {
+  padding: 0.32em 0;          
+  line-height: 1.2;
+  vertical-align: middle;     
+}
+
+.tabla-top-right td:first-child {
+  width: 1.4em;               
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tabla-top-right td:last-child {
+  padding-left: 0.4em;
+}
+
+/* ===============================
+   ICONOS UNIFORMES
+   =============================== */
+
+.tabla-top-right .icon {
+  width: 1em;                 
+  height: 1em;               
+  object-fit: contain;        
+  display: inline-block;
+  vertical-align: middle;     
+}
+
+/* ===============================
+   ENLACES
+   =============================== */
+
+.tabla-top-right a {
+  color: #404040;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease;
+  transform-origin: left center;
+}
+
+.tabla-top-right a:hover {
+  transform: scale(1.10);
+}
+
+
