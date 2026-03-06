@@ -1,5 +1,5 @@
 ﻿/* ===============================
-   ESTILOS GENERALES DEL BODY
+   RESET Y BODY
    =============================== */
 body {
   font-family: 'Century Gothic', Poppins, Arial, sans-serif;
@@ -13,43 +13,57 @@ html {
 }
 
 /* ===============================
-   CONTENEDOR PRINCIPAL Y COLUMNAS
+   GRID DE 4 COLUMNAS
    =============================== */
-.container {
-  display: flex;
+.container-wrapper {
+  display: grid;
+  grid-template-columns: 13.75em 1fr 1fr 13.75em;
   gap: 1.25em;
-  max-width: 75em;
+  max-width: 87.5em;
   margin: 0 auto;
-  position: relative;
-  left: 7.5em;
-}
-
-.left-column,
-.right-column {
-  padding: 1.25em;
-}
-
-.left-column {
-  width: 35%;
-  background-color: #2F5496;
-  color: white;
-  position: relative;
-}
-
-.right-column {
-  width: 65%;
-  background-color: #fff;
-  position: relative;
+  padding: 0 0.625em;
 }
 
 /* ===============================
-   TÍTULOS Y SUBTÍTULOS
+   COLUMNAS
+   =============================== */
+.bloque-fijo-izquierdo {
+  grid-column: 1 / 2;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left-column {
+  grid-column: 2 / 3;
+  background-color: #2F5496;
+  color: white;
+  padding: 1.25em;
+  border-radius: 0.75em;
+}
+
+.right-column {
+  grid-column: 3 / 4;
+  background-color: #fff;
+  padding: 1.25em;
+}
+
+.right-space {
+  grid-column: 4 / 5;
+}
+
+/* ===============================
+   TÍTULOS
    =============================== */
 h1 {
   font-weight: bold;
   margin-bottom: 0.02em;
   text-align: center;
   color: white;
+  font-size: 2em;
 }
 
 h2 {
@@ -60,36 +74,25 @@ h2 {
   color: white;
 }
 
-.left-column h3,
-.right-column h3 {
-  font-weight: bold;
-  margin-top: 0.625em;
-  margin-bottom: 0.625em;
-  font-size: 1em;
-}
-
 .left-column h3 {
   color: white;
+  font-weight: bold;
+  margin: 0.625em 0;
 }
 
 .right-column h3 {
   color: #006600;
-  margin-top: 1.25em;
-  margin-bottom: 0.625em;
+  font-weight: bold;
+  margin: 1.25em 0 0.625em;
 }
 
 .subido {
   margin: 0.6em 0 0.3125em;
   color: white;
-  padding-bottom: 0;
-}
-
-.subido span.spaces {
-  margin-left: 1em;
 }
 
 /* ===============================
-   TEXTO Y LISTAS (UNIFORME EN AMBAS COLUMNAS)
+   TEXTO Y LISTAS
    =============================== */
 .left-column p,
 .left-column ul,
@@ -107,58 +110,35 @@ h2 {
   padding-left: 1.25em;
 }
 
+.goldensand {
+  font-size: 0.68rem;
+}
+
 /* ===============================
-   IMÁGENES Y FOTO PERSONAL
+   IMÁGENES Y ANIMACIONES
    =============================== */
 .foto-personal {
   width: 50%;
   height: auto;
   display: block;
-  margin: 1.2em auto 0.625em auto;
+  margin: 0.5em auto 0.5em auto;
   border-radius: 1.375em;
 }
 
-/* ===============================
-   BLOQUE FIJO IZQUIERDO CV y QR
-   =============================== */
-.bloque-fijo-izquierdo {
-  position: fixed;
-  left: 3.0em;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 999;
-  pointer-events: none;
-}
-
 .cvap-image {
+  position: relative;
+  left: -3.5em;
+  top: 6.3em;
   width: 16.25em;
-  max-width: 90%;
+  max-width: 110%;
   height: auto;
-  margin-top: 7.08em;
+  display: block;
+
   opacity: 0;
-  transform: scale(0.8);
   animation: zoomFadeIn 6s ease forwards;
   pointer-events: auto;
 }
 
-.qr-fixed {
-  width: 9.375em;
-  max-width: 80%;
-  height: auto;
-  margin-bottom: 3.20em;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: slideInRight 6s ease forwards;
-  pointer-events: auto;
-}
-
-/* ===============================
-   ANIMACIONES
-   =============================== */
 @keyframes zoomFadeIn {
   0% { opacity: 0; transform: scale(0.8); }
   100% { opacity: 1; transform: scale(1); }
@@ -166,12 +146,12 @@ h2 {
 
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(-100vw); }
-  to   { opacity: 1; transform: translateX(-2px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes spinYandScale {
-  0%   { transform: rotateY(0deg) scale(1); }
-  50%  { transform: rotateY(180deg) scale(1.05); }
+  0% { transform: rotateY(0deg) scale(1); }
+  50% { transform: rotateY(180deg) scale(1.05); }
   100% { transform: rotateY(360deg) scale(1); }
 }
 
@@ -181,7 +161,34 @@ h2 {
 }
 
 /* ===============================
-   ICONOS Y ENLACES
+   QR
+   =============================== */
+.qr-fixed {
+  position: fixed;
+  bottom: 5.3em;
+  left: 11.2%;
+  transform: translateX(-50%);
+  width: 9.375em;
+  z-index: 999;
+
+  opacity: 0;
+  animation: slideInFromLeft 2s ease forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-150%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+/* ===============================
+   BLOQUE CORREO
    =============================== */
 .at-icon {
   font-size: 3.125em;
@@ -206,7 +213,6 @@ h2 {
     transform: scale(1.1);
   }
 }
-
 
 /* ===============================
    BOTÓN DE VOLVER ARRIBA
@@ -238,7 +244,6 @@ h2 {
   opacity: 0.9;
 }
 
-
 /* ===============================
    LÍNEA BLANCA ANIMADA
    =============================== */
@@ -246,26 +251,125 @@ h2 {
   width: 100%;
   height: 0.0625em;
   background-color: white;
-  margin: 0 auto;
+  margin: -0.3em auto 0 auto;
   animation: fadeOutLine 4s forwards;
   opacity: 1;
 }
 
 /* ===============================
+   TABLA CONTACTO
+   =============================== */
+.tabla-contacto {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75em;
+}
+
+.tabla-contacto td:first-child {
+  width: 0.85em;
+  padding-right: 0em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.tabla-contacto td:last-child {
+  padding-bottom: 0.35em;
+  line-height: 1.2;
+}
+
+.tabla-contacto td {
+  line-height: normal !important;
+}
+
+/* ===============================
+   TABLA SUPERIOR DERECHA
+   =============================== */
+.top-right-section {
+  font-family: 'Century Gothic', Poppins, Arial, sans-serif;
+  font-size: 0.8em;
+  color: #404040;
+  position: sticky;
+  top: 11.6em;
+  z-index: 998;
+  margin-left: 6em;
+}
+
+.tabla-top-right {
+  font-size: 1.03em;
+  border-collapse: collapse;
+}
+
+.tabla-top-right tr {
+  height: auto;
+}
+
+.tabla-top-right td {
+  padding: 0.3em 0.4em;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+
+.tabla-top-right td:first-child {
+  width: 1.4em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tabla-top-right td:last-child {
+  padding-left: 0.4em;
+}
+
+.tabla-top-right .icon {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tabla-top-right a {
+  color: #404040;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.tabla-top-right a:hover {
+  transform: scale(1.10);
+}
+
+.top-right-section .separator-line {
+  width: 14em;
+  height: 0.015em;
+  background-color: #AEAAAA;
+  margin: 0.3em 0;
+}
+
+.tabla-top-right tr:first-child td {
+  padding-top: 0.3em;
+}
+
+/* ===============================
    RESPONSIVE
    =============================== */
-@media (max-width: 85.375em), (hover: none) and (pointer: coarse) {
-  .bloque-fijo-izquierdo {
-    display: none !important;
+@media (max-width: 64em) {
+  .container-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .bloque-fijo-izquierdo,
+  .left-column,
+  .right-column,
+  .right-space,
+  .top-right-section {
+    grid-column: 1 / -1;
+    position: relative;
+    top: auto;
   }
 }
 
-@media (max-width: 64em) {
-  .bloque-fijo-izquierdo {
-    left: 3em;
-    width: 10em;
-  }
-
+@media (max-width: 40em) {
   .cvap-image {
     width: 11.25em;
   }
@@ -280,114 +384,3 @@ h2 {
     display: none !important;
   }
 }
-
-/* ===============================
-   TABLA CONTACTO
-   =============================== */
-
-.tabla-contacto {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.75em;
-}
-
-.tabla-contacto td:first-child {
-  width: 0.85em;              
-  padding-right: 0em;   
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.tabla-contacto td:last-child {
-  padding-bottom: 0.35em;
-  line-height: 1.2;
-}
-
-
-.tabla-contacto td {
-  line-height: normal !important;  
-}
-
-
-
-/* ===============================
-   SECCIÓN SUPERIOR DERECHA
-   =============================== */
-
-.top-right-section {
-  font-family: 'Century Gothic', Poppins, Arial, sans-serif;
-  font-size: 0.800em; 
-  color: #404040;
-  position: fixed;
-  top: 10.40em;
-  right: 6.10em;
-  width: max-content;
-  z-index: 998;
-}
-
-.top-right-section .separator-line {
-  width: 14em;
-  height: 0.015em;
-  background-color: #AEAAAA;
-  margin: 0.6em 0 0.6em -0.7em;
-}
-
-/* ===============================
-   TABLA SUPERIOR DERECHA
-   =============================== */
-
-.tabla-top-right {
-  font-size: 1.03em; 
-  border-collapse: collapse;
-}
-
-.tabla-top-right tr {
-  height: 1.92em;             
-}
-
-.tabla-top-right td {
-  padding: 0.32em 0;          
-  line-height: 1.2;
-  vertical-align: middle;     
-}
-
-.tabla-top-right td:first-child {
-  width: 1.4em;               
-  text-align: center;
-  vertical-align: middle;
-}
-
-.tabla-top-right td:last-child {
-  padding-left: 0.4em;
-}
-
-/* ===============================
-   ICONOS UNIFORMES
-   =============================== */
-
-.tabla-top-right .icon {
-  width: 1em;                 
-  height: 1em;               
-  object-fit: contain;        
-  display: inline-block;
-  vertical-align: middle;     
-}
-
-/* ===============================
-   ENLACES
-   =============================== */
-
-.tabla-top-right a {
-  color: #404040;
-  text-decoration: none;
-  display: inline-block;
-  transition: transform 0.2s ease;
-  transform-origin: left center;
-}
-
-.tabla-top-right a:hover {
-  transform: scale(1.10);
-}
-
-

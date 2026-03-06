@@ -51,7 +51,7 @@
     .page-title {
       position: absolute;
       top: 28px;
-      left: 68px;
+      left: 18px;
       width: 280px;
       z-index: 1000;
       opacity: 1;
@@ -110,9 +110,8 @@
     }
 
     
-    .form-container,
-    .form-container * {
-      font-family: Poppins, 'Century Gothic', sans-serif !important;
+    .form-container {
+      font-family: 'Century Gothic', Poppins, sans-serif;
     }
 
     .form-container {
@@ -328,10 +327,10 @@
         </div>
 
 	  <input type="text" name="user_company" placeholder="Hotel/Company">
-	  <input type="tel" name="user_phone" placeholder="Phone" required>
+	  <input type="tel" name="user_phone" placeholder="Phone">
 	  <input type="email" name="user_email" placeholder="Email" required>
 
-	  <textarea name="user_message" placeholder="Comments" required></textarea>
+	  <textarea name="user_message" placeholder="Comments"></textarea>
 
 
 	  <input type="hidden" name="label_name" value="Name">
@@ -344,7 +343,7 @@
 
         <div class="file-share-wrapper">
           <span>Share file</span>
-          <a class="file-share-link" href="https://www.dropbox.com/request/H87MBNvSGyTdQn83QyDm" target="_blank">
+          <a class="file-share-link" href="https://www.dropbox.com/request/H87MBNvSGyTdQn83QyDm" target="_blank" rel="noopener noreferrer">
             Select file
           </a>
         </div>
@@ -354,7 +353,7 @@
             <input type="checkbox" id="privacy" name="Privacy" value="Accepted" required>
             <label for="privacy">
               I have read and accept the
-              <a href="pprivacidad.en.html" target="_blank">Privacy Policy</a>
+              <a href="pprivacidad.en.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
             </label>
           </div>
         </div>

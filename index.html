@@ -47,16 +47,15 @@
     }
 
     .main-content {
-      margin-top: 20vh;
+      margin-top: 12vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
 
     .name {
       font-size: 2.4em;
-      margin-bottom: 0.5cm;
+      margin-bottom: 0.05em;
       animation: fadeInScale 4s ease forwards;
     }
 
@@ -65,12 +64,13 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      margin-bottom: 0.5cm;
+      margin-bottom: 0.05em;
       flex-wrap: nowrap;
     }
 
     .cv-link {
-      font-size: 18vw;
+      font-size: 21vw;
+      line-height: 1.45;
       max-width: 100%;
       color: white;
       text-decoration: none;
@@ -80,13 +80,16 @@
       z-index: 5;
       letter-spacing: normal;
       white-space: nowrap;
-      border: 2px solid transparent;
+      border: 0.125em solid transparent;
     }
 
-    .cv-link:hover {
-      border: 2px solid white;
-      border-radius: 50%;
-    }
+.cv-link {
+  border: 2px solid transparent;
+}
+.cv-link:hover {
+  border: 2px solid white;
+  border-radius: 50%;
+}
 
     .cv-letter {
       display: inline-block;
@@ -107,26 +110,26 @@
 
     .language-table {
       table-layout: fixed;
-      width: 300px;
+      width: 18.75em;
       max-width: 90vw;
       margin: 0 auto;
       animation: fadeInScale 4s ease forwards;
     }
 
     .language-table td {
-      width: 100px;
+      width: 6.25em;
       text-align: center;
     }
 
     .language-table img {
-      width: 32px;
+      width: 2em;
       height: auto;
       vertical-align: middle;
     }
 
     .language-link {
       display: inline-block;
-      margin-top: 8px;
+      margin-top: 0.5em;
       color: white;
       text-decoration: none;
     }
@@ -134,7 +137,7 @@
     .language-link span {
       display: inline-block;
       transition: transform 0.3s ease;
-      font-size: 17px;
+      font-size: 1.06em;
     }
 
     .language-link:hover span {
@@ -189,9 +192,9 @@
 
     .cv-line {
       width: 31vw;
-      min-width: 200px;
-      max-width: 600px;
-      height: 1.5px;
+      min-width: 14em;
+      max-width: 45em;
+      height: 0.090em;
       background: white;
       opacity: 0;
       transition: opacity 1s ease;
@@ -203,7 +206,7 @@
 
     .line-left,
     .line-right {
-      margin: 0 10px;
+      margin: 0 0.625em;
     }
 
     @media (max-width: 768px) {
@@ -213,7 +216,7 @@
       }
 
       .cv-link {
-        font-size: 30vw;
+        font-size: 34vw;
       }
 
       .language-table {
@@ -239,7 +242,7 @@
       }
 
       .cv-link {
-        font-size: 34vw;
+        font-size: 40vw;
       }
 
       .language-table {
@@ -307,7 +310,7 @@
         setTimeout(() => {
           leftLine.classList.remove('visible');
           rightLine.classList.remove('visible');
-        }, 800);
+        }, 300);
       }
     }
 
