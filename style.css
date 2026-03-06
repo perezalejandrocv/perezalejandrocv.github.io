@@ -17,7 +17,7 @@ html {
    =============================== */
 .container-wrapper {
   display: grid;
-  grid-template-columns: 13.75em 1fr 1fr 13.75em;
+  grid-template-columns: 9.5em 1.10fr 1.10fr 9.5em;
   gap: 1.25em;
   max-width: 87.5em;
   margin: 0 auto;
