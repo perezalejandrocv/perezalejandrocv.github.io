@@ -48,10 +48,6 @@ html {
   margin: 0;
 }
 
-.container-wrapper > * {
-  outline: 1px solid red;
-}
-
 /* ===============================
    COLUMNAS
    =============================== */
