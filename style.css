@@ -221,7 +221,7 @@ h2 {
 
 .qr-fixed {
   position: fixed;
-  bottom: 5.20em;
+  bottom: 2.50em;
   left: calc(4%);
   transform: translateX(0);
   width: 10em;
@@ -248,7 +248,7 @@ h2 {
    =============================== */
 
 .at-icon {
-  font-size: 3.125em;
+  font-size: 4em;
   color: white;
   font-family: 'Times New Roman', Times, serif;
   display: inline-block;
@@ -410,55 +410,69 @@ h2 {
 }
 
 /* ===============================
-   RESPONSIVE
+   RESPONSIVE: TABLETS Y MÓVILES
    =============================== */
 
-@media (max-width: 64em) { /* Tablets y pantallas medianas */
-  body {
-    font-size: 0.95rem;
-  }
+/* -------------------------------
+   TABLETS (pantallas ≤ 1024px / 64em)
+--------------------------------- */
+@media (max-width: 64em) {
 
-  /* Ocultar la columna 1 */
+  /* Ocultar columna 1 */
   .left-space {
-    display: none;
+    display: none !important;
   }
 
-  /* Ajustar grid para columnas 2, 3 y 4 */
+  /* Ocultar imagen de animación en columna 1 */
+  .cvap-image {
+    display: none !important;
+  }
+
+  /* Ajustar grid para columnas 2, 3 y 4 visibles */
   .container-wrapper {
+    grid-template-columns: 1fr 2fr 1fr; /* columnas left-column, right-column, right-space */
+    gap: 1em;
     padding: 1em;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas visibles */
   }
 
   .left-column {
-    grid-column: 1; /* columna 2 ahora primera */
+    grid-column: 1;
   }
 
   .right-column {
-    grid-column: 2; /* columna 3 */
+    grid-column: 2;
   }
 
   .right-space {
-    grid-column: 3; /* columna 4 */
+    grid-column: 3;
   }
 }
 
-@media (max-width: 40em) { /* Móviles */
-  .cvap-image {
-    width: 11.25em;
-  }
+/* -------------------------------
+   MÓVILES (pantallas ≤ 640px / 40em)
+--------------------------------- */
+@media (max-width: 40em) {
 
-  .qr-fixed {
-    width: 7.5em;
-  }
-
-  /* Apilar columnas 2, 3 y 4 verticalmente */
+  /* El grid se apila verticalmente */
   .container-wrapper {
     grid-template-columns: 1fr;
+    gap: 0.8em;
+    padding: 0.8em;
   }
 
+  /* Todas las columnas ocupan todo el ancho */
   .left-column,
   .right-column,
   .right-space {
     grid-column: 1;
+  }
+
+  /* Ajuste de imágenes para móviles */
+  .cvap-image {
+    display: none !important;
+  }
+
+  .qr-fixed {
+    width: 7.5em;
   }
 }
