@@ -158,9 +158,6 @@ h2 {
   padding-left: 1.25em;
 }
 
-.goldensand {
-  font-size: 0.68rem;
-}
 
 /* ===============================
    IMÁGENES Y ANIMACIONES
@@ -329,7 +326,6 @@ h2 {
 .tabla-contacto {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.75em;
 }
 
 .tabla-contacto td:first-child {
