@@ -31,11 +31,22 @@
   <!-- Grid wrapper de 4 columnas -->
   <div class="container-wrapper">
 
+    <!-- Columnas existentes -->
+    <div class="left-space"></div>
+    <aside class="left-column"> ... </aside>
+    <main class="right-column"> ... </main>
+    <div class="right-space"></div>
+
+    <!-- Elementos absolutos alineados al mismo contenedor -->
+    <img src="images/cvap.png" class="cvap-image">
+    <section class="top-right-section"> ... </section>
+
+</div>
+
     <!-- COLUMNA 1: -->
-    <div class="bloque-fijo-izquierdo">
-      <img src="images/cvap.png" alt="CV" class="cvap-image">
-      <img src="images/qr.png" alt="QR" class="qr-fixed">
-    </div>
+  <div class="left-space">
+    <img src="images/qr.png" alt="QR" class="qr-fixed">
+  </div>
 
     <!-- COLUMNA 2: -->
     <aside class="left-column">
@@ -223,7 +234,6 @@
 
     <!-- COLUMNA 4: -->
     <div class="right-space">
-      <section class="top-right-section">
         <table class="tabla-top-right">
           <tr><td><img src="images/es.png" class="icon"></td><td><a href="index.es.html">Castellà.</a></td></tr>
           <tr><td><img src="images/ca.png" class="icon"></td><td><a href="index.ca.html">Català.</a></td></tr>

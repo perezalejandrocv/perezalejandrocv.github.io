@@ -1,11 +1,23 @@
 ﻿/* ===============================
+   RESET GENERAL
+   =============================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ===============================
    RESET Y BODY
    =============================== */
 body {
   font-family: 'Century Gothic', Poppins, Arial, sans-serif;
   margin: 0;
-  padding: 1.25em;
   background-color: #ffffff;
+}
+
+:root {
+  --top-offset: 10em;
 }
 
 html {
@@ -17,24 +29,37 @@ html {
    =============================== */
 .container-wrapper {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-template-columns: 
+    minmax(10em, 1fr)   /* columna 1 */
+    minmax(11em, 2fr)   /* columna 2 */
+    minmax(11em, 2fr)   /* columna 3 */
+    minmax(10em, 1fr);  /* columna 4 */
   gap: 1.25em;
-  max-width: 87.5em;
-  margin: 0 auto;
-  padding: 0 0.625em;
+
+  /* margen uniforme de 1cm alrededor */
+  padding: 0.80em;         
+  
+  max-width: none;      /* para que el padding marque el borde real */
+  width: 100%;
+  margin: 0;            /* ya no necesitamos centrar con auto */
+}
+
+.container-wrapper > * {
+  outline: 1px solid red;
 }
 
 /* ===============================
    COLUMNAS
    =============================== */
-.bloque-fijo-izquierdo {
-  grid-column: 1 / 2;
-  position: sticky;
-  top: 0;
+.left-space,
+.right-space {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  align-items: center;    
+  /* quitamos justify-content: center */
+  width: 100%;
+  box-sizing: border-box;
+  position: relative; /* contenedor de absolute */
 }
 
 .left-column {
@@ -51,8 +76,24 @@ html {
   padding: 1.25em;
 }
 
+.left-space {
+  grid-column: 1 / 2;
+}
+
 .right-space {
   grid-column: 4 / 5;
+}
+
+/* ===============================
+   POSICIONAMIENTO ABSOLUTO EN COLUMNAS
+   =============================== */
+
+/* Hacemos que las columnas actúen como contenedor para elementos absolutos */
+.left-space,
+.left-column,
+.right-column,
+.right-space {
+  position: relative; /* los elementos con position absolute se ubican respecto a su columna */
 }
 
 /* ===============================
@@ -94,15 +135,17 @@ h2 {
 /* ===============================
    TEXTO Y LISTAS
    =============================== */
-.left-column p,
-.left-column ul,
-.left-column li,
-.right-column p,
-.right-column ul,
-.right-column li {
+.left-column,
+.right-column {
   font-size: 0.75rem;
-  text-align: justify;
   line-height: 1.6;
+}
+
+.left-column p,
+.right-column p,
+.left-column li,
+.right-column li {
+  text-align: justify;
 }
 
 .left-column ul,
@@ -126,17 +169,30 @@ h2 {
 }
 
 .cvap-image {
-  position: relative;
-  left: -3.5em;
-  top: 6.3em;
+  position: absolute;  
+  top: calc(var(--top-offset) - 4.7em);
+  left: 50%;
+  transform: translateX(calc(-50% + 0.2em)) scale(0.5);
   width: 16.25em;
-  max-width: 110%;
   height: auto;
-  display: block;
-
+  z-index: 1000;
   opacity: 0;
-  animation: zoomFadeIn 6s ease forwards;
-  pointer-events: auto;
+
+  animation: cvapZoomFade 4s ease forwards;
+  animation-delay: 0.3s;
+
+  will-change: transform, opacity;
+}
+
+@keyframes cvapZoomFade {
+  0% {
+    opacity: 0;
+    transform: translateX(calc(-50% + 0.2em)) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(calc(-50% + 0.2em)) scale(1);
+  }
 }
 
 @keyframes zoomFadeIn {
@@ -164,26 +220,26 @@ h2 {
    QR
    =============================== */
 .qr-fixed {
-  position: fixed;
-  bottom: 5.3em;
-  left: 11.2%;
-  transform: translateX(-50%);
-  width: 9.375em;
-  z-index: 999;
-
+  position: fixed;             /* siempre visible */
+  bottom: 5.20em;                 /* más abajo en la pantalla */
+  left: calc(4%);             /* ajusta según el ancho de la columna 1 */
+  transform: translateX(0);    /* ya no necesitamos centrar con -50% */
+  width: 10em;                 /* más grande */
+  height: auto;
   opacity: 0;
-  animation: slideInFromLeft 2s ease forwards;
-  animation-delay: 0.5s;
+  animation: qrSlide 3.6s ease forwards;
+  animation-delay: 0.6s;
+  z-index: 1000;               /* encima del contenido */
 }
 
-@keyframes slideInFromLeft {
+@keyframes qrSlide {
   0% {
     opacity: 0;
-    transform: translateX(-150%);
+    transform: translateX(-200%); /* entra desde la izquierda */
   }
   100% {
     opacity: 1;
-    transform: translateX(-50%);
+    transform: translateX(0);     /* posición final dentro de la columna */
   }
 }
 
@@ -279,20 +335,20 @@ h2 {
 }
 
 .tabla-contacto td {
-  line-height: normal !important;
+  line-height: normal;
 }
 
 /* ===============================
    TABLA SUPERIOR DERECHA
    =============================== */
+/* TOP-RIGHT SECTION */
 .top-right-section {
+  position: sticky;      /* relativo a su columna (right-column) */
+  top: var(--top-offset);                /* distancia desde el borde superior */
   font-family: 'Century Gothic', Poppins, Arial, sans-serif;
   font-size: 0.8em;
   color: #404040;
-  position: sticky;
-  top: 11.6em;
   z-index: 998;
-  margin-left: 6em;
 }
 
 .tabla-top-right {
@@ -353,23 +409,32 @@ h2 {
 /* ===============================
    RESPONSIVE
    =============================== */
+
 @media (max-width: 64em) {
+
+  body {
+    font-size: 0.95rem;
+  }
+
   .container-wrapper {
+    padding: 1em;
     grid-template-columns: 1fr;
   }
 
-  .bloque-fijo-izquierdo,
+  .left-space {
+    display: none;
+  }
+
   .left-column,
   .right-column,
-  .right-space,
-  .top-right-section {
-    grid-column: 1 / -1;
-    position: relative;
-    top: auto;
+  .right-space {
+    grid-column: 1;
   }
+
 }
 
 @media (max-width: 40em) {
+
   .cvap-image {
     width: 11.25em;
   }
@@ -377,10 +442,5 @@ h2 {
   .qr-fixed {
     width: 7.5em;
   }
-}
 
-@media (max-width: 37.5em) {
-  .bloque-fijo-izquierdo {
-    display: none !important;
-  }
 }
