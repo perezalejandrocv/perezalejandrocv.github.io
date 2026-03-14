@@ -408,26 +408,26 @@ h2 {
    =============================== */
 
 /* -------------------------------
-   TABLETS (pantallas ≤ 1024px / 64em)
+   TABLETS (≤1024px)
 --------------------------------- */
 @media (max-width: 64em) {
 
-  /* Ocultar columna 1 */
+  /* Ocultar columna izquierda completamente */
   .left-space {
-    display: none;
-  }
-
-  /* Ocultar elementos fixed de la columna 1 */
-  .cvap-image,
-  .qr-fixed {
     display: none !important;
   }
 
-  /* Grid pasa a 3 columnas */
+  /* Ocultar elementos fixed */
+  .cvap-image,
+  .qr-fixed {
+    display: none !important;
+    position: static !important;
+  }
+
+  /* Nuevo grid sin columna 1 */
   .container-wrapper {
-    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 0.8fr;
     gap: 1em;
-    padding: 1em;
   }
 
   .left-column {
@@ -445,29 +445,26 @@ h2 {
 }
 
 /* -------------------------------
-   MÓVILES (pantallas ≤ 640px / 40em)
+   MÓVILES (≤640px)
 --------------------------------- */
 @media (max-width: 40em) {
 
-  /* Ocultar columna 1 */
   .left-space {
-    display: none;
-  }
-
-  /* Ocultar elementos fixed */
-  .cvap-image,
-  .qr-fixed {
     display: none !important;
   }
 
-  /* Grid vertical */
+  .cvap-image,
+  .qr-fixed {
+    display: none !important;
+    position: static !important;
+  }
+
+  /* Layout vertical */
   .container-wrapper {
     grid-template-columns: 1fr;
     gap: 0.8em;
-    padding: 0.8em;
   }
 
-  /* Todas las columnas ocupan ancho completo */
   .left-column,
   .right-column,
   .right-space {
