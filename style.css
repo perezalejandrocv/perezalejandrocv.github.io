@@ -408,25 +408,18 @@ h2 {
    =============================== */
 
 /* -------------------------------
-   TABLETS (pantallas ≤ 1024px / 64em)
+   TABLETS (≤1024px)
 --------------------------------- */
 @media (max-width: 64em) {
 
-  /* Ocultar columna 1 */
+  /* ocultar columna 1 */
   .left-space {
-    display: none !important;
+    display: none;
   }
 
-  /* Ocultar imagen de animación en columna 1 */
-  .cvap-image {
-    display: none !important;
-  }
-
-  /* Ajustar grid para columnas 2, 3 y 4 visibles */
+  /* grid de 3 columnas */
   .container-wrapper {
-    grid-template-columns: 1fr 2fr 1fr; /* columnas left-column, right-column, right-space */
-    gap: 1em;
-    padding: 1em;
+    grid-template-columns: 2fr 2fr 1fr;
   }
 
   .left-column {
@@ -440,28 +433,26 @@ h2 {
   .right-space {
     grid-column: 3;
   }
+
+  .cvap-image {
+    display: none !important;
+  }
+
 }
 
 /* -------------------------------
-   MÓVILES (pantallas ≤ 640px / 40em)
+   MÓVILES (≤640px)
 --------------------------------- */
 @media (max-width: 40em) {
 
-  /* El grid se apila verticalmente */
+  .left-space {
+    display: none;
+  }
+
   .container-wrapper {
     grid-template-columns: 1fr;
-    gap: 0.8em;
-    padding: 0.8em;
   }
 
-  /* Todas las columnas ocupan todo el ancho */
-  .left-column,
-  .right-column,
-  .right-space {
-    grid-column: 1;
-  }
-
-  /* Ajuste de imágenes para móviles */
   .cvap-image {
     display: none !important;
   }
@@ -469,4 +460,5 @@ h2 {
   .qr-fixed {
     width: 7.5em;
   }
+
 }
