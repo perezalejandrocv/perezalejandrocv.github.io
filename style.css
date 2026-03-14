@@ -408,18 +408,26 @@ h2 {
    =============================== */
 
 /* -------------------------------
-   TABLETS (≤1024px)
+   TABLETS (pantallas ≤ 1024px / 64em)
 --------------------------------- */
 @media (max-width: 64em) {
 
-  /* ocultar columna 1 */
+  /* Ocultar columna 1 */
   .left-space {
     display: none;
   }
 
-  /* grid de 3 columnas */
+  /* Ocultar elementos fixed de la columna 1 */
+  .cvap-image,
+  .qr-fixed {
+    display: none !important;
+  }
+
+  /* Grid pasa a 3 columnas */
   .container-wrapper {
     grid-template-columns: 2fr 2fr 1fr;
+    gap: 1em;
+    padding: 1em;
   }
 
   .left-column {
@@ -434,31 +442,36 @@ h2 {
     grid-column: 3;
   }
 
-  .cvap-image {
-    display: none !important;
-  }
-
 }
 
 /* -------------------------------
-   MÓVILES (≤640px)
+   MÓVILES (pantallas ≤ 640px / 40em)
 --------------------------------- */
 @media (max-width: 40em) {
 
+  /* Ocultar columna 1 */
   .left-space {
     display: none;
   }
 
-  .container-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .cvap-image {
+  /* Ocultar elementos fixed */
+  .cvap-image,
+  .qr-fixed {
     display: none !important;
   }
 
-  .qr-fixed {
-    width: 7.5em;
+  /* Grid vertical */
+  .container-wrapper {
+    grid-template-columns: 1fr;
+    gap: 0.8em;
+    padding: 0.8em;
+  }
+
+  /* Todas las columnas ocupan ancho completo */
+  .left-column,
+  .right-column,
+  .right-space {
+    grid-column: 1;
   }
 
 }
