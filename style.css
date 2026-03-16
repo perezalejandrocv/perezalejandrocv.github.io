@@ -1,7 +1,6 @@
 ﻿/* ===============================
    RESET GENERAL
-   =============================== */
-
+=============================== */
 *,
 *::before,
 *::after {
@@ -10,8 +9,7 @@
 
 /* ===============================
    RESET Y BODY
-   =============================== */
-
+=============================== */
 body {
   font-family: 'Century Gothic', Poppins, Arial, sans-serif;
   margin: 0;
@@ -28,36 +26,30 @@ html {
 
 /* ===============================
    GRID DE 4 COLUMNAS
-   =============================== */
-
+=============================== */
 .container-wrapper {
   display: grid;
-
-  grid-template-columns:
-    12em
-    minmax(22em, 1fr)
-    minmax(22em, 1fr)
-    12em;
-
+  grid-template-columns: 
+    minmax(10em, 1fr)   /* COLUMNA 1 */
+    minmax(11em, 2fr)   /* COLUMNA 2 */
+    minmax(11em, 2fr)   /* COLUMNA 3 */
+    minmax(10em, 1fr);  /* COLUMNA 4 */
   gap: 1.25em;
-  padding: 0.80em;
-
-  max-width: none;
+  padding: 0.8em;
   width: 100%;
   margin: 0;
+  max-width: none;
 }
 
 /* ===============================
    COLUMNAS
-   =============================== */
-
+=============================== */
 .left-space,
 .right-space {
   display: flex;
   flex-direction: column;
   align-items: center;    
   width: 100%;
-  box-sizing: border-box;
   position: relative;
 }
 
@@ -75,18 +67,12 @@ html {
   padding: 1.25em;
 }
 
-.left-space {
-  grid-column: 1 / 2;
-}
-
-.right-space {
-  grid-column: 4 / 5;
-}
+.left-space { grid-column: 1 / 2; }
+.right-space { grid-column: 4 / 5; }
 
 /* ===============================
    POSICIONAMIENTO ABSOLUTO EN COLUMNAS
-   =============================== */
-
+=============================== */
 .left-space,
 .left-column,
 .right-column,
@@ -96,8 +82,7 @@ html {
 
 /* ===============================
    TÍTULOS
-   =============================== */
-
+=============================== */
 h1 {
   font-weight: bold;
   margin-bottom: 0.02em;
@@ -133,8 +118,7 @@ h2 {
 
 /* ===============================
    TEXTO Y LISTAS
-   =============================== */
-
+=============================== */
 .left-column,
 .right-column {
   font-size: 0.75rem;
@@ -153,23 +137,21 @@ h2 {
   padding-left: 1.25em;
 }
 
-
 /* ===============================
    IMÁGENES Y ANIMACIONES
-   =============================== */
-
+=============================== */
 .foto-personal {
   width: 50%;
   height: auto;
   display: block;
-  margin: 0.5em auto 0.5em auto;
+  margin: 0.5em auto;
   border-radius: 1.375em;
 }
 
 .cvap-image {
-  position: fixed;
+  position: fixed; /* fija en pantalla */
   top: calc(var(--top-offset) - 4.7em);
-  left: calc(0.8em + 0px);
+  left: 1em; 
   transform: scale(0.5);
   width: 16.25em;
   height: auto;
@@ -180,9 +162,29 @@ h2 {
   will-change: transform, opacity;
 }
 
+.qr-fixed {
+  position: fixed;
+  bottom: 2.5em;
+  left: 4%;
+  width: 10em;
+  height: auto;
+  opacity: 0;
+  animation: qrSlide 3.6s ease forwards;
+  animation-delay: 0.6s;
+  z-index: 1000;
+}
+
+/* ===============================
+   ANIMACIONES
+=============================== */
 @keyframes cvapZoomFade {
   0% { opacity: 0; transform: scale(0.5); }
   100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes qrSlide {
+  0% { opacity: 0; transform: translateX(-200%); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes zoomFadeIn {
@@ -207,37 +209,8 @@ h2 {
 }
 
 /* ===============================
-   QR
-   =============================== */
-
-.qr-fixed {
-  position: fixed;
-  bottom: 2.50em;
-  left: calc(4%);
-  transform: translateX(0);
-  width: 10em;
-  height: auto;
-  opacity: 0;
-  animation: qrSlide 3.6s ease forwards;
-  animation-delay: 0.6s;
-  z-index: 1000;
-}
-
-@keyframes qrSlide {
-  0% {
-    opacity: 0;
-    transform: translateX(-200%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* ===============================
    BLOQUE CORREO
-   =============================== */
-
+=============================== */
 .at-icon {
   font-size: 4em;
   color: white;
@@ -257,15 +230,12 @@ h2 {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .email-link:hover {
-    transform: scale(1.1);
-  }
+  .email-link:hover { transform: scale(1.1); }
 }
 
 /* ===============================
    BOTÓN DE VOLVER ARRIBA
-   =============================== */
-
+=============================== */
 .back-to-top {
   position: fixed;
   bottom: 1.875em;
@@ -275,10 +245,10 @@ h2 {
   background-color: transparent;
   text-decoration: none;
   z-index: 999;
-  transition: transform 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease;
 }
 
 .back-to-top-img {
@@ -295,8 +265,7 @@ h2 {
 
 /* ===============================
    LÍNEA BLANCA ANIMADA
-   =============================== */
-
+=============================== */
 .white-line {
   width: 100%;
   height: 0.0625em;
@@ -308,8 +277,7 @@ h2 {
 
 /* ===============================
    TABLA CONTACTO
-   =============================== */
-
+=============================== */
 .tabla-contacto {
   width: 100%;
   border-collapse: collapse;
@@ -328,14 +296,9 @@ h2 {
   line-height: 1.2;
 }
 
-.tabla-contacto td {
-  line-height: normal;
-}
-
 /* ===============================
    TABLA SUPERIOR DERECHA
-   =============================== */
-
+=============================== */
 .top-right-section {
   position: sticky;
   top: var(--top-offset);
@@ -363,7 +326,6 @@ h2 {
 .tabla-top-right td:first-child {
   width: 1.4em;
   text-align: center;
-  vertical-align: middle;
 }
 
 .tabla-top-right td:last-child {
@@ -385,9 +347,7 @@ h2 {
   transition: transform 0.2s ease;
 }
 
-.tabla-top-right a:hover {
-  transform: scale(1.10);
-}
+.tabla-top-right a:hover { transform: scale(1.10); }
 
 .top-right-section .separator-line {
   width: 14em;
@@ -396,52 +356,28 @@ h2 {
   margin: 0.3em 0;
 }
 
-.tabla-top-right tr:first-child td {
-  padding-top: 0.3em;
-}
+.tabla-top-right tr:first-child td { padding-top: 0.3em; }
 
 /* ===============================
    RESPONSIVE: TABLETS Y MÓVILES
-   =============================== */
-
-/* Tablets y móviles (≤1024px) */
+=============================== */
 @media (max-width: 64em) {
+  /* Ocultar Columna 1 y las imágenes */
+  .left-space, .cvap-image, .qr-fixed { display: none !important; }
 
-  /* ocultar columna 1 */
-  .left-space {
-    display: none !important;
-  }
-
-  /* ocultar imágenes fijas */
-  .cvap-image,
-  .qr-fixed {
-    display: none !important;
-  }
-
-  /* grid sin columna 1 */
-  .container-wrapper {
-    grid-template-columns: 1fr 1fr 0.8fr;
-    gap: 1em;
-  }
-
+  /* Ajuste del grid */
+  .container-wrapper { grid-template-columns: 1fr 2fr 1fr; gap: 1em; padding: 1em; }
   .left-column { grid-column: 1; }
   .right-column { grid-column: 2; }
   .right-space { grid-column: 3; }
-
 }
 
-/* Móviles (≤640px) */
 @media (max-width: 40em) {
+  /* Ocultar Columna 1 y las imágenes */
+  .left-space, .cvap-image, .qr-fixed { display: none !important; }
 
-  .container-wrapper {
-    grid-template-columns: 1fr;
-    gap: 0.8em;
-  }
-
-  .left-column,
-  .right-column,
-  .right-space {
-    grid-column: 1;
-  }
-
+  /* Apilado vertical */
+  .container-wrapper { grid-template-columns: 1fr; gap: 0.8em; padding: 0.8em; }
+  .left-column, .right-column, .right-space { grid-column: 1; }
+  .qr-fixed { width: 7.5em; }
 }
