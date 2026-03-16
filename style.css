@@ -32,16 +32,15 @@ html {
 
 .container-wrapper {
   display: grid;
-  grid-template-columns: 
-    minmax(10em, 1fr)   /* COLUMNA 1 */
-    minmax(11em, 2fr)   /* COLUMNA 2 */
-    minmax(11em, 2fr)   /* COLUMNA 3 */
-    minmax(10em, 1fr);  /* COLUMNA 4 */
-  gap: 1.25em;
 
-  
-  padding: 0.80em;         
-  
+  grid-template-columns:
+    12em
+    minmax(22em, 1fr)
+    minmax(22em, 1fr)
+    12em;
+
+  gap: 1.25em;
+  padding: 0.80em;
 
   max-width: none;
   width: 100%;
@@ -444,11 +443,5 @@ h2 {
   .right-space {
     grid-column: 1;
   }
-
-@media (max-width: 64em) {
-  .left-space {
-    display: none;
-  }
-}
 
 }
