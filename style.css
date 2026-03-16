@@ -445,4 +445,10 @@ h2 {
     grid-column: 1;
   }
 
+@media (max-width: 64em) {
+  .left-space {
+    display: none;
+  }
+}
+
 }
