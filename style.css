@@ -8,7 +8,7 @@
 }
 
 /* ===============================
-   RESET Y BODY
+   BODY Y TIPOGRAFÍA
 =============================== */
 body {
   font-family: 'Century Gothic', Poppins, Arial, sans-serif;
@@ -18,6 +18,8 @@ body {
 
 :root {
   --top-offset: 10em;
+  --primary-color: #2F5496;
+  --secondary-color: #006600;
 }
 
 html {
@@ -25,20 +27,14 @@ html {
 }
 
 /* ===============================
-   GRID DE 4 COLUMNAS
+   GRID DE 4 COLUMNAS (ESCRITORIO)
 =============================== */
 .container-wrapper {
   display: grid;
-  grid-template-columns: 
-    minmax(10em, 1fr)   /* COLUMNA 1 */
-    minmax(11em, 2fr)   /* COLUMNA 2 */
-    minmax(11em, 2fr)   /* COLUMNA 3 */
-    minmax(10em, 1fr);  /* COLUMNA 4 */
+  grid-template-columns: minmax(10em,1fr)  minmax(11em,2fr)  minmax(11em,2fr)  minmax(10em,1fr);
   gap: 1.25em;
   padding: 0.8em;
   width: 100%;
-  margin: 0;
-  max-width: none;
 }
 
 /* ===============================
@@ -50,12 +46,11 @@ html {
   flex-direction: column;
   align-items: center;    
   width: 100%;
-  position: relative;
 }
 
 .left-column {
   grid-column: 2 / 3;
-  background-color: #2F5496;
+  background-color: var(--primary-color);
   color: white;
   padding: 1.25em;
   border-radius: 0.75em;
@@ -69,16 +64,6 @@ html {
 
 .left-space { grid-column: 1 / 2; }
 .right-space { grid-column: 4 / 5; }
-
-/* ===============================
-   POSICIONAMIENTO ABSOLUTO EN COLUMNAS
-=============================== */
-.left-space,
-.left-column,
-.right-column,
-.right-space {
-  position: relative;
-}
 
 /* ===============================
    TÍTULOS
@@ -106,7 +91,7 @@ h2 {
 }
 
 .right-column h3 {
-  color: #006600;
+  color: var(--secondary-color);
   font-weight: bold;
   margin: 1.25em 0 0.625em;
 }
@@ -154,7 +139,6 @@ h2 {
   height: auto;
   display: block;
   margin-bottom: 1em;
-
   transform: scale(0.5);
   opacity: 0;
   animation: cvapZoomFade 4s ease forwards;
@@ -167,7 +151,6 @@ h2 {
   height: auto;
   display: block;
   margin-top: 2em;
-
   opacity: 0;
   animation: qrSlide 3.6s ease forwards;
   animation-delay: 0.6s;
@@ -184,16 +167,6 @@ h2 {
 @keyframes qrSlide {
   0% { opacity: 0; transform: translateX(-200%); }
   100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes zoomFadeIn {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(-100vw); }
-  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes spinYandScale {
@@ -216,7 +189,6 @@ h2 {
   font-family: 'Times New Roman', Times, serif;
   display: inline-block;
   animation: spinYandScale 15s linear infinite;
-  will-change: transform;
 }
 
 .email-link,
@@ -233,7 +205,7 @@ h2 {
 }
 
 /* ===============================
-   BOTÓN DE VOLVER ARRIBA
+   BOTÓN VOLVER ARRIBA
 =============================== */
 .back-to-top {
   position: fixed;
@@ -241,13 +213,10 @@ h2 {
   right: 1.875em;
   width: 3.125em;
   height: 3.125em;
-  background-color: transparent;
-  text-decoration: none;
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
 }
 
 .back-to-top-img {
@@ -275,7 +244,7 @@ h2 {
 }
 
 /* ===============================
-   TABLA CONTACTO
+   TABLAS
 =============================== */
 .tabla-contacto {
   width: 100%;
@@ -295,13 +264,9 @@ h2 {
   line-height: 1.2;
 }
 
-/* ===============================
-   TABLA SUPERIOR DERECHA
-=============================== */
 .top-right-section {
   position: sticky;
   top: var(--top-offset);
-  font-family: 'Century Gothic', Poppins, Arial, sans-serif;
   font-size: 0.8em;
   color: #404040;
   z-index: 998;
@@ -312,37 +277,14 @@ h2 {
   border-collapse: collapse;
 }
 
-.tabla-top-right tr {
-  height: auto;
-}
+.tabla-top-right td:first-child { width: 1.4em; text-align: center; }
+.tabla-top-right td:last-child { padding-left: 0.4em; }
 
-.tabla-top-right td {
-  padding: 0.3em 0.4em;
-  line-height: 1.2;
-  vertical-align: middle;
-}
-
-.tabla-top-right td:first-child {
-  width: 1.4em;
-  text-align: center;
-}
-
-.tabla-top-right td:last-child {
-  padding-left: 0.4em;
-}
-
-.tabla-top-right .icon {
-  width: 1em;
-  height: 1em;
-  object-fit: contain;
-  display: inline-block;
-  vertical-align: middle;
-}
+.tabla-top-right .icon { width: 1em; height: 1em; object-fit: contain; display: inline-block; vertical-align: middle; }
 
 .tabla-top-right a {
   color: #404040;
   text-decoration: none;
-  display: inline-block;
   transition: transform 0.2s ease;
 }
 
@@ -355,44 +297,24 @@ h2 {
   margin: 0.3em 0;
 }
 
-.tabla-top-right tr:first-child td { padding-top: 0.3em; }
-
-
 /* ===============================
-   OCULTAR COLUMNA 1 EN TABLETS Y MÓVILES
+   RESPONSIVE (OCULTAR COLUMNA 1)
 =============================== */
-@media (max-width: 1024px) { /* Tablets y más pequeños */
-  .left-space {
-    display: none !important; /* Oculta Columna 1 */
-  }
+@media (max-width: 1024px) { /* Tablets */
+  .left-space { display: none !important; }
+  .cvap-image, .qr-fixed { display: none !important; opacity: 0 !important; animation: none !important; }
 
-  /* Ajustar grid a 3 columnas visibles: left-column, right-column, right-space */
   .container-wrapper {
-    grid-template-columns: 2fr 2fr 1fr; /* Columnas 2,3,4 */
+    grid-template-columns: 2fr 2fr 1fr; /* left-column, right-column, right-space */
     gap: 1em;
     padding: 1em;
   }
-
   .left-column { grid-column: 1; }
   .right-column { grid-column: 2; }
   .right-space { grid-column: 3; }
-
-  /* Ocultar imágenes CVAP y QR también */
-  .cvap-image, .qr-fixed {
-    display: none !important;
-    opacity: 0 !important;
-    animation: none !important;
-  }
 }
 
 @media (max-width: 640px) { /* Móviles */
-  .container-wrapper {
-    grid-template-columns: 1fr; /* solo una columna visible */
-  }
-
-  .left-column,
-  .right-column,
-  .right-space {
-    grid-column: 1;
-  }
+  .container-wrapper { grid-template-columns: 1fr; gap: 0.8em; padding: 0.8em; }
+  .left-column, .right-column, .right-space { grid-column: 1; }
 }
