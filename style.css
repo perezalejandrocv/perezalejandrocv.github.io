@@ -360,24 +360,23 @@ h2 {
 /* ===============================
    RESPONSIVE: TABLETS Y MÓVILES
 =============================== */
-@media (max-width: 64em) {
-  /* Ocultar Columna 1 (left-space) */
-  .left-space {
+@media (max-width: 64em) { /* Tablets */
+  /* Ocultar Columna 1 completa */
+  .left-column {
     display: none !important;
   }
 
-  /* Ajuste del grid: 3 columnas para tablets */
+  /* Ajustar grid para 3 columnas (ahora sólo columnas 2, 3 y 4) */
   .container-wrapper {
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr; /* columna 2, columna 3, right-space */
     gap: 1em;
     padding: 1em;
   }
 
-  .left-column { grid-column: 1; }
-  .right-column { grid-column: 2; }
-  .right-space { grid-column: 3; }
+  .right-column { grid-column: 1; }
+  .right-space { grid-column: 2; }
 
-  /* Ocultar imágenes CVAP y QR en tablets */
+  /* Ocultar imágenes CVAP y QR por si acaso */
   .cvap-image, .qr-fixed {
     display: none !important;
     opacity: 0 !important;
@@ -385,20 +384,19 @@ h2 {
   }
 }
 
-@media (max-width: 40em) {
-  /* Ocultar Columna 1 también en móviles */
-  .left-space {
+@media (max-width: 40em) { /* Móviles */
+  /* Ocultar Columna 1 completa */
+  .left-column {
     display: none !important;
   }
 
-  /* Ajuste del grid: apilado vertical */
+  /* Ajuste grid: apilado vertical */
   .container-wrapper {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* solo una columna visible */
     gap: 0.8em;
     padding: 0.8em;
   }
 
-  .left-column,
   .right-column,
   .right-space {
     grid-column: 1;
@@ -407,7 +405,7 @@ h2 {
   /* Ajuste del QR en móvil */
   .qr-fixed { width: 7.5em; }
 
-  /* Ocultar imágenes CVAP y QR en móviles */
+  /* Ocultar imágenes CVAP y QR por si acaso */
   .cvap-image, .qr-fixed {
     display: none !important;
     opacity: 0 !important;
