@@ -361,10 +361,12 @@ h2 {
    RESPONSIVE: TABLETS Y MÓVILES
 =============================== */
 @media (max-width: 64em) {
+  /* Ocultar Columna 1 (left-space) */
   .left-space {
-    display: none;
+    display: none !important;
   }
 
+  /* Ajuste del grid: 3 columnas para tablets */
   .container-wrapper {
     grid-template-columns: 1fr 2fr 1fr;
     gap: 1em;
@@ -374,8 +376,22 @@ h2 {
   .left-column { grid-column: 1; }
   .right-column { grid-column: 2; }
   .right-space { grid-column: 3; }
+
+  /* Ocultar imágenes CVAP y QR en tablets */
+  .cvap-image, .qr-fixed {
+    display: none !important;
+    opacity: 0 !important;
+    animation: none !important;
+  }
 }
+
 @media (max-width: 40em) {
+  /* Ocultar Columna 1 también en móviles */
+  .left-space {
+    display: none !important;
+  }
+
+  /* Ajuste del grid: apilado vertical */
   .container-wrapper {
     grid-template-columns: 1fr;
     gap: 0.8em;
@@ -386,5 +402,15 @@ h2 {
   .right-column,
   .right-space {
     grid-column: 1;
+  }
+
+  /* Ajuste del QR en móvil */
+  .qr-fixed { width: 7.5em; }
+
+  /* Ocultar imágenes CVAP y QR en móviles */
+  .cvap-image, .qr-fixed {
+    display: none !important;
+    opacity: 0 !important;
+    animation: none !important;
   }
 }
