@@ -298,23 +298,25 @@ h2 {
 }
 
 /* ===============================
-   OCULTAR COLUMNA 1 EN TABLETS Y MÓVILES
+   OCULTAR COLUMNA 1 (cvap y qr) EN TABLETS Y MÓVILES
 =============================== */
 @media (max-width: 1024px) { /* Tablets */
+  /* Ocultar columna 1 y todos sus hijos */
   .left-space {
     display: none !important;
   }
 
-  /* Ocultar todos los hijos por seguridad */
-  .left-space * {
+  /* Ocultar imágenes por si no se ocultan automáticamente */
+  .left-space .cvap-image,
+  .left-space .qr-fixed {
     display: none !important;
+    opacity: 0 !important;
+    animation: none !important;
   }
 
-  /* Grid solo con las columnas visibles */
+  /* Ajustar grid para las columnas visibles */
   .container-wrapper {
-    display: grid !important;
     grid-template-columns: 2fr 2fr 1fr !important; /* left-column, right-column, right-space */
-    gap: 1em !important;
   }
 
   .left-column { grid-column: 1 !important; }
@@ -327,15 +329,16 @@ h2 {
     display: none !important;
   }
 
-  .left-space * {
+  .left-space .cvap-image,
+  .left-space .qr-fixed {
     display: none !important;
+    opacity: 0 !important;
+    animation: none !important;
   }
 
   /* Grid apilado vertical */
   .container-wrapper {
-    display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 0.8em !important;
   }
 
   .left-column, .right-column, .right-space { grid-column: 1 !important; }
