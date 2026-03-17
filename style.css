@@ -305,8 +305,14 @@ h2 {
     display: none !important;
   }
 
-  /* Ajustar grid para columnas visibles */
+  /* Ocultar todos los hijos por seguridad */
+  .left-space * {
+    display: none !important;
+  }
+
+  /* Grid solo con las columnas visibles */
   .container-wrapper {
+    display: grid !important;
     grid-template-columns: 2fr 2fr 1fr !important; /* left-column, right-column, right-space */
     gap: 1em !important;
   }
@@ -314,18 +320,21 @@ h2 {
   .left-column { grid-column: 1 !important; }
   .right-column { grid-column: 2 !important; }
   .right-space { grid-column: 3 !important; }
-
-  /* Ocultar imágenes absolutas dentro de left-space */
-  .cvap-image, .qr-fixed {
-    display: none !important;
-    opacity: 0 !important;
-    animation: none !important;
-  }
 }
 
 @media (max-width: 640px) { /* Móviles */
+  .left-space {
+    display: none !important;
+  }
+
+  .left-space * {
+    display: none !important;
+  }
+
+  /* Grid apilado vertical */
   .container-wrapper {
-    grid-template-columns: 1fr !important; /* apilado vertical */
+    display: grid !important;
+    grid-template-columns: 1fr !important;
     gap: 0.8em !important;
   }
 
