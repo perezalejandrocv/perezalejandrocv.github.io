@@ -149,29 +149,28 @@ h2 {
 }
 
 .cvap-image {
-  position: fixed; /* fija en pantalla */
-  top: calc(var(--top-offset) - 4.7em);
-  left: 1em; 
-  transform: scale(0.5);
-  width: 16.25em;
+  width: 100%;
+  max-width: 16em;
   height: auto;
-  z-index: 1000;
+  display: block;
+  margin-bottom: 1em;
+
+  transform: scale(0.5);
   opacity: 0;
   animation: cvapZoomFade 4s ease forwards;
   animation-delay: 0.3s;
-  will-change: transform, opacity;
 }
 
 .qr-fixed {
-  position: fixed;
-  bottom: 2.5em;
-  left: 4%;
-  width: 10em;
+  width: 100%;
+  max-width: 10em;
   height: auto;
+  display: block;
+  margin-top: 2em;
+
   opacity: 0;
   animation: qrSlide 3.6s ease forwards;
   animation-delay: 0.6s;
-  z-index: 1000;
 }
 
 /* ===============================
@@ -362,37 +361,30 @@ h2 {
    RESPONSIVE: TABLETS Y MÓVILES
 =============================== */
 @media (max-width: 64em) {
-  /* Ocultar Columna 1 y las imágenes fijas */
-  .left-space { display: none !important; }
-  .cvap-image, .qr-fixed {
-    display: none !important;
-    opacity: 0 !important;
-    animation: none !important;
+  .left-space {
+    display: none;
   }
 
-  /* Ajuste del grid */
-  .container-wrapper { grid-template-columns: 1fr 2fr 1fr; gap: 1em; padding: 1em; }
+  .container-wrapper {
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1em;
+    padding: 1em;
+  }
+
   .left-column { grid-column: 1; }
   .right-column { grid-column: 2; }
   .right-space { grid-column: 3; }
 }
-
 @media (max-width: 40em) {
-  .left-space { display: none !important; }
-  .cvap-image, .qr-fixed {
-    display: none !important;
-    opacity: 0 !important;
-    animation: none !important;
+  .container-wrapper {
+    grid-template-columns: 1fr;
+    gap: 0.8em;
+    padding: 0.8em;
   }
 
-  /* Apilado vertical */
-  .container-wrapper { grid-template-columns: 1fr; gap: 0.8em; padding: 0.8em; }
-  .left-column, .right-column, .right-space { grid-column: 1; }
-  .qr-fixed { width: 7.5em; }
-}
-
-.left-space,
-.cvap-image,
-.qr-fixed {
-  display: none !important;
+  .left-column,
+  .right-column,
+  .right-space {
+    grid-column: 1;
+  }
 }
