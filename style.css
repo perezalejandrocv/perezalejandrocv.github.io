@@ -362,8 +362,13 @@ h2 {
    RESPONSIVE: TABLETS Y MÓVILES
 =============================== */
 @media (max-width: 64em) {
-  /* Ocultar Columna 1 y las imágenes */
-  .left-space, .cvap-image, .qr-fixed { display: none !important; }
+  /* Ocultar Columna 1 y las imágenes fijas */
+  .left-space { display: none !important; }
+  .cvap-image, .qr-fixed {
+    display: none !important;
+    opacity: 0 !important;
+    animation: none !important;
+  }
 
   /* Ajuste del grid */
   .container-wrapper { grid-template-columns: 1fr 2fr 1fr; gap: 1em; padding: 1em; }
@@ -373,11 +378,21 @@ h2 {
 }
 
 @media (max-width: 40em) {
-  /* Ocultar Columna 1 y las imágenes */
-  .left-space, .cvap-image, .qr-fixed { display: none !important; }
+  .left-space { display: none !important; }
+  .cvap-image, .qr-fixed {
+    display: none !important;
+    opacity: 0 !important;
+    animation: none !important;
+  }
 
   /* Apilado vertical */
   .container-wrapper { grid-template-columns: 1fr; gap: 0.8em; padding: 0.8em; }
   .left-column, .right-column, .right-space { grid-column: 1; }
   .qr-fixed { width: 7.5em; }
+}
+
+.left-space,
+.cvap-image,
+.qr-fixed {
+  display: none !important;
 }
