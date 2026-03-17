@@ -357,7 +357,12 @@ h2 {
 
 .tabla-top-right tr:first-child td { padding-top: 0.3em; }
 
-/@media (max-width: 64em) { /* Tablets */
+
+/* ===============================
+   OCULTAR COLUMNA 1 EN MÓVILES Y TABLETS
+=============================== */
+
+@media (max-width: 64em) { /* Tablets */
   /* Ocultar Columna 1 completa */
   .left-space {
     display: none !important;
