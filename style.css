@@ -357,26 +357,24 @@ h2 {
 
 .tabla-top-right tr:first-child td { padding-top: 0.3em; }
 
-/* ===============================
-   RESPONSIVE: TABLETS Y MÓVILES
-=============================== */
-@media (max-width: 64em) { /* Tablets */
+/@media (max-width: 64em) { /* Tablets */
   /* Ocultar Columna 1 completa */
-  .left-column {
+  .left-space {
     display: none !important;
   }
 
-  /* Ajustar grid para 3 columnas (ahora sólo columnas 2, 3 y 4) */
+  /* Ajustar grid para 3 columnas (columnas 2, 3 y 4) */
   .container-wrapper {
-    grid-template-columns: 1fr 2fr 1fr; /* columna 2, columna 3, right-space */
+    grid-template-columns: 1fr 2fr 1fr; /* left-column, right-column, right-space */
     gap: 1em;
     padding: 1em;
   }
 
-  .right-column { grid-column: 1; }
-  .right-space { grid-column: 2; }
+  .left-column { grid-column: 1; }
+  .right-column { grid-column: 2; }
+  .right-space { grid-column: 3; }
 
-  /* Ocultar imágenes CVAP y QR por si acaso */
+  /* Ocultar imágenes CVAP y QR */
   .cvap-image, .qr-fixed {
     display: none !important;
     opacity: 0 !important;
@@ -386,7 +384,7 @@ h2 {
 
 @media (max-width: 40em) { /* Móviles */
   /* Ocultar Columna 1 completa */
-  .left-column {
+  .left-space {
     display: none !important;
   }
 
@@ -397,15 +395,13 @@ h2 {
     padding: 0.8em;
   }
 
+  .left-column,
   .right-column,
   .right-space {
     grid-column: 1;
   }
 
-  /* Ajuste del QR en móvil */
-  .qr-fixed { width: 7.5em; }
-
-  /* Ocultar imágenes CVAP y QR por si acaso */
+  /* Ocultar imágenes CVAP y QR */
   .cvap-image, .qr-fixed {
     display: none !important;
     opacity: 0 !important;
