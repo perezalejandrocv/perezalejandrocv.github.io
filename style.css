@@ -48,6 +48,12 @@ html {
   width: 100%;
 }
 
+.left-space {
+  position: sticky;
+  top: 2em;
+  align-self: start;
+}
+
 .left-column {
   grid-column: 2 / 3;
   background-color: var(--primary-color);
@@ -136,6 +142,8 @@ h2 {
 .cvap-image {
   width: 100%;
   max-width: 16em;
+  margin-top: 3em;
+  margin-left: 0.4em;
   height: auto;
   display: block;
   margin-bottom: 1em;
@@ -150,7 +158,9 @@ h2 {
   max-width: 10em;
   height: auto;
   display: block;
-  margin-top: 2em;
+  margin-top: 31em;
+  margin-left: 10.3em;
+
   opacity: 0;
   animation: qrSlide 3.6s ease forwards;
   animation-delay: 0.6s;
@@ -165,8 +175,14 @@ h2 {
 }
 
 @keyframes qrSlide {
-  0% { opacity: 0; transform: translateX(-200%); }
-  100% { opacity: 1; transform: translateX(0); }
+  0% {
+    opacity: 0;
+    transform: translateX(-250%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes spinYandScale {
@@ -300,46 +316,29 @@ h2 {
 /* ===============================
    OCULTAR COLUMNA 1 (cvap y qr) EN TABLETS Y MÓVILES
 =============================== */
-@media (max-width: 1024px) { /* Tablets */
-  /* Ocultar columna 1 y todos sus hijos */
+
+@media (max-width: 1024px) {
   .left-space {
-    display: none !important;
+    display: none;
   }
 
-  /* Ocultar imágenes por si no se ocultan automáticamente */
-  .left-space .cvap-image,
-  .left-space .qr-fixed {
-    display: none !important;
-    opacity: 0 !important;
-    animation: none !important;
-  }
-
-  /* Ajustar grid para las columnas visibles */
   .container-wrapper {
-    grid-template-columns: 2fr 2fr 1fr !important; /* left-column, right-column, right-space */
+    grid-template-columns: 2fr 2fr 1fr;
   }
 
-  .left-column { grid-column: 1 !important; }
-  .right-column { grid-column: 2 !important; }
-  .right-space { grid-column: 3 !important; }
+  .left-column { grid-column: 1; }
+  .right-column { grid-column: 2; }
+  .right-space { grid-column: 3; }
 }
 
-@media (max-width: 640px) { /* Móviles */
-  .left-space {
-    display: none !important;
-  }
-
-  .left-space .cvap-image,
-  .left-space .qr-fixed {
-    display: none !important;
-    opacity: 0 !important;
-    animation: none !important;
-  }
-
-  /* Grid apilado vertical */
+@media (max-width: 640px) {
   .container-wrapper {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
   }
 
-  .left-column, .right-column, .right-space { grid-column: 1 !important; }
+  .left-column,
+  .right-column,
+  .right-space {
+    grid-column: 1;
+  }
 }
