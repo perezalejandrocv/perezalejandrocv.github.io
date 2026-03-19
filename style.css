@@ -1,15 +1,9 @@
-﻿/* ===============================
-   RESET GENERAL
-=============================== */
-*,
-*::before,
-*::after {
+﻿/* =============================== RESET GENERAL =============================== */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* ===============================
-   BODY Y TIPOGRAFÍA
-=============================== */
+/* =============================== BODY Y TIPOGRAFÍA =============================== */
 body {
   font-family: 'Century Gothic', Poppins, Arial, sans-serif;
   margin: 0;
@@ -26,32 +20,42 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ===============================
-   GRID DE 4 COLUMNAS (ESCRITORIO)
-=============================== */
+/* =============================== GRID (NO TOCAR - TU CONFIG) =============================== */
 .container-wrapper {
   display: grid;
-  grid-template-columns: minmax(10em,1fr)  minmax(11em,2fr)  minmax(11em,2fr)  minmax(10em,1fr);
+  grid-template-columns: minmax(10em,1fr) minmax(11em,2fr) minmax(11em,2fr) minmax(10em,1fr);
   gap: 1.25em;
   padding: 0.8em;
   width: 100%;
 }
 
-/* ===============================
-   COLUMNAS
-=============================== */
-.left-space,
+/* =============================== COLUMNAS =============================== */
+
+/* 🔴 Oculta por defecto */
+.left-space {
+  display: none;
+}
+
+/* 🟢 Solo visible en escritorio real */
+@media (min-width: 1025px) and (min-height: 769px) {
+  .left-space {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    grid-column: 1 / 2;
+    position: sticky;
+    top: 2em;
+    align-self: start;
+  }
+}
+
 .right-space {
   display: flex;
   flex-direction: column;
-  align-items: center;    
+  align-items: center;
   width: 100%;
-}
-
-.left-space {
-  position: sticky;
-  top: 2em;
-  align-self: start;
+  grid-column: 4 / 5;
 }
 
 .left-column {
@@ -68,12 +72,7 @@ html {
   padding: 1.25em;
 }
 
-.left-space { grid-column: 1 / 2; }
-.right-space { grid-column: 4 / 5; }
-
-/* ===============================
-   TÍTULOS
-=============================== */
+/* =============================== TÍTULOS =============================== */
 h1 {
   font-weight: bold;
   margin-bottom: 0.02em;
@@ -107,30 +106,18 @@ h2 {
   color: white;
 }
 
-/* ===============================
-   TEXTO Y LISTAS
-=============================== */
-.left-column,
-.right-column {
-  font-size: 0.75rem;
+/* =============================== TEXTO =============================== */
+.left-column, .right-column {
+  font-size: 0.9rem;
   line-height: 1.6;
-}
-
-.left-column p,
-.right-column p,
-.left-column li,
-.right-column li {
   text-align: justify;
 }
 
-.left-column ul,
-.right-column ul {
+.left-column ul, .right-column ul {
   padding-left: 1.25em;
 }
 
-/* ===============================
-   IMÁGENES Y ANIMACIONES
-=============================== */
+/* =============================== IMÁGENES =============================== */
 .foto-personal {
   width: 50%;
   height: auto;
@@ -142,8 +129,7 @@ h2 {
 .cvap-image {
   width: 100%;
   max-width: 16em;
-  margin-top: 3em;
-  margin-left: 0.4em;
+  margin-top: 4.3em;
   height: auto;
   display: block;
   margin-bottom: 1em;
@@ -151,6 +137,7 @@ h2 {
   opacity: 0;
   animation: cvapZoomFade 4s ease forwards;
   animation-delay: 0.3s;
+  will-change: transform, opacity;
 }
 
 .qr-fixed {
@@ -158,31 +145,23 @@ h2 {
   max-width: 10em;
   height: auto;
   display: block;
-  margin-top: 31em;
+  margin-top: 29.7em;
   margin-left: 10.3em;
-
   opacity: 0;
   animation: qrSlide 3.6s ease forwards;
   animation-delay: 0.6s;
+  will-change: transform, opacity;
 }
 
-/* ===============================
-   ANIMACIONES
-=============================== */
+/* =============================== ANIMACIONES =============================== */
 @keyframes cvapZoomFade {
   0% { opacity: 0; transform: scale(0.5); }
   100% { opacity: 1; transform: scale(1); }
 }
 
 @keyframes qrSlide {
-  0% {
-    opacity: 0;
-    transform: translateX(-250%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%);
-  }
+  0% { opacity: 0; transform: translateX(-250%); }
+  100% { opacity: 1; transform: translateX(-50%); }
 }
 
 @keyframes spinYandScale {
@@ -196,9 +175,7 @@ h2 {
   100% { opacity: 0; }
 }
 
-/* ===============================
-   BLOQUE CORREO
-=============================== */
+/* =============================== CORREO =============================== */
 .at-icon {
   font-size: 4em;
   color: white;
@@ -207,9 +184,7 @@ h2 {
   animation: spinYandScale 15s linear infinite;
 }
 
-.email-link,
-.email-link:visited,
-.email-link:hover {
+.email-link, .email-link:visited, .email-link:hover {
   color: white;
   text-decoration: none;
   display: inline-block;
@@ -217,12 +192,12 @@ h2 {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .email-link:hover { transform: scale(1.1); }
+  .email-link:hover {
+    transform: scale(1.1);
+  }
 }
 
-/* ===============================
-   BOTÓN VOLVER ARRIBA
-=============================== */
+/* =============================== BOTÓN =============================== */
 .back-to-top {
   position: fixed;
   bottom: 1.875em;
@@ -247,21 +222,16 @@ h2 {
   opacity: 0.9;
 }
 
-/* ===============================
-   LÍNEA BLANCA ANIMADA
-=============================== */
+/* =============================== LÍNEA =============================== */
 .white-line {
   width: 100%;
   height: 0.0625em;
   background-color: white;
   margin: -0.3em auto 0 auto;
   animation: fadeOutLine 4s forwards;
-  opacity: 1;
 }
 
-/* ===============================
-   TABLAS
-=============================== */
+/* =============================== TABLAS =============================== */
 .tabla-contacto {
   width: 100%;
   border-collapse: collapse;
@@ -269,9 +239,7 @@ h2 {
 
 .tabla-contacto td:first-child {
   width: 0.85em;
-  padding-right: 0em;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
 }
 
@@ -285,7 +253,6 @@ h2 {
   top: var(--top-offset);
   font-size: 0.8em;
   color: #404040;
-  z-index: 998;
 }
 
 .tabla-top-right {
@@ -293,10 +260,19 @@ h2 {
   border-collapse: collapse;
 }
 
-.tabla-top-right td:first-child { width: 1.4em; text-align: center; }
-.tabla-top-right td:last-child { padding-left: 0.4em; }
+.tabla-top-right td:first-child {
+  width: 1.4em;
+  text-align: center;
+}
 
-.tabla-top-right .icon { width: 1em; height: 1em; object-fit: contain; display: inline-block; vertical-align: middle; }
+.tabla-top-right td:last-child {
+  padding-left: 0.4em;
+}
+
+.tabla-top-right .icon {
+  width: 1em;
+  height: 1em;
+}
 
 .tabla-top-right a {
   color: #404040;
@@ -304,7 +280,9 @@ h2 {
   transition: transform 0.2s ease;
 }
 
-.tabla-top-right a:hover { transform: scale(1.10); }
+.tabla-top-right a:hover {
+  transform: scale(1.10);
+}
 
 .top-right-section .separator-line {
   width: 14em;
@@ -313,14 +291,10 @@ h2 {
   margin: 0.3em 0;
 }
 
-/* ===============================
-   OCULTAR COLUMNA 1 (cvap y qr) EN TABLETS Y MÓVILES
-=============================== */
+/* =============================== RESPONSIVE =============================== */
 
+/* Tablets y móviles */
 @media (max-width: 1024px) {
-  .left-space {
-    display: none;
-  }
 
   .container-wrapper {
     grid-template-columns: 2fr 2fr 1fr;
@@ -331,6 +305,7 @@ h2 {
   .right-space { grid-column: 3; }
 }
 
+/* Móviles pequeños */
 @media (max-width: 640px) {
   .container-wrapper {
     grid-template-columns: 1fr;
