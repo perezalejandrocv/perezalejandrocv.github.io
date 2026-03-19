@@ -23,7 +23,7 @@ html {
 /* =============================== GRID (NO TOCAR - TU CONFIG) =============================== */
 .container-wrapper {
   display: grid;
-  grid-template-columns: minmax(10em,1fr) minmax(11em,2fr) minmax(11em,2fr) minmax(10em,1fr);
+  grid-template-columns: 1fr 2fr 2fr 1fr;
   gap: 1.25em;
   padding: 0.8em;
   width: 100%;
@@ -294,7 +294,7 @@ h2 {
 /* =============================== RESPONSIVE =============================== */
 
 /* Tablets y móviles */
-@media (max-width: 1024px) {
+@media (max-width: 1024px), (max-height: 768px) {
 
   .container-wrapper {
     grid-template-columns: 2fr 2fr 1fr;
