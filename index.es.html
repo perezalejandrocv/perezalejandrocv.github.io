@@ -28,35 +28,46 @@
 </head>
 <body>
 
-  <!-- Grid wrapper de 4 columnas -->
+  <!-- Puertas -->
+  <div class="door-frame"></div>
+
+<div class="door door-left">
+  <div class="cv-title">
+    <h1>CV | Alejandro Pérez</h1>
+  </div>
+</div>
+<div class="door door-right"></div>
+
   <div class="container-wrapper">
 
-    <!-- COLUMNA 1: -->
+    <!-- COLUMNA 1: Solo escritorio -->
     <div class="left-space">
-      <img src="images/cvap.png" alt="CV" class="cvap-image">
-      <img src="images/qr.png" alt="QR" class="qr-fixed">
-    </div>
 
-    <!-- COLUMNA 2: -->
+<img src="images/cvap.png" alt="CV" class="cvap-image">
+<img src="images/qr.png" alt="QR" class="qr-fixed">
+
+</div>
+
+    <!-- COLUMNA 2: Contenido izquierdo -->
     <aside class="left-column">
       <img src="images/foto.jpg" alt="Alejandro Pérez" class="foto-personal" />
-  <div class="name-section">
-    <h1>ALEJANDRO PÉREZ</h1>
-    <div class="white-line"></div>
-    <h2>Recepcionista</h2>
-  </div>
+      <div class="name-section">
+        <h1>ALEJANDRO PÉREZ</h1>
+        <div class="white-line"></div>
+        <h2>Recepcionista</h2>
+      </div>
 
-<br>
+      <br>
 
       <section>
-        <h3>RESUMEN PROFESIONAL.</h3>
+        <h3 class="section-title">RESUMEN PROFESIONAL.</h3>
         <p>
           Recepcionista disponible para trabajar en entornos dinámicos y en contacto con el público. Con experiencia en tareas administrativas y comerciales, como gestión de la Recepción del Hotel, Reservas y Facturación.
         </p>
       </section>
 
       <section>
-        <h3>FUNCIONES.</h3>
+        <h3 class="section-title">FUNCIONES.</h3>
         <ul>
           <li>Atención al cliente.</li>
           <li>Gestión de reservas individuales.</li>
@@ -72,7 +83,7 @@
       </section>
 
       <section>
-        <h3>APTITUDES.</h3>
+        <h3 class="section-title">APTITUDES.</h3>
         <ul>
           <li>Trabajo en equipo.</li>
           <li>Disponibilidad.</li>
@@ -93,7 +104,7 @@
       </section>
 
       <section>
-        <h3>HOTEL PMS.</h3>
+        <h3 class="section-title">HOTEL PMS.</h3>
         <ul>
           <li>Microsoft Dynamics NAV.</li>
           <li>Anphitrion Hotel.</li>
@@ -103,7 +114,7 @@
       </section>
 
       <section>
-        <h3>OTROS.</h3>
+        <h3 class="section-title">OTROS.</h3>
         <ul>
           <li>Carnet de Conducir A y B.</li>
           <li>
@@ -114,7 +125,7 @@
       </section>
 
       <section>
-        <h3>CONTACTO.</h3>
+        <h3 class="section-title">CONTACTO.</h3>
         <table class="tabla-contacto">
           <tr><td role="img" aria-label="Persona">👨</td><td>Alejandro Pérez Gómez</td></tr>
           <tr><td role="img" aria-label="Adreça">🏠</td><td>Av. Frederic Mistral, 17 / 02-04</td></tr>
@@ -123,22 +134,36 @@
           <tr><td role="img" aria-label="Estat civil">👨‍👩‍👧</td><td>Soltero</td></tr>
           <tr><td role="img" aria-label="Telèfon">☎</td><td>(+34) 665 42 66 11</td></tr>
           <tr><td role="img" aria-label="Email">📧</td><td>perezalejandrocv@outlook.com</td></tr>
-          <tr><td role="img" aria-label="Web">🌐</td><td>perezalejandrocv.github.io</td></tr>
+<tr>
+  <td role="img" aria-label="Web">🌐</td>
+  <td>
+    <a href="https://perezalejandrocv.github.io" target="_blank"
+       style="color: white; text-decoration: none;"
+       onmouseover="this.style.color='white'"
+       onmouseout="this.style.color='white'">
+      perezalejandrocv.github.io
+    </a>
+  </td>
+</tr>
         </table>
 
-        <h3 class="subido">
-          Enviar un Email.&nbsp;&nbsp;&nbsp; <a href="form.ca.html" class="email-link" aria-label="Enviar email"><span class="at-icon">@</span></a>
-        </h3>
-<br>
-<br>
+<h3 class="section-title subido">
+  Enviar un Email.&nbsp;&nbsp;&nbsp;
+  <a href="form.ca.html" class="email-link" aria-label="Enviar email">
+    <span class="at-icon">@</span>
+  </a>
+</h3>
+        <br>
       </section>
 
     </aside>
 
-    <!-- COLUMNA 3: -->
+    <!-- COLUMNA 3: Contenido central -->
     <main class="right-column">
+<br>
+<br>
       <section>
-        <h3>EXPERIENCIA LABORAL.</h3>
+        <h3 class="section-title">EXPERIENCIA LABORAL.</h3>
         <p>
           02.2022 - 11.2025<br />
           HOSTAL RIBAS (Garet 62 Lloret, S.L.) | Lloret de Mar<br />
@@ -148,9 +173,9 @@
           HOTEL MERCEDES <sup>★★★</sup> (Distinct Merit, S.L.) | Lloret de Mar<br />
           Recepcionista<br /><br />
 
-	  02.2017 - 06.2018<br />
- 	  HOTEL GOLDEN SAND <sup>★★★</sup> (Control Global Hostelería, S.L.) | Lloret de Mar<br />
-	  Recepcionista<br /><br />
+          02.2017 - 06.2018<br />
+          HOTEL GOLDEN SAND <sup>★★★</sup> (Control Global Hostelería, S.L.) | Lloret de Mar<br />
+          Recepcionista<br /><br />
 
           06.2013 - 09.2016<br />
           HOTEL SUNVILLAGE <sup>★★★★</sup> (Sun Village Lloret, S.L.) | Lloret de Mar<br />
@@ -170,29 +195,29 @@
           Ayud. de Recepción
         </p>
       </section>
-
+<br>
       <section>
-        <h3>HISTORIAL ACADÉMICO.</h3>
+        <h3 class="section-title">HISTORIAL ACADÉMICO.</h3>
         <p>
           10.2023<br />
           Agència FPCAT. GenCat | Barcelona<br />
           Certificado Profesionalidad Recepcionista de Alojamientos.<br /><br />
 
           02.2022 – 06.2022<br />
-          Ayuntamiento de Lloret de Mar | Lloret de Mar<br />
-          acTIC Nivell Medio; 30 horas.<br /><br />
+          Ayuntamiento de Lloret de Mar<br />
+          acTIC Nivell Mitjà; 30 horas.<br /><br />
 
           11.2018<br />
-          Ayuntamiento de Lloret de Mar | Lloret de Mar<br />
-          Trámites en la Administración por Internet; 3 horas.<br /><br />
+          Ayuntamiento de Lloret de Mar<br />
+          Tràmits a l'Administració per Internet; 3 horas.<br /><br />
 
           11.2018<br />
-          Ayuntamiento Lloret de Mar | Lloret de Mar<br />
-          Administración Electrónica; 2 horas.<br /><br />
+          Ayuntamiento Lloret de Mar<br />
+          Administració Electrònica; 2 horas.<br /><br />
 
           02.2017<br />
-          Ayuntamiento Lloret de Mar | Lloret de Mar<br />
-          Cómo Financiar Mi Empresa; 8 horas.<br /><br />
+          Ayuntamiento Lloret de Mar<br />
+          Com Finançar la Meva Empresa; 8 horas.<br /><br />
 
           01.2003 – 05.2003<br />
           e-CIFO | Girona<br />
@@ -211,15 +236,17 @@
           Graduado Escolar.
         </p>
       </section>
+<br>
+<section>
+  <h3 class="section-title">IDIOMAS.</h3>
+  <br>
+  <img src="images/idiomes1.jpg" alt="Idiomes" 
+     style="width: 80%; height: auto; margin-top: -1.70em;" />
+</section>
 
-      <section>
-        <h3 style="margin-bottom: 2em;">IDIOMAS.</h3>
-        <img src="images/idiomes1.png" alt="Idiomes" style="width: 80%; height: auto;" />
-      </section>
+    </main>
 
-  </main>
-
-    <!-- COLUMNA 4: -->
+    <!-- COLUMNA 4: Contenido derecho -->
     <div class="right-space">
       <section class="top-right-section">
         <table class="tabla-top-right">
@@ -228,21 +255,53 @@
           <tr><td><img src="images/en.png" class="icon"></td><td><a href="index.en.html">Inglés.</a></td></tr>
           <tr><td colspan="2"><div class="separator-line"></div></td></tr>
           <tr><td>📂</td><td><a href="https://drive.proton.me/urls/P9SC6QRABM#oYsazzgC2FgN" target="_blank" rel="noopener noreferrer">Documentos.</a></td></tr>
-          <tr><td><img src="images/pdf-icon.png" class="icon"></td><td><a href="pdf/perezalejandro.ca.pdf" target="_blank" rel="noopener noreferrer">PDF.</a></td></tr>
-          <tr><td>📃</td><td><a href="pdf/nota.ca.html" target="_blank" rel="noopener noreferrer">Vida Laboral.</a></td></tr>
+          <tr><td><img src="images/pdf-icon.png" class="icon"></td><td><a href="pdf/perezalejandro.es.pdf" target="_blank" rel="noopener noreferrer">PDF.</a></td></tr>
+          <tr><td>📃</td><td><a href="pdf/nota.es.html" target="_blank" rel="noopener noreferrer">Vida Laboral.</a></td></tr>
           <tr><td colspan="2"><div class="separator-line"></div></td></tr>
-          <tr><td>📜</td><td><a href="pdf/nota.ca.html" target="_blank" rel="noopener noreferrer">Carta de Presentación.</a></td></tr>
-          <tr><td>📺</td><td><a href="video/nota.ca.html" target="_blank" rel="noopener noreferrer">Vídeo Presentación.</a></td></tr>
+          <tr><td>📜</td><td><a href="pdf/nota.es.html" target="_blank" rel="noopener noreferrer">Carta de Presentación.</a></td></tr>
+          <tr><td>📺</td><td><a href="video/nota.es.html" target="_blank" rel="noopener noreferrer">Vídeo Presentación.</a></td></tr>
           <tr><td>👨🏽‍💼</td><td><a href="https://us05web.zoom.us/j/6400522934?pwd=hrbiZgPH9vEXsZvvPq2SDVVuUOSAnj.1" target="_blank" rel="noopener noreferrer">Reunión.</a></td></tr>
         </table>
       </section>
     </div>
-  </div>
+
+  </div> <!-- /.container-wrapper -->
 
   <!-- Botón volver arriba -->
   <a href="#" class="back-to-top" aria-label="Volver arriba">
     <img src="images/flechaazultop.jpg" alt="Volver arriba" class="back-to-top-img">
   </a>
 
+
+<script>
+window.addEventListener('load', () => {
+  const leftDoor = document.querySelector('.door-left');
+  const rightDoor = document.querySelector('.door-right');
+
+  const cvap = document.querySelector('.cvap-image');
+  const qr = document.querySelector('.qr-fixed');
+  const whiteLine = document.querySelector('.white-line');
+
+  [cvap, qr, whiteLine].forEach(el => {
+    el.style.animationPlayState = 'paused';
+  });
+
+  document.body.classList.add('loaded');
+
+  setTimeout(() => {
+    leftDoor.classList.add('open-left');
+    rightDoor.classList.add('open-right');
+
+    setTimeout(() => {
+      [cvap, qr, whiteLine].forEach(el => {
+        el.style.animationPlayState = 'running';
+      });
+    }, 2300);
+  }, 900);
+});
+
+</script>
+
 </body>
+
 </html>

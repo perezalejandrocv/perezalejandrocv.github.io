@@ -1,13 +1,33 @@
 ﻿/* =============================== RESET GENERAL =============================== */
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
 /* =============================== BODY Y TIPOGRAFÍA =============================== */
+
 body {
   font-family: 'Century Gothic', Poppins, Arial, sans-serif;
   margin: 0;
   background-color: #ffffff;
+
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+body.loaded .door-frame {
+  opacity: 0;
+  transition: opacity 0.5s ease 3.5s;
+}
+
+body.loaded .door-left::after,
+body.loaded .door-right::after {
+  opacity: 0;
+  transition: opacity 0.5s ease 3.5s;
 }
 
 :root {
@@ -21,6 +41,7 @@ html {
 }
 
 /* =============================== GRID (NO TOCAR - TU CONFIG) =============================== */
+
 .container-wrapper {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
@@ -48,6 +69,34 @@ html {
     top: 2em;
     align-self: start;
   }
+
+  .cvap-image {
+    width: 100%;
+    max-width: 16em;
+    margin-top: 4.3em;
+    margin-left: 0.70vw;
+    height: auto;
+    display: block;
+    margin-bottom: 1em;
+    transform: scale(0.5);
+    opacity: 0;
+    animation: cvapZoomFade 4s ease forwards;
+    animation-play-state: paused;
+    will-change: transform, opacity;
+  }
+
+.qr-fixed {
+  width: 100%;
+  max-width: 10em;
+  height: auto;
+  display: block;
+  margin-top: 29.6em;
+  margin-left: 6.2px;  /* 👈 ajuste fino a la derecha */
+  opacity: 0;
+  animation: qrSlide 3.6s ease forwards;
+  animation-play-state: paused;
+  will-change: transform, opacity;
+  }
 }
 
 .right-space {
@@ -73,42 +122,64 @@ html {
 }
 
 /* =============================== TÍTULOS =============================== */
-h1 {
+
+
+/* =============================== NOMBRE Y PUESTO =============================== */
+
+.left-column h1 {
+  font-size: 1.90rem;    
   font-weight: bold;
   margin-bottom: 0.02em;
   text-align: center;
-  color: white;
-  font-size: 2em;
+  color: white;          
 }
 
-h2 {
+.left-column h2 {
+  font-size: 1.50rem;  
   font-weight: normal;
   margin-top: 0.1em;
-  font-size: 1.1em;
   text-align: center;
   color: white;
 }
 
-.left-column h3 {
-  color: white;
+/* =============================== TÍTULOS DE SECCIONES =============================== */
+
+.left-column .section-title {
+  font-size: 1.25rem;
   font-weight: bold;
-  margin: 0.625em 0;
+  margin: 1em 0 0.5em;
+  text-align: left;
+  color: white;
 }
 
-.right-column h3 {
-  color: var(--secondary-color);
+.right-column .section-title {
+  font-size: 1.25rem;
   font-weight: bold;
-  margin: 1.25em 0 0.625em;
+  margin: 1em 0 0.5em;
+  text-align: left;
+  color: var(--secondary-color);
 }
 
 .subido {
-  margin: 0.6em 0 0.3125em;
+  margin: 0.2em 0 0.2em;
   color: white;
 }
 
+.left-column .section-title.subido {
+  margin-top: 0;
+  transform: translateY(-4px);
+}
+
+.tabla-contacto {
+  margin-bottom: 0;
+}
+
 /* =============================== TEXTO =============================== */
-.left-column, .right-column {
-  font-size: 0.9rem;
+
+.left-column,
+.right-column,
+.top-right-section {
+  font-size: 0.80rem; /* tamaño unificado */
   line-height: 1.6;
   text-align: justify;
 }
@@ -118,6 +189,7 @@ h2 {
 }
 
 /* =============================== IMÁGENES =============================== */
+
 .foto-personal {
   width: 50%;
   height: auto;
@@ -126,42 +198,22 @@ h2 {
   border-radius: 1.375em;
 }
 
-.cvap-image {
-  width: 100%;
-  max-width: 16em;
-  margin-top: 4.3em;
-  height: auto;
-  display: block;
-  margin-bottom: 1em;
-  transform: scale(0.5);
-  opacity: 0;
-  animation: cvapZoomFade 4s ease forwards;
-  animation-delay: 0.3s;
-  will-change: transform, opacity;
-}
-
-.qr-fixed {
-  width: 100%;
-  max-width: 10em;
-  height: auto;
-  display: block;
-  margin-top: 29.7em;
-  margin-left: 10.3em;
-  opacity: 0;
-  animation: qrSlide 3.6s ease forwards;
-  animation-delay: 0.6s;
-  will-change: transform, opacity;
-}
-
 /* =============================== ANIMACIONES =============================== */
+
 @keyframes cvapZoomFade {
   0% { opacity: 0; transform: scale(0.5); }
   100% { opacity: 1; transform: scale(1); }
 }
 
 @keyframes qrSlide {
-  0% { opacity: 0; transform: translateX(-250%); }
-  100% { opacity: 1; transform: translateX(-50%); }
+  0% {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes spinYandScale {
@@ -176,6 +228,7 @@ h2 {
 }
 
 /* =============================== CORREO =============================== */
+
 .at-icon {
   font-size: 4em;
   color: white;
@@ -198,13 +251,14 @@ h2 {
 }
 
 /* =============================== BOTÓN =============================== */
+
 .back-to-top {
   position: fixed;
   bottom: 1.875em;
   right: 1.875em;
   width: 3.125em;
   height: 3.125em;
-  z-index: 999;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -223,15 +277,19 @@ h2 {
 }
 
 /* =============================== LÍNEA =============================== */
+
 .white-line {
   width: 100%;
   height: 0.0625em;
   background-color: white;
   margin: -0.3em auto 0 auto;
+  opacity: 1;
   animation: fadeOutLine 4s forwards;
+  animation-play-state: paused;
 }
 
 /* =============================== TABLAS =============================== */
+
 .tabla-contacto {
   width: 100%;
   border-collapse: collapse;
@@ -251,7 +309,6 @@ h2 {
 .top-right-section {
   position: sticky;
   top: var(--top-offset);
-  font-size: 0.8em;
   color: #404040;
 }
 
@@ -291,6 +348,104 @@ h2 {
   margin: 0.3em 0;
 }
 
+/* =============================== EFECTO PUERTAS QUE SE ABREN =============================== */
+
+/* PUERTA IZQUIERDA */
+
+.door-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  background-color: #808080;
+  z-index: 10000;
+  transition: transform 3s linear;
+  overflow: hidden;
+}
+
+/* Logo dentro de la puerta */
+.door-left .cv-title {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 3s linear;
+  z-index: 10001;
+}
+
+.door-left.open-left .cv-title {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.cv-title h1 {
+  color: #ffffff;
+  font-family: 'Century Gothic', Poppins, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin: 0;
+  letter-spacing: 0.5px;
+
+}
+
+/* PUERTA DERECHA */
+
+.door-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  background-color: #808080;
+  z-index: 10000;
+  transition: transform 3s linear;
+}
+
+.door-left.open-left {
+  transform: translateX(-110%);
+}
+
+.door-right.open-right {
+  transform: translateX(110%);
+}
+
+.door-left::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background: #808080;
+}
+
+.door-right::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: #808080;
+}
+
+.door-frame {
+  position: fixed;
+  inset: 10px;
+  border: 3px solid #ffffff;
+  pointer-events: none;
+  z-index: 10001;
+}
+
+/* =============================== TEXTO INTERIOR FORMULARIO =============================== */
+
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Century Gothic', Poppins, sans-serif;
+  color: #999;
+}
+
 /* =============================== RESPONSIVE =============================== */
 
 /* Tablets y móviles */
@@ -317,3 +472,5 @@ h2 {
     grid-column: 1;
   }
 }
+
+
