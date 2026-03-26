@@ -476,12 +476,28 @@ textarea::placeholder {
 /* Reducir tamaño de hoteles específicos en tablets y móviles */
 @media (max-width: 1024px) {
   .goldensand {
-    font-size: 0.80rem; /* ajusta según prefieras */
+    font-size: 0.60rem; /* ajusta según prefieras */
   }
 }
 
 @media (max-width: 640px) {
   .goldensand {
-    font-size: 0.70rem; /* más pequeño en móviles pequeños */
+    font-size: 0.60rem; /* más pequeño en móviles pequeños */
+  }
+}
+
+/* =============================== MÓVILES Y TABLETS =============================== */
+
+/* Para tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .main-content, .container-wrapper {
+    margin-top: 2em; /* sube todo el contenido */
+  }
+}
+
+/* Para móviles (≤640px) */
+@media (max-width: 640px) {
+  .main-content, .container-wrapper {
+    margin-top: 1em; /* sube un poco más, ajusta a tu gusto */
   }
 }
