@@ -486,18 +486,18 @@ textarea::placeholder {
   }
 }
 
-/* =============================== MÓVILES Y TABLETS =============================== */
+/* =============================== MÓVILES Y TABLETS - AJUSTE SUBIDA CONTENIDO =============================== */
 
-/* Para tablets (≤1024px) */
+/* Tablets (≤1024px) */
 @media (max-width: 1024px) {
   .main-content, .container-wrapper {
-    margin-top: 2em; /* sube todo el contenido */
+    margin-top: 1.5em; /* sube un poco el contenido en tablets */
   }
 }
 
-/* Para móviles (≤640px) */
+/* Móviles (≤640px) */
 @media (max-width: 640px) {
   .main-content, .container-wrapper {
-    margin-top: 1em; /* sube un poco más, ajusta a tu gusto */
+    margin-top: 2em; /* sube más en móviles pequeños */
   }
 }
