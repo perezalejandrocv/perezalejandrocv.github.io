@@ -12,20 +12,11 @@
 document.getElementById("formulario").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  // Función para formatear fechas a DD/MM/YYYY
-  function formatDate(dateStr) {
-    const d = new Date(dateStr);
-    const day = String(d.getDate()).padStart(2,"0");
-    const month = String(d.getMonth()+1).padStart(2,"0");
-    const year = d.getFullYear();
-    return `${day}/${month}/${year}`;
-  }
-
   const datos = {
     Nombre: this.elements["Nombre"].value || "",
     DNI: this.elements["DNI"].value || "",
-    "Fecha Entrada": formatDate(this.elements["Fecha Entrada"].value),
-    "Fecha Salida": formatDate(this.elements["Fecha Salida"].value),
+    "Fecha Entrada": this.elements["Fecha Entrada"].value || "", // ISO YYYY-MM-DD
+    "Fecha Salida": this.elements["Fecha Salida"].value || "",
     "Teléfono": this.elements["Teléfono"].value || "",
     Email: this.elements["Email"].value || ""
   };
