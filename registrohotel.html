@@ -12,22 +12,40 @@
 document.getElementById("formulario").addEventListener("submit", async function(e) {
   e.preventDefault();
 
+  // Función para formatear fechas a DD/MM/YYYY
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    const day = String(d.getDate()).padStart(2,"0");
+    const month = String(d.getMonth()+1).padStart(2,"0");
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
   const datos = {
-    Nombre: this.Nombre.value,
-    DNI: this.DNI.value,
-    Entrada: this.Entrada.value,
-    Salida: this.Salida.value,
-    Telefono: this.Telefono.value,
-    Email: this.Email.value
+    Nombre: this.Nombre.value || "",
+    DNI: this.DNI.value || "",
+    "Fecha Entrada": formatDate(this.Entrada.value),
+    "Fecha Salida": formatDate(this.Salida.value),
+    "Teléfono": this.Telefono.value || "",
+    Email: this.Email.value || ""
   };
 
-  await fetch("https://hook.eu1.make.com/s1iuz5nm1sg2bjrdiur3a9rfbnjpf56s", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(datos)
-  });
+  try {
+    const response = await fetch("https://hook.eu1.make.com/s1iuz5nm1sg2bjrdiur3a9rfbnjpf56s", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos)
+    });
 
-  alert("Datos enviados");
-  this.reset();
+    if (response.ok) {
+      alert("Datos enviados correctamente");
+      this.reset();
+    } else {
+      alert("Error al enviar datos. Intenta de nuevo.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error de conexión. Intenta más tarde.");
+  }
 });
 </script>
