@@ -12,6 +12,7 @@
 document.getElementById("formulario").addEventListener("submit", async function(e) {
   e.preventDefault();
 
+  // Construir JSON con limpieza de espacios
   const datos = {
     NOMBRE: this.elements["NOMBRE"].value.trim() || "",
     DNI: this.elements["DNI"].value.trim() || "",
@@ -34,8 +35,8 @@ document.getElementById("formulario").addEventListener("submit", async function(
       alert("Datos enviados correctamente");
       this.reset();
     } else {
-      alert("Error al enviar datos. Intenta de nuevo.");
       console.error("Error HTTP:", response.status, response.statusText);
+      alert("Error al enviar datos. Intenta de nuevo.");
     }
   } catch (err) {
     console.error("Error de conexión:", err);
