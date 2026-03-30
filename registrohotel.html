@@ -1,0 +1,33 @@
+<form id="formulario">
+  <input type="text" name="Nombre" placeholder="Nombre completo" required>
+  <input type="text" name="DNI" placeholder="DNI / Pasaporte" required>
+  <input type="date" name="Entrada" required>
+  <input type="date" name="Salida" required>
+  <input type="tel" name="Telefono" placeholder="Teléfono" required>
+  <input type="email" name="Email" placeholder="Email" required>
+  <button type="submit">Enviar</button>
+</form>
+
+<script>
+document.getElementById("formulario").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const datos = {
+    Nombre: this.Nombre.value,
+    DNI: this.DNI.value,
+    Entrada: this.Entrada.value,
+    Salida: this.Salida.value,
+    Telefono: this.Telefono.value,
+    Email: this.Email.value
+  };
+
+  await fetch("https://hook.eu1.make.com/s1iuz5nm1sg2bjrdiur3a9rfbnjpf56s", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(datos)
+  });
+
+  alert("Datos enviados");
+  this.reset();
+});
+</script>
