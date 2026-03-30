@@ -22,12 +22,12 @@ document.getElementById("formulario").addEventListener("submit", async function(
   }
 
   const datos = {
-    Nombre: this.Nombre.value || "",
-    DNI: this.DNI.value || "",
-    "Fecha Entrada": formatDate(this.Entrada.value),
-    "Fecha Salida": formatDate(this.Salida.value),
-    "Teléfono": this.Telefono.value || "",
-    Email: this.Email.value || ""
+    Nombre: this.elements["Nombre"].value || "",
+    DNI: this.elements["DNI"].value || "",
+    "Fecha Entrada": formatDate(this.elements["Fecha Entrada"].value),
+    "Fecha Salida": formatDate(this.elements["Fecha Salida"].value),
+    "Teléfono": this.elements["Teléfono"].value || "",
+    Email: this.elements["Email"].value || ""
   };
 
   try {
