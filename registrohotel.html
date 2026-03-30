@@ -1,10 +1,10 @@
 <form id="formulario">
-  <input type="text" name="Nombre" placeholder="Nombre" required>
+  <input type="text" name="NOMBRE" placeholder="NOMBRE" required>
   <input type="text" name="DNI" placeholder="DNI" required>
-  <input type="date" name="Fecha Entrada" required>
-  <input type="date" name="Fecha Salida" required>
-  <input type="tel" name="Teléfono" placeholder="Teléfono" required>
-  <input type="email" name="Email" placeholder="Email" required>
+  <input type="date" name="FECHA ENTRADA" required>
+  <input type="date" name="FECHA SALIDA" required>
+  <input type="tel" name="TELEFONO" placeholder="TELEFONO" required>
+  <input type="email" name="EMAIL" placeholder="EMAIL" required>
   <button type="submit">Enviar</button>
 </form>
 
@@ -13,12 +13,12 @@ document.getElementById("formulario").addEventListener("submit", async function(
   e.preventDefault();
 
   const datos = {
-    Nombre: this.elements["Nombre"].value || "",
+    NOMBRE: this.elements["NOMBRE"].value || "",
     DNI: this.elements["DNI"].value || "",
-    "Fecha Entrada": this.elements["Fecha Entrada"].value || "", // ISO YYYY-MM-DD
-    "Fecha Salida": this.elements["Fecha Salida"].value || "",
-    "Teléfono": this.elements["Teléfono"].value || "",
-    Email: this.elements["Email"].value || ""
+    "FECHA ENTRADA": this.elements["FECHA ENTRADA"].value || "",
+    "FECHA SALIDA": this.elements["FECHA SALIDA"].value || "",
+    "TELEFONO": this.elements["TELEFONO"].value || "",
+    EMAIL: this.elements["EMAIL"].value || ""
   };
 
   try {
