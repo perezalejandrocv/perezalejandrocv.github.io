@@ -22,7 +22,7 @@ document.getElementById("formulario").addEventListener("submit", async function(
   };
 
   try {
-    const response = await fetch("TU_WEBHOOK_DE_LATENODE", {
+    const response = await fetch("https://webhook.latenode.com/94387/dev/f0160f6a-59f6-407f-a01a-038aa74e8c96", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datos)
