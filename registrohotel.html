@@ -13,26 +13,25 @@ console.log("SCRIPT CARGADO");
 
 document.getElementById("formulario").addEventListener("submit", async function(e) {
   e.preventDefault();
-
   console.log("FORM SUBMIT DETECTADO");
 
-  const datos = {
-    NOMBRE: this.elements["NOMBRE"].value.trim(),
-    DNI: this.elements["DNI"].value.trim(),
-    FECHA_ENTRADA: this.elements["FECHA_ENTRADA"].value,
-    FECHA_SALIDA: this.elements["FECHA_SALIDA"].value,
-    TELEFONO: this.elements["TELEFONO"].value.trim(),
-    EMAIL: this.elements["EMAIL"].value.trim()
-  };
+  const fila = [
+    this.elements["NOMBRE"].value.trim(),
+    this.elements["DNI"].value.trim(),
+    this.elements["FECHA_ENTRADA"].value,
+    this.elements["FECHA_SALIDA"].value,
+    this.elements["TELEFONO"].value.trim(),
+    this.elements["EMAIL"].value.trim()
+  ];
 
-  console.log("JSON a enviar:", datos);
+  console.log("Fila a enviar:", fila);
   console.log("ANTES DEL FETCH");
 
   try {
     await fetch("https://hook.eu1.make.com/s1iuz5nm1sg2bjrdiur3a9rfbnjpf56s", {
       method: "POST",
       mode: "no-cors",
-      body: JSON.stringify(datos)
+      body: JSON.stringify(fila)
     });
 
     console.log("FETCH EJECUTADO");
