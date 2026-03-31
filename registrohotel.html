@@ -21,7 +21,7 @@ document.getElementById("formulario").addEventListener("submit", async function(
   formData.append("EMAIL", this.elements["EMAIL"].value.trim());
 
   try {
-    await fetch("TU_WEBHOOK_DE_LATENODE_AQUI", {
+    await fetch("https://webhook.latenode.com/94387/prod/f0160f6a-59f6-407f-a01a-038aa74e8c96", {
       method: "POST",
       body: formData
     });
