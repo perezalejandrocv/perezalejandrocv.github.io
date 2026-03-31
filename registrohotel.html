@@ -15,23 +15,23 @@ document.getElementById("formulario").addEventListener("submit", async function(
   e.preventDefault();
   console.log("FORM SUBMIT DETECTADO");
 
-  const fila = [
-    this.elements["NOMBRE"].value.trim(),
-    this.elements["DNI"].value.trim(),
-    this.elements["FECHA_ENTRADA"].value,
-    this.elements["FECHA_SALIDA"].value,
-    this.elements["TELEFONO"].value.trim(),
-    this.elements["EMAIL"].value.trim()
-  ];
+  const datos = {
+    NOMBRE: this.elements["NOMBRE"].value.trim(),
+    DNI: this.elements["DNI"].value.trim(),
+    FECHA_ENTRADA: this.elements["FECHA_ENTRADA"].value,
+    FECHA_SALIDA: this.elements["FECHA_SALIDA"].value,
+    TELEFONO: this.elements["TELEFONO"].value.trim(),
+    EMAIL: this.elements["EMAIL"].value.trim()
+  };
 
-  console.log("Fila a enviar:", fila);
-  console.log("ANTES DEL FETCH");
+  console.log("JSON a enviar:", datos);
 
   try {
-    await fetch("https://hook.eu1.make.com/s1iuz5nm1sg2bjrdiur3a9rfbnjpf56s", {
+    await fetch("https://webhook.latenode.com/94387/dev/f0160f6a-59f6-407f-a01a-038aa74e8c96", {
       method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(fila)
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos)
     });
 
     console.log("FETCH EJECUTADO");
