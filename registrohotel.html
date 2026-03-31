@@ -12,26 +12,25 @@
 document.getElementById("formulario").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  const datos = {
-    NOMBRE: this.elements["NOMBRE"].value.trim(),
-    DNI: this.elements["DNI"].value.trim(),
-    FECHA_ENTRADA: this.elements["FECHA_ENTRADA"].value,
-    FECHA_SALIDA: this.elements["FECHA_SALIDA"].value,
-    TELEFONO: this.elements["TELEFONO"].value.trim(),
-    EMAIL: this.elements["EMAIL"].value.trim()
-  };
+  const formData = new FormData();
+  formData.append("NOMBRE", this.elements["NOMBRE"].value.trim());
+  formData.append("DNI", this.elements["DNI"].value.trim());
+  formData.append("FECHA_ENTRADA", this.elements["FECHA_ENTRADA"].value);
+  formData.append("FECHA_SALIDA", this.elements["FECHA_SALIDA"].value);
+  formData.append("TELEFONO", this.elements["TELEFONO"].value.trim());
+  formData.append("EMAIL", this.elements["EMAIL"].value.trim());
 
   try {
-    const response = await fetch("https://webhook.latenode.com/94387/dev/f0160f6a-59f6-407f-a01a-038aa74e8c96", {
+    await fetch("TU_WEBHOOK_DE_LATENODE_AQUI", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(datos)
+      body: formData
     });
 
     alert("Datos enviados correctamente");
     this.reset();
+
   } catch (err) {
-    console.error("Error al enviar:", err);
+    console.error("Error:", err);
     alert("Error de conexión");
   }
 });
