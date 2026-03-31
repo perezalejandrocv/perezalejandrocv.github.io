@@ -1,27 +1,32 @@
 <form id="formulario">
   <input type="text" name="NOMBRE" placeholder="NOMBRE" required>
   <input type="text" name="DNI" placeholder="DNI" required>
-  <input type="date" name="FECHA ENTRADA" required>
-  <input type="date" name="FECHA SALIDA" required>
+  <input type="date" name="FECHA_ENTRADA" required>
+  <input type="date" name="FECHA_SALIDA" required>
   <input type="tel" name="TELEFONO" placeholder="TELEFONO" required>
   <input type="email" name="EMAIL" placeholder="EMAIL" required>
   <button type="submit">Enviar</button>
 </form>
 
 <script>
+console.log("SCRIPT CARGADO");
+
 document.getElementById("formulario").addEventListener("submit", async function(e) {
   e.preventDefault();
+
+  console.log("FORM SUBMIT DETECTADO");
 
   const datos = {
     NOMBRE: this.elements["NOMBRE"].value.trim(),
     DNI: this.elements["DNI"].value.trim(),
-    "FECHA ENTRADA": this.elements["FECHA ENTRADA"].value,
-    "FECHA SALIDA": this.elements["FECHA SALIDA"].value,
+    FECHA_ENTRADA: this.elements["FECHA_ENTRADA"].value,
+    FECHA_SALIDA: this.elements["FECHA_SALIDA"].value,
     TELEFONO: this.elements["TELEFONO"].value.trim(),
     EMAIL: this.elements["EMAIL"].value.trim()
   };
 
-  console.log("JSON a enviar al webhook:", datos);
+  console.log("JSON a enviar:", datos);
+  console.log("ANTES DEL FETCH");
 
   try {
     await fetch("https://hook.eu1.make.com/s1iuz5nm1sg2bjrdiur3a9rfbnjpf56s", {
@@ -30,6 +35,7 @@ document.getElementById("formulario").addEventListener("submit", async function(
       body: JSON.stringify(datos)
     });
 
+    console.log("FETCH EJECUTADO");
     alert("Datos enviados (verificar en Make)");
     this.reset();
 
