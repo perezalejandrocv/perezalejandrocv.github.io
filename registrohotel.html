@@ -12,18 +12,15 @@
 document.getElementById("formulario").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  const formData = new FormData();
-  formData.append("NOMBRE", this.elements["NOMBRE"].value.trim());
-  formData.append("DNI", this.elements["DNI"].value.trim());
-  formData.append("FECHA_ENTRADA", this.elements["FECHA_ENTRADA"].value);
-  formData.append("FECHA_SALIDA", this.elements["FECHA_SALIDA"].value);
-  formData.append("TELEFONO", this.elements["TELEFONO"].value.trim());
-  formData.append("EMAIL", this.elements["EMAIL"].value.trim());
+  // Creamos un objeto con todos los campos del formulario automáticamente
+  const datos = Object.fromEntries(new FormData(this).entries());
+  console.log("FORMULARIO ENVIADO:", datos);
 
   try {
     await fetch("https://webhook.latenode.com/94387/prod/f0160f6a-59f6-407f-a01a-038aa74e8c96", {
       method: "POST",
-      body: formData
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos)
     });
 
     alert("Datos enviados correctamente");
