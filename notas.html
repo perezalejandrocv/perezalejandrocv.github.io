@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Notas</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #4460AA;
+      color: white;
+      font-family: "Trebuchet MS", sans-serif;
+      text-align: center;
+    }
+
+    .contenedor {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      font-size: 18px;
+      padding: 10px;
+      font-family: "Trebuchet MS", sans-serif;
+    }
+
+    label {
+      font-size: 20px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      font-family: "Trebuchet MS", sans-serif;
+    }
+
+    #estado {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: "Trebuchet MS", sans-serif;
+
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <div class="contenedor">
+    <h2>Enviar Notas</h2>
+
+<form action="https://formspree.io/f/mlgapdvw" method="POST">
+
+  <textarea name="mensaje" placeholder="Escribe tus notas..." required></textarea>
+
+  <br><br>
+
+  <label>
+    <input type="checkbox" name="urgente">
+    Urgente
+  </label>
+
+  <br><br>
+
+  <button type="submit">Enviar</button>
+</form>
+
+  </div>
+
+
+<script>
+document.querySelector("form[action*='formspree']").addEventListener("submit", function () {
+  const urgente = document.querySelector("input[name='urgente']").checked;
+  
+  const subjectInput = document.createElement("input");
+  subjectInput.type = "hidden";
+  subjectInput.name = "_subject";
+  subjectInput.value = urgente 
+    ? "🚨 URGENTE - Nueva nota"
+    : "Nueva nota";
+
+  this.appendChild(subjectInput);
+});
+</script>
+
+
+
+</body>
+</html>
