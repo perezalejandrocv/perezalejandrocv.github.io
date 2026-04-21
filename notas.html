@@ -83,9 +83,11 @@ button:hover {
   <br><br>
 
   <label>
-    <input type="checkbox" name="urgente">
+    <input type="checkbox" name="urgente" id="urgente">
     Urgente
   </label>
+
+  <input type="hidden" name="_subject" id="subjectField">
 
   <br><br>
 
@@ -96,19 +98,15 @@ button:hover {
 
 
 <script>
-document.querySelector("form[action*='formspree']").addEventListener("submit", function () {
-  const urgente = document.querySelector("input[name='urgente']").checked;
+document.querySelector("form").addEventListener("submit", function () {
+  const urgente = document.getElementById("urgente").checked;
   const mensaje = document.querySelector("textarea[name='mensaje']").value.trim();
 
-  const subjectInput = document.createElement("input");
-  subjectInput.type = "hidden";
-  subjectInput.name = "_subject";
+  const subjectField = document.getElementById("subjectField");
 
-  subjectInput.value = urgente
+  subjectField.value = urgente
     ? "🚨 " + mensaje
     : "📝 " + mensaje;
-
-  this.appendChild(subjectInput);
 });
 </script>
 
