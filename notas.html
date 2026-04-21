@@ -98,13 +98,15 @@ button:hover {
 <script>
 document.querySelector("form[action*='formspree']").addEventListener("submit", function () {
   const urgente = document.querySelector("input[name='urgente']").checked;
-  
+  const mensaje = document.querySelector("textarea[name='mensaje']").value.trim();
+
   const subjectInput = document.createElement("input");
   subjectInput.type = "hidden";
   subjectInput.name = "_subject";
-  subjectInput.value = urgente 
-    ? "🚨 URGENTE - Nueva nota"
-    : "Nueva nota";
+
+  subjectInput.value = urgente
+    ? "🚨 " + mensaje
+    : "📝 " + mensaje;
 
   this.appendChild(subjectInput);
 });
