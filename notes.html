@@ -70,18 +70,20 @@ textarea {
   <div class="contenedor">
     <h2>Enviar Notas</h2>
 
-<form action="https://formspree.io/f/mlgapdvw" method="POST">
+<form action="https://api.web3forms.com/submit" method="POST">
 
-  <textarea name="mensaje" placeholder="Escribe tus notas..." required></textarea>
+  <input type="hidden" name="access_key" value="28bf9573-eef3-41f9-a913-77917f9bfdf1">
+
+  <textarea name="message" placeholder="Escribe tus notas..." required></textarea>
 
   <br><br>
 
   <label>
-    <input type="checkbox" name="urgente" id="urgente">
+    <input type="checkbox" id="urgente">
     Urgente
   </label>
 
-  <input type="hidden" name="_subject" id="subjectField">
+  <input type="hidden" name="subject" id="subjectField">
 
   <br><br>
 
@@ -95,15 +97,16 @@ textarea {
 
 document.querySelector("form").addEventListener("submit", function () {
   const urgente = document.getElementById("urgente").checked;
-  const mensaje = document.querySelector("textarea[name='mensaje']").value.trim();
+  const message = document.querySelector("textarea[name='message']").value.trim();
 
   const subjectField = document.getElementById("subjectField");
 
-  const resumen = mensaje.substring(0, 100);
 
-  subjectField.value = urgente
-    ? "🚨 " + resumen
-    : "📝 " + resumen;
+
+subjectField.value = urgente
+  ? "🚨 " + message.substring(0, 100)
+  : "📝 " + message.substring(0, 100);
+
 });
 
 </script>
