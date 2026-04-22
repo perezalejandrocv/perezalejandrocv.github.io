@@ -83,7 +83,7 @@ textarea {
     Urgente
   </label>
 
-  <input type="hidden" name="subject" value="TEST 🚨">
+  <input type="hidden" name="subject" id="subjectField">
 
   <br><br>
 
@@ -94,20 +94,24 @@ textarea {
 
 
 <script>
-document.querySelector("form").addEventListener("submit", function (e) {
-  e.preventDefault(); // ⛔ detener envío automático
+const textarea = document.querySelector("textarea");
+const checkbox = document.getElementById("urgente");
+const subjectField = document.getElementById("subjectField");
 
-  const urgente = document.getElementById("urgente").checked;
-  const message = document.querySelector("textarea[name='message']").value.trim();
-  const subjectField = document.getElementById("subjectField");
+function actualizarSubject() {
+  const message = textarea.value.trim();
 
-  subjectField.value = urgente
+  subjectField.value = checkbox.checked
     ? "🚨 " + message.substring(0, 100)
     : "📝 " + message.substring(0, 100);
+}
 
-  // ✅ enviar después de actualizar
-  this.submit();
-});
+// actualizar en tiempo real
+textarea.addEventListener("input", actualizarSubject);
+checkbox.addEventListener("change", actualizarSubject);
+
+// asegurar valor antes de enviar (por si acaso)
+document.querySelector("form").addEventListener("submit", actualizarSubject);
 </script>
 
 
