@@ -83,7 +83,7 @@ textarea {
     Urgente
   </label>
 
-  <input type="hidden" name="subject" id="subjectField">
+  <input type="hidden" name="subject" value="TEST 🚨">
 
   <br><br>
 
@@ -94,21 +94,20 @@ textarea {
 
 
 <script>
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault(); // ⛔ detener envío automático
 
-document.querySelector("form").addEventListener("submit", function () {
   const urgente = document.getElementById("urgente").checked;
   const message = document.querySelector("textarea[name='message']").value.trim();
-
   const subjectField = document.getElementById("subjectField");
 
+  subjectField.value = urgente
+    ? "🚨 " + message.substring(0, 100)
+    : "📝 " + message.substring(0, 100);
 
-
-subjectField.value = urgente
-  ? "🚨 " + message.substring(0, 100)
-  : "📝 " + message.substring(0, 100);
-
+  // ✅ enviar después de actualizar
+  this.submit();
 });
-
 </script>
 
 
