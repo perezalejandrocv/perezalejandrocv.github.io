@@ -94,24 +94,18 @@ textarea {
 
 
 <script>
+const form = document.querySelector("form");
 const textarea = document.querySelector("textarea");
 const checkbox = document.getElementById("urgente");
 const subjectField = document.getElementById("subjectField");
 
-function actualizarSubject() {
+form.addEventListener("submit", function () {
   const message = textarea.value.trim();
 
   subjectField.value = checkbox.checked
-    ? "🚨 " + message.substring(0, 100)
-    : "📝 " + message.substring(0, 100);
-}
-
-// actualizar en tiempo real
-textarea.addEventListener("input", actualizarSubject);
-checkbox.addEventListener("change", actualizarSubject);
-
-// asegurar valor antes de enviar (por si acaso)
-document.querySelector("form").addEventListener("submit", actualizarSubject);
+    ? "🚨" + message.substring(0, 100)
+    : "📝" + message.substring(0, 100);
+});
 </script>
 
 
