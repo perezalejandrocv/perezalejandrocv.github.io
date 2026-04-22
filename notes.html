@@ -106,6 +106,10 @@ form.addEventListener("submit", function (e) {
     ? "🚨 URGENTE: " + message.substring(0, 100)
     : "📝 NOTA: " + message.substring(0, 100);
 
+console.log("SERVICE OK");
+console.log(subject, message);
+
+
   emailjs.send("service_s4ozhif", "template_39rv41s", {
     subject: subject,
     message: message
@@ -113,9 +117,9 @@ form.addEventListener("submit", function (e) {
     alert("Enviado ✔️");
     form.reset();
   }).catch((error) => {
-    console.error("EMAILJS ERROR:", error);
-    alert("Error al enviar ❌");
-  });
+  console.error("EMAILJS FULL ERROR:", error);
+  alert(JSON.stringify(error, null, 2));
+});
 });
 
 </script>
