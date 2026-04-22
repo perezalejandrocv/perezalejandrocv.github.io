@@ -39,11 +39,14 @@ button {
   cursor: pointer;
   font-family: "Trebuchet MS", sans-serif;
 
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  background: transparent;
+  border: 1.5px solid white;
+  color: #ffffff;
+  transition: transform 0.5s ease, color 0.5s ease;
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 textarea {
@@ -60,6 +63,23 @@ textarea {
 
   -webkit-appearance: none;
 }
+
+@keyframes spinY {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.spin-n {
+  animation: spinY 12s linear infinite;
+  display: inline-block;
+  transform-style: preserve-3d;
+}
+
+
 
   </style>
 </head>
@@ -84,7 +104,33 @@ textarea {
 
       <button type="submit">Enviar</button>
 
+
     </form>
+
+<div style="margin-top:120px; display:flex; justify-content:center;">
+  
+  <div style="
+    width:220px;
+    height:220px;
+    border:2px solid white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  ">
+    
+    <div class="spin-n" style="
+      color:white;
+      font-size:160px;
+      font-weight:bold;
+    ">
+      N
+    </div>
+
+  </div>
+</div>
+
+
   </div>
 
 
@@ -113,6 +159,8 @@ const time =
   String(now.getHours()).padStart(2, "0") + ":" +
   String(now.getMinutes()).padStart(2, "0");
 
+const urgent = checkbox.checked ? "Urgente." : "";
+
   const subject = checkbox.checked
     ? "🚨 " + message.substring(0, 100)
     : "📝 " + message.substring(0, 100);
@@ -120,9 +168,9 @@ const time =
   emailjs.send("service_s4ozhif", "template_39rv41s", {
     subject,
     message,
-    time
+    time,
+    urgent
   }).then(() => {
-    alert("Enviado ✔️");
     form.reset();
   }).catch((error) => {
     console.error(error);
