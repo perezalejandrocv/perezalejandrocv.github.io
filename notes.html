@@ -88,10 +88,12 @@ textarea {
   </div>
 
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-emailjs.init("5EsBv0Ay5DyiR8pSs");
+emailjs.init({
+  publicKey: "5EsBv0Ay5DyiR8pSs"
+});
 
 const form = document.getElementById("form");
 const textarea = form.querySelector("textarea");
@@ -106,22 +108,17 @@ form.addEventListener("submit", function (e) {
     ? "🚨 URGENTE: " + message.substring(0, 100)
     : "📝 NOTA: " + message.substring(0, 100);
 
-console.log("SERVICE OK");
-console.log(subject, message);
-
-
   emailjs.send("service_s4ozhif", "template_39rv41s", {
-    subject: subject,
-    message: message
+    subject,
+    message
   }).then(() => {
     alert("Enviado ✔️");
     form.reset();
   }).catch((error) => {
-  console.error("EMAILJS FULL ERROR:", error);
-  alert(JSON.stringify(error, null, 2));
+    console.error(error);
+    alert("Error al enviar ❌");
+  });
 });
-});
-
 </script>
 
 
