@@ -61,7 +61,6 @@ textarea {
   -webkit-appearance: none;
 }
 
-
   </style>
 </head>
 
@@ -70,41 +69,53 @@ textarea {
   <div class="contenedor">
     <h2>Enviar Notas</h2>
 
-<form action="https://api.web3forms.com/submit" method="POST">
+    <form id="form">
 
-  <input type="hidden" name="access_key" value="28bf9573-eef3-41f9-a913-77917f9bfdf1">
+      <textarea name="message" placeholder="Escribe tus notas..." required></textarea>
 
-  <textarea name="message" placeholder="Escribe tus notas..." required></textarea>
+      <br><br>
 
-  <br><br>
+      <label>
+        <input type="checkbox" id="urgente">
+        Urgente
+      </label>
 
-  <label>
-    <input type="checkbox" id="urgente">
-    Urgente
-  </label>
+      <br><br>
 
-  <input type="hidden" name="subject" id="subjectField">
+      <button type="submit">Enviar</button>
 
-  <br><br>
-
-  <button type="submit">Enviar</button>
-</form>
-
+    </form>
   </div>
 
 
-<script>
-const form = document.querySelector("form");
-const textarea = document.querySelector("textarea");
-const checkbox = document.getElementById("urgente");
-const subjectField = document.getElementById("subjectField");
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-form.addEventListener("submit", function () {
+<script>
+emailjs.init("5EsBv0Ay5DyiR8pSs");
+
+const form = document.getElementById("form");
+const textarea = form.querySelector("textarea");
+const checkbox = document.getElementById("urgente");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
   const message = textarea.value.trim();
 
-  subjectField.value = checkbox.checked
-    ? "🚨" + message.substring(0, 100)
-    : "📝" + message.substring(0, 100);
+  const subject = checkbox.checked
+    ? "🚨 URGENTE: " + message.substring(0, 100)
+    : "📝 NOTA: " + message.substring(0, 100);
+
+  emailjs.send("service_s4ozhif", "template_39rv41s", {
+    subject: subject,
+    message: message
+  }).then(() => {
+    alert("Enviado ✔️");
+    form.reset();
+  }).catch((error) => {
+    console.error(error);
+    alert("Error al enviar ❌");
+  });
 });
 </script>
 
