@@ -91,6 +91,7 @@ textarea {
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
+
 emailjs.init({
   publicKey: "5EsBv0Ay5DyiR8pSs"
 });
@@ -103,14 +104,16 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const message = textarea.value.trim();
+  const time = new Date().toLocaleString();
 
   const subject = checkbox.checked
-    ? "🚨 URGENTE: " + message.substring(0, 100)
-    : "📝 NOTA: " + message.substring(0, 100);
+    ? "🚨 " + message.substring(0, 100)
+    : "📝 " + message.substring(0, 100);
 
   emailjs.send("service_s4ozhif", "template_39rv41s", {
     subject,
-    message
+    message,
+    time
   }).then(() => {
     alert("Enviado ✔️");
     form.reset();
@@ -119,8 +122,8 @@ form.addEventListener("submit", function (e) {
     alert("Error al enviar ❌");
   });
 });
-</script>
 
+</script>
 
 
 </body>
