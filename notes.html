@@ -113,10 +113,11 @@ form.addEventListener("submit", function (e) {
     alert("Enviado ✔️");
     form.reset();
   }).catch((error) => {
-    console.error(error);
+    console.error("EMAILJS ERROR:", error);
     alert("Error al enviar ❌");
   });
 });
+
 </script>
 
 
