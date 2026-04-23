@@ -196,7 +196,9 @@ form.addEventListener("submit", function (e) {
     }, 2000);
 
   }).catch((error) => {
-    console.error(error);
+  console.log("EMAILJS FULL ERROR:", error);
+  alert(JSON.stringify(error, null, 2));
+
 
     button.disabled = false;
     alert("Error al enviar ❌");
