@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,9 +20,11 @@ body {
 }
 
     .contenedor {
-      width: 100%;
-      max-width: 500px;
-    }
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
 
     h2 {
       font-size: 32px;
@@ -145,21 +148,27 @@ emailjs.init({
 const form = document.getElementById("form");
 const textarea = form.querySelector("textarea");
 const checkbox = document.getElementById("urgente");
+const button = form.querySelector("button");
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const message = textarea.value.trim();
+  if (!message) return;
+
+  // 🔒 bloquea botón mientras envía
+  button.disabled = true;
+
   const now = new Date();
 
-const time =
-  String(now.getDate()).padStart(2, "0") + "/" +
-  String(now.getMonth() + 1).padStart(2, "0") + "/" +
-  String(now.getFullYear()).slice(-2) + " " +
-  String(now.getHours()).padStart(2, "0") + ":" +
-  String(now.getMinutes()).padStart(2, "0");
+  const time =
+    String(now.getDate()).padStart(2, "0") + "/" +
+    String(now.getMonth() + 1).padStart(2, "0") + "/" +
+    String(now.getFullYear()).slice(-2) + " " +
+    String(now.getHours()).padStart(2, "0") + ":" +
+    String(now.getMinutes()).padStart(2, "0");
 
-const urgent = checkbox.checked ? "Urgente." : "";
+  const urgent = checkbox.checked ? "Urgente." : "";
 
   const subject = checkbox.checked
     ? "🚨 " + message.substring(0, 100)
@@ -171,9 +180,25 @@ const urgent = checkbox.checked ? "Urgente." : "";
     time,
     urgent
   }).then(() => {
+
     form.reset();
+
+    // ✨ estado ENVIADO
+    button.textContent = "ENVIADO";
+    button.style.color = "#FFFF00";
+    button.style.borderColor = "#FFFF00";
+
+    setTimeout(() => {
+      button.textContent = "Enviar";
+      button.style.color = "#ffffff";
+      button.style.borderColor = "#ffffff";
+      button.disabled = false;
+    }, 2000);
+
   }).catch((error) => {
     console.error(error);
+
+    button.disabled = false;
     alert("Error al enviar ❌");
   });
 });
