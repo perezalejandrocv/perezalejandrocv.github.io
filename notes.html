@@ -11,7 +11,8 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 40px;
   background-color: #4460AA;
   color: white;
   font-family: "Trebuchet MS", sans-serif;
@@ -23,10 +24,11 @@ body {
       max-width: 500px;
     }
 
-    h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
+  h2 {
+  font-size: 32px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
 
     label {
       font-size: 20px;
@@ -95,9 +97,9 @@ textarea {
   background: #FFFF00;
   border-radius: 50%;
   opacity: 1;
-  box-shadow: none; /* 👈 clave: elimina efecto difuso */
-  filter: none;     /* 👈 evita blur accidental */
-  animation: explode 1000ms cubic-bezier(.16,.84,.44,1) forwards;
+  box-shadow: none;
+  filter: none;
+  animation: explode 8000ms cubic-bezier(.16,.84,.44,1) forwards;
 }
 
 .btn-enviado {
@@ -126,6 +128,32 @@ textarea {
 <body>
 
   <div class="contenedor">
+
+
+<div style="display:flex; justify-content:center;">
+  
+<div style="
+  width:120px;
+  height:120px;
+  border:2px solid white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin: 0 auto 20px auto;
+">
+  
+  <div class="spin-n" style="
+    color:white;
+    font-size:87px;
+    font-weight:bold;
+  ">
+    N
+  </div>
+ </div>
+</div>
+
+
     <h2>Enviar Notas</h2>
 
     <form id="form">
@@ -145,30 +173,6 @@ textarea {
 
 
 </form>
-
-
-<div style="margin-top:120px; display:flex; justify-content:center;">
-  
-  <div style="
-    width:220px;
-    height:220px;
-    border:2px solid white;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  ">
-    
-    <div class="spin-n" style="
-      color:white;
-      font-size:160px;
-      font-weight:bold;
-    ">
-      N
-    </div>
-
-  </div>
-</div>
 
 </div>
 
@@ -246,13 +250,15 @@ emailjs.send("service_s4ozhif", "template_39rv41s", {
 function fireworks(x, y) {
   const container = document.getElementById("fireworks");
 
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 100; i++) {
   const particle = document.createElement("div");
   particle.classList.add("particle");
 
   const angle = (Math.PI * 2 / 25) * i + (Math.random() * 0.3);
 
-  const distance = Math.random() * 220 + 80;
+  const maxDistance = Math.max(window.innerWidth, window.innerHeight);
+
+  const distance = Math.random() * maxDistance;
 
   const dx = Math.cos(angle) * distance;
   const dy = Math.sin(angle) * distance;
@@ -262,12 +268,9 @@ for (let i = 0; i < 25; i++) {
   particle.style.setProperty("--x", dx + "px");
   particle.style.setProperty("--y", dy + "px");
 
-  particle.style.animation =
-    "explode 1000ms cubic-bezier(.16,.84,.44,1) forwards";
-
   container.appendChild(particle);
 
-  setTimeout(() => particle.remove(), 1000);
+  setTimeout(() => particle.remove(), 8000);
 }
 }
 
