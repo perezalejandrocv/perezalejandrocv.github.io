@@ -211,16 +211,14 @@ form.addEventListener("submit", async function (e) {
     String(now.getHours()).padStart(2, "0") + ":" +
     String(now.getMinutes()).padStart(2, "0");
 
-  const formattedMessage = 
-`📒 N O T E S
-
-🧑 Alejandro Pérez
-🕒 ${time}
-${checkbox.checked ? "🚨 URGENTE" : "📝 MENSAJE"}
-
-─────────────────────────────────────────────────────────────────────────────────────────
-
-${message}`;
+const formattedMessage =
+"📒 N O T E S\r\n" +
+"🧑 Alejandro Pérez\r\n" +
+"🕒 " + time + "\r\n" +
+(checkbox.checked ? "🚨 URGENTE\r\n" : "📝 MENSAJE\r\n") +
+"\r\n" +
+"────────────────────────────────────────────────────────────────────────────────────\r\n\r\n" +
+message;
 
   const subject = checkbox.checked
     ? "🚨 " + message.substring(0, 100)
