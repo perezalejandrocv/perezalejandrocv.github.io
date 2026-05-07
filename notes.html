@@ -180,8 +180,6 @@ textarea {
 <div id="fireworks"></div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
 <script>
 
 const form = document.getElementById("form");
@@ -221,8 +219,8 @@ const formattedMessage =
 message;
 
   const subject = checkbox.checked
-    ? "🚨 " + message.substring(0, 100)
-    : "📝 " + message.substring(0, 100);
+    ? "🚨 " + message.substring(0, 120)
+    : "📝 " + message.substring(0, 120);
 
   try {
     const response = await fetch("https://splitforms.com/api/submit", {
