@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -219,24 +218,27 @@ const formattedMessage =
 "────────────────────────────────────────────────────────────────────────────────────\r\n\r\n" +
 message;
 
-  const subject = checkbox.checked
-    ? "🚨 " + message.substring(0, 120)
-    : "📝 " + message.substring(0, 120);
+const subject = checkbox.checked
+  ? "🚨 " + message.substring(0, 120)
+  : "📝 " + message.substring(0, 120);
 
-  try {
-    const response = await fetch("https://splitforms.com/api/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        access_key: "4f1a9e5d6ef84d32ab6ed58276886279",
-        subject,
-        message: formattedMessage
-      })
-    });
+try {
+  const formData = new FormData();
 
-    if (!response.ok) throw new Error("Error en envío");
+  formData.append("subject", subject);
+  formData.append("message", formattedMessage);
+
+  const response = await fetch("https://formlist.com/f/-Tib4vGImqQZ", {
+    method: "POST",
+    body: formData
+  });
+
+  const text = await response.text();
+  console.log("FormsList response:", text);
+
+if (!response.ok) {
+  throw new Error(text || "Error en envío");
+}
 
     form.reset();
 
