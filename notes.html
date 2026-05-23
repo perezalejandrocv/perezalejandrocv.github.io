@@ -130,54 +130,31 @@ const form = document.getElementById("formlistForm");
 const button = form.querySelector("button");
 const originalButtonText = button.textContent;
 
-let sending = false;
-
-form.addEventListener("submit", async function(e) {
-  e.preventDefault();
-
-  if (sending) return;
-  sending = true;
+form.addEventListener("submit", function() {
 
   button.disabled = true;
-  button.textContent = "Enviando...";
 
-  try {
+  button.textContent = "ENVIADO";
 
-    const formData = new FormData(form);
+  button.classList.add("btn-enviado");
 
-  const response = await fetch(form.action, {
-    method: "POST",
-    body: formData
-  });
+  const rect = button.getBoundingClientRect();
 
-  if (!response.ok) {
-    throw new Error("Error enviando");
-  }
-
-    form.reset();
-
-    button.textContent = "ENVIADO";
-    button.classList.add("btn-enviado");
-
-    const rect = button.getBoundingClientRect();
-
-    fireworks(
-      rect.left + rect.width / 2,
-      rect.top + rect.height / 2
-    );
-
-  } catch(err) {
-
-    button.textContent = "ERROR";
-
-  }
+  fireworks(
+    rect.left + rect.width / 2,
+    rect.top + rect.height / 2
+  );
 
   setTimeout(() => {
+
     button.textContent = originalButtonText;
+
     button.classList.remove("btn-enviado");
+
     button.disabled = false;
-    sending = false;
+
   }, 2000);
+
 });
 
 function fireworks(x, y) {
@@ -191,21 +168,27 @@ function fireworks(x, y) {
     particle.classList.add("particle");
 
     const angle = (Math.PI * 2 / 40) * i;
+
     const distance = Math.random() * 700;
 
     const dx = Math.cos(angle) * distance;
+
     const dy = Math.sin(angle) * distance;
 
     particle.style.left = x + "px";
+
     particle.style.top = y + "px";
 
     particle.style.setProperty("--x", dx + "px");
+
     particle.style.setProperty("--y", dy + "px");
 
     container.appendChild(particle);
 
     setTimeout(() => particle.remove(), 8000);
+
   }
+
 }
 </script>
 
