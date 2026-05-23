@@ -116,12 +116,11 @@ textarea {
   <h2>Enviar Notas</h2>
 
   <!-- FORMULARIO EMBEBIDO -->
-  <form id="formlistForm" action="https://formlist.com/f/-Tib4vGImqQZ" method="POST"   target="hidden_iframe">
+  <form id="formlistForm" action="https://formlist.com/f/-Tib4vGImqQZ" method="POST">   
   <textarea name="message" required></textarea>
   <button type="submit">Enviar</button>
   </form>
 
-<iframe name="hidden_iframe" style="display:none;"></iframe>
 </div>
 
 <div id="fireworks"></div>
@@ -131,16 +130,29 @@ const form = document.getElementById("formlistForm");
 const button = form.querySelector("button");
 const originalButtonText = button.textContent;
 
-form.addEventListener("submit", function(e) {
+let sending = false;
+
+form.addEventListener("submit", async function(e) {
   e.preventDefault();
+
+  if (sending) return;
+  sending = true;
 
   button.disabled = true;
   button.textContent = "Enviando...";
 
-  setTimeout(() => {
+  try {
 
-    // ENVÍO REAL DEL FORMULARIO
-    form.submit();
+    const formData = new FormData(form);
+
+  const response = await fetch(form.action, {
+    method: "POST",
+    body: formData
+  });
+
+  if (!response.ok) {
+    throw new Error("Error enviando");
+  }
 
     form.reset();
 
@@ -148,27 +160,38 @@ form.addEventListener("submit", function(e) {
     button.classList.add("btn-enviado");
 
     const rect = button.getBoundingClientRect();
-    fireworks(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
-    setTimeout(() => {
-      button.textContent = originalButtonText;
-      button.classList.remove("btn-enviado");
-      button.disabled = false;
-    }, 2000);
+    fireworks(
+      rect.left + rect.width / 2,
+      rect.top + rect.height / 2
+    );
 
-  }, 1000);
+  } catch(err) {
+
+    button.textContent = "ERROR";
+
+  }
+
+  setTimeout(() => {
+    button.textContent = originalButtonText;
+    button.classList.remove("btn-enviado");
+    button.disabled = false;
+    sending = false;
+  }, 2000);
 });
 
 function fireworks(x, y) {
+
   const container = document.getElementById("fireworks");
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 40; i++) {
+
     const particle = document.createElement("div");
+
     particle.classList.add("particle");
 
-    const angle = (Math.PI * 2 / 25) * i + (Math.random() * 0.3);
-    const maxDistance = Math.max(window.innerWidth, window.innerHeight);
-    const distance = Math.random() * maxDistance;
+    const angle = (Math.PI * 2 / 40) * i;
+    const distance = Math.random() * 700;
 
     const dx = Math.cos(angle) * distance;
     const dy = Math.sin(angle) * distance;
