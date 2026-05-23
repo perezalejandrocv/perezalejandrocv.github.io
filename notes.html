@@ -137,9 +137,13 @@ form.addEventListener("submit", function(e) {
   button.disabled = true;
   button.textContent = "Enviando...";
 
-  // Usamos setTimeout simulado para mostrar el envío (Formlist se encarga de enviar)
   setTimeout(() => {
+
+    // ENVÍO REAL DEL FORMULARIO
+    form.submit();
+
     form.reset();
+
     button.textContent = "ENVIADO";
     button.classList.add("btn-enviado");
 
@@ -151,11 +155,13 @@ form.addEventListener("submit", function(e) {
       button.classList.remove("btn-enviado");
       button.disabled = false;
     }, 2000);
-  }, 1000); // simula 1s de envío
+
+  }, 1000);
 });
 
 function fireworks(x, y) {
   const container = document.getElementById("fireworks");
+
   for (let i = 0; i < 100; i++) {
     const particle = document.createElement("div");
     particle.classList.add("particle");
@@ -169,10 +175,12 @@ function fireworks(x, y) {
 
     particle.style.left = x + "px";
     particle.style.top = y + "px";
+
     particle.style.setProperty("--x", dx + "px");
     particle.style.setProperty("--y", dy + "px");
 
     container.appendChild(particle);
+
     setTimeout(() => particle.remove(), 8000);
   }
 }
