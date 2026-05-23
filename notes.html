@@ -5,6 +5,7 @@
   <title>NOTES</title>
 
   <style>
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -18,20 +19,20 @@ body {
   text-align: center;
 }
 
-.contenedor {
-  width: 100%;
-  max-width: 500px;
-}
+    .contenedor {
+      width: 100%;
+      max-width: 500px;
+    }
 
-h2 {
+  h2 {
   font-size: 32px;
   margin-top: 5px;
   margin-bottom: 20px;
 }
 
-label {
-  font-size: 20px;
-}
+    label {
+      font-size: 20px;
+    }
 
 button {
   margin-top: 15px;
@@ -39,6 +40,7 @@ button {
   font-size: 18px;
   cursor: pointer;
   font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+
   background: transparent;
   border: 1.5px solid white;
   color: #ffffff;
@@ -55,16 +57,22 @@ textarea {
   font-size: 16px;
   padding: 10px;
   font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+
   background-color: white !important;
   color: black;
   border: none;
   border-radius: 5px;
+
   -webkit-appearance: none;
 }
 
 @keyframes spinY {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
 .spin-n {
@@ -89,6 +97,8 @@ textarea {
   background: #FFFF00;
   border-radius: 50%;
   opacity: 1;
+  box-shadow: none;
+  filter: none;
   animation: explode 8000ms cubic-bezier(.16,.84,.44,1) forwards;
 }
 
@@ -97,52 +107,133 @@ textarea {
   border-color: #FFFF00 !important;
 }
 
+
 @keyframes explode {
-  0% { transform: translate(0,0) scale(1); opacity: 1; }
-  100% { transform: translate(var(--x), var(--y)) scale(0.5); opacity: 0; }
+  0% {
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.5);
+    opacity: 0;
+  }
 }
+
+
+
+
   </style>
 </head>
 
 <body>
 
-<div class="contenedor">
-  <div style="display:flex; justify-content:center;">
-    <div style="width:120px; height:120px; border:2px solid white; border-radius:50%; display:flex; align-items:center; justify-content:center; margin: 0 auto 20px auto;">
-      <div class="spin-n" style="color:white; font-size:87px; font-weight:bold;">N</div>
-    </div>
+  <div class="contenedor">
+
+
+<div style="display:flex; justify-content:center;">
+  
+<div style="
+  width:120px;
+  height:120px;
+  border:2px solid white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin: 0 auto 20px auto;
+">
+  
+  <div class="spin-n" style="
+    color:white;
+    font-size:87px;
+    font-weight:bold;
+  ">
+    N
   </div>
+ </div>
+</div>
 
-  <h2>Enviar Notas</h2>
 
-<form
-  id="formlistForm"
-  action="https://formlist.com/f/DMofB3fNwlvo"
-  method="POST"
-  target="hidden_iframe">
+    <h2>Enviar Notas</h2>
 
-  <textarea name="message" required></textarea>
+    <form id="form">
 
-  <button type="submit">Enviar</button>
+      <textarea name="message" placeholder="Escribe tus notas..." required></textarea>
+
+      <br><br>
+
+      <label>
+        <input type="checkbox" id="urgente">
+        Urgente
+      </label>
+
+      <br><br>
+
+      <button type="submit">Enviar</button>
+
+
 </form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 </div>
 
+
 <div id="fireworks"></div>
 
-<script>
-const form = document.getElementById("formlistForm");
-const button = form.querySelector("button");
-const originalText = button.textContent;
 
-form.addEventListener("submit", function () {
+<script>
+
+const form = document.getElementById("form");
+const textarea = form.querySelector("textarea");
+const checkbox = document.getElementById("urgente");
+const button = form.querySelector("button");
+const originalButtonText = button.textContent;
+
+let isSending = false;
+
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  if (isSending) return;
+  isSending = true;
 
   button.disabled = true;
-  button.textContent = "ENVIANDO...";
+  button.textContent = "Enviando...";
 
-  setTimeout(() => {
+const message = textarea.value.trim();
+
+const now = new Date();
+
+const time =
+  String(now.getDate()).padStart(2, "0") + "/" +
+  String(now.getMonth() + 1).padStart(2, "0") + "/" +
+  String(now.getFullYear()).slice(-2) + " " +
+  String(now.getHours()).padStart(2, "0") + ":" +
+  String(now.getMinutes()).padStart(2, "0");
+
+const subject = checkbox.checked
+  ? "🚨 " + message.substring(0, 120)
+  : "📝 " + message.substring(0, 120);
+
+try {
+
+const response = await fetch("https://formslist.com/f/DMofB3fNwlvo", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json"
+  },
+  body: JSON.stringify({
+    subject: subject,
+    message: message,
+    time: time,
+    urgent: checkbox.checked ? "🚨 URGENTE" : "📝 MENSAJE"
+  })
+});
+
+    if (!response.ok) throw new Error("Error en envío");
+
+    form.reset();
+
     button.textContent = "ENVIADO";
     button.classList.add("btn-enviado");
 
@@ -154,15 +245,48 @@ form.addEventListener("submit", function () {
     );
 
     setTimeout(() => {
-      form.reset();
-      button.textContent = originalText;
+      button.textContent = originalButtonText;
       button.classList.remove("btn-enviado");
       button.disabled = false;
+      isSending = false;
     }, 2000);
 
-  }, 500);
+  } catch (error) {
+    console.error(error);
+    alert("Error al enviar ❌");
 
+    button.disabled = false;
+    button.textContent = originalButtonText;
+    isSending = false;
+  }
 });
+
+function fireworks(x, y) {
+  const container = document.getElementById("fireworks");
+
+  for (let i = 0; i < 100; i++) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+
+    const angle = (Math.PI * 2 / 25) * i + (Math.random() * 0.3);
+
+    const maxDistance = Math.max(window.innerWidth, window.innerHeight);
+    const distance = Math.random() * maxDistance;
+
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
+
+    particle.style.left = x + "px";
+    particle.style.top = y + "px";
+    particle.style.setProperty("--x", dx + "px");
+    particle.style.setProperty("--y", dy + "px");
+
+    container.appendChild(particle);
+
+    setTimeout(() => particle.remove(), 8000);
+  }
+}
+
 </script>
 
 </body>
