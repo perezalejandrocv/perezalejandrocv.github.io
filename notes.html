@@ -216,18 +216,19 @@ const subject = checkbox.checked
 
 try {
 
+const formData = new FormData();
+
+formData.append("subject", subject);
+formData.append("message", message);
+formData.append("time", time);
+formData.append(
+  "urgent",
+  checkbox.checked ? "🚨 URGENTE" : "📝 MENSAJE"
+);
+
 const response = await fetch("https://formslist.com/f/DMofB3fNwlvo", {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json"
-  },
-  body: JSON.stringify({
-    subject: subject,
-    message: message,
-    time: time,
-    urgent: checkbox.checked ? "🚨 URGENTE" : "📝 MENSAJE"
-  })
+  body: formData
 });
 
     if (!response.ok) throw new Error("Error en envío");
