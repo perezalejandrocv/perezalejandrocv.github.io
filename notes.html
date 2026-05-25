@@ -85,27 +85,24 @@ textarea {
 
   <h2>Enviar Notas</h2>
 
-  <form id="form"
-        action="https://formslist.com/f/DMofB3fNwlvo"
-        method="POST">
+<form id="form"
+  action="https://formslist.com/f/DMofB3fNwlvo"
+  method="POST">
 
-    <textarea name="message" id="message"
-      placeholder="Escribe tus notas..." required></textarea>
+  <textarea id="message" name="message"
+    placeholder="Escribe tus notas..." required></textarea>
 
-    <br><br>
+  <br><br>
 
-    <label>
-      <input type="checkbox" id="urgente">
-      Urgente
-    </label>
+  <label>
+    <input type="checkbox" id="urgente">
+    Urgente
+  </label>
 
-    <br><br>
+  <br><br>
 
-    <input type="hidden" name="urgent" id="urgentInput">
-
-    <button type="submit">Enviar</button>
-
-  </form>
+  <button type="submit">Enviar</button>
+</form>
 
 </div>
 
@@ -125,21 +122,23 @@ form.addEventListener("submit", function (e) {
 
   const prefix = checkbox.checked ? "🚨 " : "📝 ";
 
-  // 🔥 SOLO esto es lo que te interesa en Formslist
-  textarea.value = prefix + message.substring(0, 120);
+  // 🔥 SUBJECT FINAL (120 caracteres máximo)
+  const subject = prefix + message.substring(0, 120);
 
-  document.getElementById("urgentInput").value =
-    checkbox.checked ? "URGENTE" : "NORMAL";
+  // 👉 SOLO enviamos esto a Formslist
+  textarea.value = subject;
 
   button.disabled = true;
   button.textContent = "ENVIANDO...";
 
   const rect = button.getBoundingClientRect();
-  fireworks(rect.left + rect.width / 2, rect.top + rect.height / 2);
+  if (typeof fireworks === "function") {
+    fireworks(rect.left + rect.width / 2, rect.top + rect.height / 2);
+  }
 
   setTimeout(() => {
-    form.submit(); // envío real a Formslist
-  }, 900);
+    form.submit();
+  }, 800);
 });
 
 function fireworks(x, y) {
