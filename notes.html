@@ -202,49 +202,29 @@ const checkbox = document.getElementById("urgente");
 const button = form.querySelector("button");
 
 form.addEventListener("submit", function (e) {
-
   e.preventDefault();
 
   const message = textarea.value.trim();
-
-  const now = new Date();
-
-  const time =
-    String(now.getDate()).padStart(2, "0") + "/" +
-    String(now.getMonth() + 1).padStart(2, "0") + "/" +
-    String(now.getFullYear()).slice(-2) + " " +
-    String(now.getHours()).padStart(2, "0") + ":" +
-    String(now.getMinutes()).padStart(2, "0");
 
   const subject = checkbox.checked
     ? "🚨 " + message.substring(0, 120)
     : "📝 " + message.substring(0, 120);
 
   document.getElementById("subjectInput").value = subject;
-
-  document.getElementById("timeInput").value = time;
-
   document.getElementById("urgentInput").value =
-    checkbox.checked
-      ? "🚨 URGENTE"
-      : "📝 MENSAJE";
-
+    checkbox.checked ? "🚨 URGENTE" : "📝 MENSAJE";
 
   button.disabled = true;
-
   button.textContent = "ENVIADO";
-  button.classList.add("btn-enviado");
 
   const rect = button.getBoundingClientRect();
 
-  fireworks(
-    rect.left + rect.width / 2,
-    rect.top + rect.height / 2
-  );
+  fireworks(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
   setTimeout(() => {
-    form.submit();
-  }, 1200);
+  form.submit();   // 
+}, 1200);
+
 
 });
 
