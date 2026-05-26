@@ -223,17 +223,20 @@ message;
     : "📝 " + message.substring(0, 120);
 
   try {
-    const response = await fetch("https://submit-form.com/form_v1_EJlYhw5bcFdP7nz0G5xd5opo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-  subject: subject,
-  message: formattedMessage
- 
-
-    });
+const response = await fetch(
+  "https://submit-form.com/form_v1_EJlYhw5bcFdP7nz0G5xd5opo",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      subject: subject,
+      message: formattedMessage
+    })
+  }
+);
 
 
     if (!response.ok) throw new Error("Error en envío");
