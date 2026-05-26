@@ -218,9 +218,15 @@ const formattedMessage =
 "────────────────────────────────────────────────────────────────────────────────────\r\n\r\n" +
 message;
 
-  const subject = checkbox.checked
-    ? "🚨 " + message.substring(0, 120)
-    : "📝 " + message.substring(0, 120);
+const cleanMessage = message
+  .replace(/\n/g, " ")
+  .replace(/\s+/g, " ")
+  .trim()
+  .substring(0, 120);
+
+const subject = checkbox.checked
+  ? "🚨 " + cleanMessage
+  : "📝 " + cleanMessage;
 
   try {
 const response = await fetch(
@@ -232,7 +238,7 @@ const response = await fetch(
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      subject: subject,
+      _subject: subject,
       message: formattedMessage
     })
   }
