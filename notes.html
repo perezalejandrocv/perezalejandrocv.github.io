@@ -162,10 +162,40 @@ textarea {
 
       <br><br>
 
-      <label>
-        <input type="checkbox" id="urgente">
-        Urgente
-      </label>
+      <div style="
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+  font-size:20px;
+">
+
+  <label>
+    <input type="checkbox" id="urgente">
+    Urgente
+  </label>
+
+  <label>
+    <input type="checkbox" id="hotel">
+    Hotel
+  </label>
+
+  <label>
+    <input type="checkbox" id="pelis">
+    Pelis
+  </label>
+
+  <label>
+    <input type="checkbox" id="bolsillo">
+    Bolsillo
+  </label>
+
+  <label>
+    <input type="checkbox" id="psico">
+    Psico
+  </label>
+
+</div>
 
       <br><br>
 
@@ -185,6 +215,10 @@ textarea {
 const form = document.getElementById("form");
 const textarea = form.querySelector("textarea");
 const checkbox = document.getElementById("urgente");
+const hotel = document.getElementById("hotel");
+const pelis = document.getElementById("pelis");
+const bolsillo = document.getElementById("bolsillo");
+const psico = document.getElementById("psico");
 const button = form.querySelector("button");
 const originalButtonText = button.textContent;
 
@@ -209,12 +243,20 @@ form.addEventListener("submit", async function (e) {
     String(now.getHours()).padStart(2, "0") + ":" +
     String(now.getMinutes()).padStart(2, "0");
 
+let etiquetas = [];
+
+if (checkbox.checked) etiquetas.push("🚨 URGENTE");
+if (hotel.checked) etiquetas.push("🏨 HOTEL");
+if (pelis.checked) etiquetas.push("🎬 PELIS");
+if (bolsillo.checked) etiquetas.push("💰 BOLSILLO");
+if (psico.checked) etiquetas.push("🧠 PSICO");
+
 const formattedMessage =
 "📒 N O T E S\n" +
 "🧑 Alejandro Pérez\n" +
 "🕒 " + time + "\n" +
-(checkbox.checked ? "🚨 URGENTE\n" : "📝 MENSAJE\n") +
-"\n" +
+(etiquetas.length ? etiquetas.join(" · ") : "📝 MENSAJE") +
+"\n\n" +
 "───────────────────────────────────────────────────────────────────────────────────\n\n" +
 message;
 
