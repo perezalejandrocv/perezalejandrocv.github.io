@@ -260,9 +260,20 @@ const formattedMessage =
 "───────────────────────────────────────────────────────────────────────────────────\n\n" +
 message;
 
-  const subject = checkbox.checked
-    ? "🚨 " + message.substring(0, 120)
-    : "📝 " + message.substring(0, 120);
+  let subjectIcons = [];
+
+if (checkbox.checked) subjectIcons.push("🚨");
+if (hotel.checked) subjectIcons.push("🏨");
+if (pelis.checked) subjectIcons.push("🎬");
+if (bolsillo.checked) subjectIcons.push("💰");
+if (psico.checked) subjectIcons.push("🧠");
+
+if (subjectIcons.length === 0) {
+  subjectIcons.push("📝");
+}
+
+const subject =
+  subjectIcons.join("") + " " + message.substring(0, 120);
 
   try {
 const formData = new FormData();
