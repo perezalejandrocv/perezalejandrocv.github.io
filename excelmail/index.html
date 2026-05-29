@@ -42,29 +42,46 @@
             });
         }
 
-        async function loadEmails(token) {
-            const response = await fetch(
-                "https://graph.microsoft.com/v1.0/me/messages?$top=10",
-                {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                }
-            );
+async function loadEmails(token) {
 
-            const data = await response.json();
-
-            let text = "";
-
-            data.value.forEach((mail, i) => {
-                text += `\n--- EMAIL ${i + 1} ---\n`;
-                text += `Asunto: ${mail.subject}\n`;
-                text += `De: ${mail.from?.emailAddress?.address}\n`;
-                text += `Fecha: ${mail.receivedDateTime}\n`;
-            });
-
-            output.innerText = text;
+    const response = await fetch(
+        "https://graph.microsoft.com/v1.0/me/messages?$top=10",
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         }
+    );
+
+    console.log("STATUS:", response.status);
+
+    const rawText = await response.text();
+
+    console.log("RAW RESPONSE:", rawText);
+
+    if (!response.ok) {
+        output.innerText =
+            "Graph API Error\n\n" +
+            "Status: " + response.status + "\n\n" +
+            rawText;
+
+        return;
+    }
+
+    const data = JSON.parse(rawText);
+
+    let text = "";
+
+    data.value.forEach((mail, i) => {
+        text += `\n--- EMAIL ${i + 1} ---\n`;
+        text += `Asunto: ${mail.subject}\n`;
+        text += `De: ${mail.from?.emailAddress?.address}\n`;
+        text += `Fecha: ${mail.receivedDateTime}\n`;
+    });
+
+    output.innerText = text;
+}
+
 
         document.getElementById("login").onclick = async () => {
             try {
