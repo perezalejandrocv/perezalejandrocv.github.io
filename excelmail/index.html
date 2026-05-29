@@ -83,24 +83,28 @@ async function loadEmails(token) {
 }
 
 
-        document.getElementById("login").onclick = async () => {
-            try {
-                const loginResponse = await msalInstance.loginPopup(loginRequest);
+document.getElementById("login").onclick = async () => {
+    try {
+        const loginResponse = await msalInstance.loginPopup(loginRequest);
 
-                const account = loginResponse.account;
-                msalInstance.setActiveAccount(account);
+        const account = loginResponse.account;
+        msalInstance.setActiveAccount(account);
 
-                const tokenResponse = await getToken(account);
+        // Aquí añadimos los console.log para depuración
+        const tokenResponse = await getToken(account);
+        console.log("ACCOUNT:", account);  // muestra la cuenta
+        console.log("TOKEN RESPONSE:", tokenResponse);  // muestra todo el objeto token
+        console.log("ACCESS TOKEN:", tokenResponse.accessToken);  // muestra solo el token
 
-                output.innerText = "Cargando emails...";
+        output.innerText = "Cargando emails...";
 
-                await loadEmails(tokenResponse.accessToken);
+        await loadEmails(tokenResponse.accessToken);
 
-            } catch (err) {
-                console.error(err);
-                output.innerText = "Error: " + err.message;
-            }
-        };
+    } catch (err) {
+        console.error(err);
+        output.innerText = "Error: " + err.message;
+    }
+};
 
         document.getElementById("logout").onclick = () => {
             msalInstance.logoutPopup();
