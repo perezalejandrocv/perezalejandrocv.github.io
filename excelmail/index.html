@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ExcelMail Bridge</title>
+    <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.min.js"></script>
+</head>
+
+<body>
+    <h1>ExcelMail Bridge</h1>
+
+    <button id="login">Iniciar sesión</button>
+    <button id="logout">Cerrar sesión</button>
+
+    <h2>Emails:</h2>
+    <pre id="output"></pre>
+
+    <script>
+        const msalConfig = {
+            auth: {
+                clientId: "febd5697-6342-4a56-adfc-393e39a59c73",
+                authority: "https://login.microsoftonline.com/1ae0bd69-c867-4cf3-b57f-3855fe6628f1",
+                redirectUri: "https://perezalejandrocv.github.io/excelmail/"
+            },
+            cache: {
+                cacheLocation: "localStorage"
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        const loginRequest = {
+            scopes: ["User.Read", "Mail.Read"]
+        };
+
+        const output = document.getElementById("output");
+
+        async function getToken(account) {
+            return await msalInstance.acquireTokenSilent({
+                ...loginRequest,
+                account: account
+            });
+        }
+
+        async function loadEmails(token) {
+            const response = await fetch(
+                "https://graph.microsoft.com/v1.0/me/messages?$top=10",
+                {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+            const data = await response.json();
+
+            let text = "";
+
+            data.value.forEach((mail, i) => {
+                text += `\n--- EMAIL ${i + 1} ---\n`;
+                text += `Asunto: ${mail.subject}\n`;
+                text += `De: ${mail.from?.emailAddress?.address}\n`;
+                text += `Fecha: ${mail.receivedDateTime}\n`;
+            });
+
+            output.innerText = text;
+        }
+
+        document.getElementById("login").onclick = async () => {
+            try {
+                const loginResponse = await msalInstance.loginPopup(loginRequest);
+
+                const account = loginResponse.account;
+                msalInstance.setActiveAccount(account);
+
+                const tokenResponse = await getToken(account);
+
+                output.innerText = "Cargando emails...";
+
+                await loadEmails(tokenResponse.accessToken);
+
+            } catch (err) {
+                console.error(err);
+                output.innerText = "Error: " + err.message;
+            }
+        };
+
+        document.getElementById("logout").onclick = () => {
+            msalInstance.logoutPopup();
+        };
+    </script>
+</body>
+</html>
