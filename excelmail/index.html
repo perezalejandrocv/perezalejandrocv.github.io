@@ -29,9 +29,7 @@
 
         const msalInstance = new msal.PublicClientApplication(msalConfig);
 
-        const loginRequest = {
-            scopes: ["User.Read", "Mail.Read"]
-        };
+        const loginRequest = { scopes: [ "User.Read", "Mail.Read", "Files.ReadWrite" ] };
 
         const output = document.getElementById("output");
 
