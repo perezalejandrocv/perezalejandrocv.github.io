@@ -135,7 +135,23 @@ async function createTestFile(token) {
 }
 
 
+async function findExcel(token) {
 
+    const response = await fetch(
+        "https://graph.microsoft.com/v1.0/me/drive/root:/ExcelMail.xlsx",
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    console.log("FIND EXCEL STATUS:", response.status);
+
+    const text = await response.text();
+
+    console.log("FIND EXCEL RESPONSE:", text);
+}
 
 
 
@@ -169,6 +185,8 @@ await testDrive(tokenResponse.accessToken);
 console.log("DESPUÉS DE TESTDRIVE");
 
 await createTestFile(tokenResponse.accessToken);
+
+await findExcel(tokenResponse.accessToken);
 
 
     } catch (err) {
