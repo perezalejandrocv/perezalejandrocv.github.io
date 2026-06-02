@@ -81,6 +81,31 @@ async function loadEmails(token) {
 }
 
 
+async function testDrive(token) {
+
+    console.log("ENTRANDO EN TESTDRIVE");
+
+    const response = await fetch(
+        "https://graph.microsoft.com/v1.0/me/drive",
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    console.log("DRIVE STATUS:", response.status);
+
+    const text = await response.text();
+
+    console.log("DRIVE RESPONSE:", text);
+
+    output.innerText += "\n\n--- DRIVE TEST ---\n";
+    output.innerText += "STATUS: " + response.status + "\n";
+    output.innerText += text;
+}
+
+
 document.getElementById("login").onclick = async () => {
     try {
         const loginResponse = await msalInstance.loginPopup(loginRequest);
@@ -90,13 +115,22 @@ document.getElementById("login").onclick = async () => {
 
         // Aquí añadimos los console.log para depuración
         const tokenResponse = await getToken(account);
-        console.log("ACCOUNT:", account);  // muestra la cuenta
-        console.log("TOKEN RESPONSE:", tokenResponse);  // muestra todo el objeto token
-        console.log("ACCESS TOKEN:", tokenResponse.accessToken);  // muestra solo el token
 
-        output.innerText = "Cargando emails...";
+console.log("ACCOUNT:", account);
+console.log("TOKEN RESPONSE:", tokenResponse);
+console.log("SCOPES:", tokenResponse.scopes);
+console.log("ACCESS TOKEN:", tokenResponse.accessToken);
 
-        await loadEmails(tokenResponse.accessToken);
+output.innerText = "Cargando emails...";
+
+await loadEmails(tokenResponse.accessToken);
+
+console.log("ANTES DE TESTDRIVE");
+
+await testDrive(tokenResponse.accessToken);
+
+console.log("DESPUÉS DE TESTDRIVE");
+
 
     } catch (err) {
         console.error(err);
