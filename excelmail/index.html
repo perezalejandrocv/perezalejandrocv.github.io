@@ -106,6 +106,43 @@ async function testDrive(token) {
 }
 
 
+
+async function createTestFile(token) {
+
+    console.log("CREANDO ARCHIVO...");
+
+    const response = await fetch(
+        "https://graph.microsoft.com/v1.0/me/drive/root:/test.txt:/content",
+        {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "text/plain"
+            },
+            body: "Hola desde ExcelMail"
+        }
+    );
+
+    console.log("CREATE FILE STATUS:", response.status);
+
+    const text = await response.text();
+
+    console.log("CREATE FILE RESPONSE:", text);
+
+    output.innerText += "\n\n--- CREATE FILE ---\n";
+    output.innerText += "STATUS: " + response.status + "\n";
+    output.innerText += text;
+}
+
+
+
+
+
+
+
+
+
+
 document.getElementById("login").onclick = async () => {
     try {
         const loginResponse = await msalInstance.loginPopup(loginRequest);
@@ -130,6 +167,8 @@ console.log("ANTES DE TESTDRIVE");
 await testDrive(tokenResponse.accessToken);
 
 console.log("DESPUÉS DE TESTDRIVE");
+
+await createTestFile(tokenResponse.accessToken);
 
 
     } catch (err) {
