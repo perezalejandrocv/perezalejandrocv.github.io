@@ -66,18 +66,27 @@
 
 
 
+
+
+
+
 async function getFolderName(folderId) {
     const res = await fetch(
         `https://graph.microsoft.com/v1.0/me/mailFolders/${folderId}`,
-        {
-            headers: { "Authorization": "Bearer " + window.accessToken }
-        }
+        { headers: { "Authorization": "Bearer " + window.accessToken } }
     );
 
     if (!res.ok) return folderId;
 
     const data = await res.json();
     return data.displayName;
+}
+
+// Función para limpiar HTML y dejar solo texto
+function stripHtml(html) {
+    const div = document.createElement("div");
+    div.innerHTML = html || "";
+    return div.textContent || div.innerText || "";
 }
 
 async function loadEmails() {
@@ -93,12 +102,15 @@ async function loadEmails() {
     for (const msg of data.value) {
         const folderName = await getFolderName(msg.parentFolderId);
 
+        // Solo la fecha AAAA-MM-DD
+        const shortDate = msg.receivedDateTime.split("T")[0];
+
         await addEmailToExcel({
-            date: msg.receivedDateTime,
+            date: shortDate,
             from: msg.from?.emailAddress?.name + " <" + msg.from?.emailAddress?.address + ">",
             subject: msg.subject,
             folder: folderName,
-            preview: msg.body?.content || ""
+            preview: stripHtml(msg.body?.content)
         });
     }
 
