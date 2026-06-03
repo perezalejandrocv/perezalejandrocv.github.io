@@ -64,26 +64,61 @@
             );
         }
 
-        async function loadEmails() {
-            output.innerText = "Cargando emails...";
-            const res = await fetch(
-                "https://graph.microsoft.com/v1.0/me/messages?$top=10",
-                { headers: { "Authorization": "Bearer " + accessToken } }
-            );
-            const data = await res.json();
 
-            for (const msg of data.value) {
-                await addEmailToExcel({
-                    date: msg.receivedDateTime,
-                    from: msg.from?.emailAddress?.name,
-                    subject: msg.subject,
-                    folder: msg.parentFolderId,
-                    preview: msg.bodyPreview
-                });
-            }
 
-            output.innerText += "\nEmails cargados en Excel.";
+async function getFolderName(folderId) {
+    const res = await fetch(
+        `https://graph.microsoft.com/v1.0/me/mailFolders/${folderId}`,
+        {
+            headers: { "Authorization": "Bearer " + window.accessToken }
         }
+    );
+
+    if (!res.ok) return folderId;
+
+    const data = await res.json();
+    return data.displayName;
+}
+
+async function loadEmails() {
+    output.innerText = "Cargando emails...";
+
+    const res = await fetch(
+        "https://graph.microsoft.com/v1.0/me/messages?$top=10&$select=subject,from,receivedDateTime,parentFolderId,body",
+        { headers: { "Authorization": "Bearer " + window.accessToken } }
+    );
+
+    const data = await res.json();
+
+    for (const msg of data.value) {
+        const folderName = await getFolderName(msg.parentFolderId);
+
+        await addEmailToExcel({
+            date: msg.receivedDateTime,
+            from: msg.from?.emailAddress?.name + " <" + msg.from?.emailAddress?.address + ">",
+            subject: msg.subject,
+            folder: folderName,
+            preview: msg.body?.content || ""
+        });
+    }
+
+    output.innerText += "\nEmails cargados en Excel.";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // --- Funciones de prueba que ya tenías ---
         async function testDrive(token) {
