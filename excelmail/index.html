@@ -209,6 +209,30 @@ async function testDrive(token) {
     console.log("DRIVE RESPONSE:", text);
 }
 
+async function writeCell(token) {
+
+    const response = await fetch(
+        "https://graph.microsoft.com/v1.0/me/drive/root:/EXCELMAIL.xlsx:/workbook/worksheets('Hoja1')/range(address='A1')",
+        {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                values: [["PRUEBA GRAPH"]]
+            })
+        }
+    );
+
+    console.log("WRITE CELL STATUS:", response.status);
+
+    const text = await response.text();
+
+    console.log("WRITE CELL RESPONSE:", text);
+}
+
+
 
 
 
@@ -247,6 +271,8 @@ await testWorkbook(tokenResponse.accessToken);
 await testWorksheets(tokenResponse.accessToken);
 
 await testDrive(tokenResponse.accessToken);
+
+await writeCell(tokenResponse.accessToken);
 
 
     } catch (err) {
