@@ -84,35 +84,78 @@ async function getFolderName(folderId) {
 
 // Función para limpiar HTML y dejar solo texto
 function stripHtml(html) {
+
     const div = document.createElement("div");
     div.innerHTML = html || "";
-    return div.textContent || div.innerText || "";
+
+    let text = div.textContent || div.innerText || "";
+
+    text = text.replace(/\s+/g, " ");
+    text = text.replace(/\n\s*\n/g, "\n");
+    text = text.trim();
+
+    return text;
 }
 
+
+
+async function getFullMessage(messageId) {
+
+    const res = await fetch(
+        `https://graph.microsoft.com/v1.0/me/messages/${messageId}?$select=subject,from,receivedDateTime,parentFolderId,body`,
+        {
+            headers: {
+                "Authorization": "Bearer " + window.accessToken
+            }
+        }
+    );
+
+    return await res.json();
+}
+
+
+
+
+
+
+
 async function loadEmails() {
+
     output.innerText = "Cargando emails...";
 
     const res = await fetch(
-        "https://graph.microsoft.com/v1.0/me/messages?$top=10&$select=subject,from,receivedDateTime,parentFolderId,body",
-        { headers: { "Authorization": "Bearer " + window.accessToken } }
+        "https://graph.microsoft.com/v1.0/me/messages?$top=10&$select=id",
+        {
+            headers: {
+                "Authorization": "Bearer " + window.accessToken
+            }
+        }
     );
 
     const data = await res.json();
 
-    for (const msg of data.value) {
+    for (const item of data.value) {
+
+        const msg = await getFullMessage(item.id);
+
         const folderName = await getFolderName(msg.parentFolderId);
 
-        // Solo la fecha AAAA-MM-DD
         const shortDate = msg.receivedDateTime.split("T")[0];
 
         await addEmailToExcel({
             date: shortDate,
-            from: msg.from?.emailAddress?.name + " <" + msg.from?.emailAddress?.address + ">",
-            subject: msg.subject,
+
+            from:
+                (msg.from?.emailAddress?.name || "") +
+                " <" +
+                (msg.from?.emailAddress?.address || "") +
+                ">",
+
+            subject: msg.subject || "",
+
             folder: folderName,
-            preview: stripHtml(
-    msg.body?.content || msg.bodyPreview || ""
-)
+
+            preview: stripHtml(msg.body?.content || "")
         });
     }
 
