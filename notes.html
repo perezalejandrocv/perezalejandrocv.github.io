@@ -293,67 +293,11 @@ const response = await fetch("https://formsubmit.co/8f75a7c7a58d3a8b305f5f132f29
 
 function fireworks(x, y) {
 
-  const ok = document.createElement("div");
-
-  ok.textContent = "OK";
-
-  ok.style.position = "fixed";
-  ok.style.left = x + "px";
-  ok.style.top = (y + 40) + "px";
-  ok.style.transform = "translateX(-50%)";
-  ok.style.color = "#FFFF00";
-  ok.style.fontSize = "28px";
-  ok.style.fontWeight = "bold";
-  ok.style.fontFamily = '"Trebuchet MS","Segoe UI",Arial,sans-serif';
-  ok.style.opacity = "0";
-  ok.style.transition = "opacity .5s ease";
-
-  document.body.appendChild(ok);
-
-  requestAnimationFrame(() => {
-    ok.style.opacity = "1";
-  });
-
-  setTimeout(() => {
-
-    const circle = document.createElement("div");
-
-    circle.style.position = "fixed";
-    circle.style.left = x + "px";
-    circle.style.top = (y + 54) + "px";
-    circle.style.width = "10px";
-    circle.style.height = "10px";
-    circle.style.border = "2px solid #FFFF00";
-    circle.style.borderRadius = "50%";
-    circle.style.transform = "translate(-50%,-50%) scale(0)";
-    circle.style.opacity = "1";
-    circle.style.transition =
-      "transform .8s ease, opacity .8s ease";
-
-    document.body.appendChild(circle);
-
-    requestAnimationFrame(() => {
-      circle.style.transform =
-        "translate(-50%,-50%) scale(6)";
-      circle.style.opacity = "0";
-    });
-
-    setTimeout(() => {
-      circle.remove();
-    }, 800);
-
-  }, 400);
-
-  setTimeout(() => {
-    ok.style.opacity = "0";
-  }, 1200);
-
-  setTimeout(() => {
-    ok.remove();
-  }, 1700);
-
+  alert("fireworks");
 
 }
+
+
 
 </script>
 
