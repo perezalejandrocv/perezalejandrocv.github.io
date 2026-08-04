@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -82,26 +81,8 @@ textarea {
   transform-style: preserve-3d;
 }
 
-#fireworks {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-}
 
-.particle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #FFFF00;
-  border-radius: 50%;
-  opacity: 1;
-  box-shadow: none;
-  filter: none;
-  animation: explode 8000ms cubic-bezier(.16,.84,.44,1) forwards;
-}
+
 
 .btn-enviado {
   color: #FFFF00 !important;
@@ -109,16 +90,7 @@ textarea {
 }
 
 
-@keyframes explode {
-  0% {
-    transform: translate(0,0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--x), var(--y)) scale(0.5);
-    opacity: 0;
-  }
-}
+
 
 
 
@@ -206,9 +178,6 @@ textarea {
 </form>
 
 </div>
-
-
-<div id="fireworks"></div>
 
 
 <script>
@@ -323,29 +292,67 @@ const response = await fetch("https://formsubmit.co/8f75a7c7a58d3a8b305f5f132f29
 });
 
 function fireworks(x, y) {
-  const container = document.getElementById("fireworks");
 
-  for (let i = 0; i < 100; i++) {
-    const particle = document.createElement("div");
-    particle.classList.add("particle");
+  const ok = document.createElement("div");
 
-    const angle = (Math.PI * 2 / 25) * i + (Math.random() * 0.3);
+  ok.textContent = "OK";
 
-    const maxDistance = Math.max(window.innerWidth, window.innerHeight);
-    const distance = Math.random() * maxDistance;
+  ok.style.position = "fixed";
+  ok.style.left = x + "px";
+  ok.style.top = (y + 40) + "px";
+  ok.style.transform = "translateX(-50%)";
+  ok.style.color = "#FFFF00";
+  ok.style.fontSize = "28px";
+  ok.style.fontWeight = "bold";
+  ok.style.fontFamily = '"Trebuchet MS","Segoe UI",Arial,sans-serif';
+  ok.style.opacity = "0";
+  ok.style.transition = "opacity .5s ease";
 
-    const dx = Math.cos(angle) * distance;
-    const dy = Math.sin(angle) * distance;
+  document.body.appendChild(ok);
 
-    particle.style.left = x + "px";
-    particle.style.top = y + "px";
-    particle.style.setProperty("--x", dx + "px");
-    particle.style.setProperty("--y", dy + "px");
+  requestAnimationFrame(() => {
+    ok.style.opacity = "1";
+  });
 
-    container.appendChild(particle);
+  setTimeout(() => {
 
-    setTimeout(() => particle.remove(), 8000);
-  }
+    const circle = document.createElement("div");
+
+    circle.style.position = "fixed";
+    circle.style.left = x + "px";
+    circle.style.top = (y + 54) + "px";
+    circle.style.width = "10px";
+    circle.style.height = "10px";
+    circle.style.border = "2px solid #FFFF00";
+    circle.style.borderRadius = "50%";
+    circle.style.transform = "translate(-50%,-50%) scale(0)";
+    circle.style.opacity = "1";
+    circle.style.transition =
+      "transform .8s ease, opacity .8s ease";
+
+    document.body.appendChild(circle);
+
+    requestAnimationFrame(() => {
+      circle.style.transform =
+        "translate(-50%,-50%) scale(6)";
+      circle.style.opacity = "0";
+    });
+
+    setTimeout(() => {
+      circle.remove();
+    }, 800);
+
+  }, 400);
+
+  setTimeout(() => {
+    ok.style.opacity = "0";
+  }, 1200);
+
+  setTimeout(() => {
+    ok.remove();
+  }, 1700);
+
+
 }
 
 </script>
