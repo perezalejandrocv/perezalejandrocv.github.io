@@ -267,12 +267,8 @@ const response = await fetch("https://formsubmit.co/8f75a7c7a58d3a8b305f5f132f29
     button.textContent = "ENVIADO";
     button.classList.add("btn-enviado");
 
-    const rect = button.getBoundingClientRect();
 
-    fireworks(
-      rect.left + rect.width / 2,
-      rect.top + rect.height / 2
-    );
+    showConfirmation();
 
     setTimeout(() => {
       button.textContent = originalButtonText;
@@ -291,9 +287,107 @@ const response = await fetch("https://formsubmit.co/8f75a7c7a58d3a8b305f5f132f29
   }
 });
 
-function fireworks(x, y) {
+function showConfirmation() {
 
-  alert("fireworks");
+  const anterior = button.parentElement.querySelector(".ok-anim");
+  if (anterior) anterior.remove();
+
+  const cont = document.createElement("div");
+  cont.className = "ok-anim";
+
+  cont.style.position = "relative";
+  cont.style.width = "100%";
+  cont.style.height = "130px";
+  cont.style.display = "flex";
+  cont.style.justifyContent = "center";
+  cont.style.alignItems = "flex-start";
+  cont.style.pointerEvents = "none";
+  cont.style.marginTop = "35px";
+
+
+  const ok = document.createElement("div");
+
+  ok.textContent = "OK";
+
+  ok.style.color = "#FFFF00";
+  ok.style.fontSize = "120px";
+  ok.style.fontWeight = "bold";
+  ok.style.lineHeight = "1";
+  ok.style.opacity = "0";
+  ok.style.transform = "scale(1.25)";
+  ok.style.textShadow = "0 0 1px #FFFF00";
+  ok.style.transition = "opacity .25s ease, transform .35s ease";
+
+
+  const line = document.createElement("div");
+
+  line.style.position = "absolute";
+  line.style.top = "70px";
+  line.style.width = "90vw";
+  line.style.height = "2px";
+  line.style.background = "#FFFF00";
+  line.style.opacity = "0";
+  line.style.transition = "opacity .1s ease";
+
+
+  cont.appendChild(ok);
+  cont.appendChild(line);
+
+  button.insertAdjacentElement("afterend", cont);
+
+
+  requestAnimationFrame(() => {
+
+    // aparece OK
+    ok.style.opacity = "1";
+    ok.style.transform = "scale(1)";
+
+
+    // desaparece OK
+    setTimeout(() => {
+
+      ok.style.opacity = "0";
+
+    }, 1250);
+
+
+ // primera línea
+setTimeout(() => {
+
+  line.style.opacity = "1";
+
+}, 1400);
+
+
+setTimeout(() => {
+
+  line.style.opacity = "0";
+
+}, 1530);
+
+
+// segunda línea
+setTimeout(() => {
+
+  line.style.opacity = "1";
+
+}, 1660);
+
+
+setTimeout(() => {
+
+  line.style.opacity = "0";
+
+}, 1790);
+
+
+    setTimeout(() => {
+
+      cont.remove();
+
+    }, 2200);
+
+  });
 
 }
 
