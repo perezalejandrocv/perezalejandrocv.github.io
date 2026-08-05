@@ -260,11 +260,7 @@ const response = await fetch("https://formsubmit.co/8f75a7c7a58d3a8b305f5f132f29
   body: formData
 });
 
-    if (!response.ok) {
-  console.log("Estado:", response.status);
-  console.log("Respuesta:", await response.text());
-  throw new Error("Error en envío");
-}
+    if (!response.ok) throw new Error("Error en envío");
 
     form.reset();
 
@@ -306,7 +302,8 @@ function showConfirmation() {
   cont.style.justifyContent = "center";
   cont.style.alignItems = "flex-start";
   cont.style.pointerEvents = "none";
-  cont.style.marginTop = "25px";
+  cont.style.marginTop = "37px";
+  cont.style.transform = "translateY(3px)";
   cont.style.zIndex = "9999";
 
 
@@ -319,7 +316,7 @@ function showConfirmation() {
   ok.style.fontWeight = "bold";
   ok.style.lineHeight = "1";
   ok.style.opacity = "0";
-  ok.style.transform = "scale(0.5)";
+  ok.style.transform = "scale(0.65)";
   ok.style.position = "relative";
   ok.style.zIndex = "9999";
   ok.style.textShadow = "0 0 1px #FFFF00";
@@ -345,16 +342,26 @@ function showConfirmation() {
 
   requestAnimationFrame(() => {
 
-    // aparece OK
-    // aparece OK pequeño
-ok.style.opacity = "1";
-ok.style.transform = "scale(1.5)";
+  // aparece pequeño
+  ok.style.opacity = "1";
 
-setTimeout(() => {
+  // fuerza al navegador móvil a pintar el estado inicial
+  void ok.offsetWidth;
 
-  ok.style.transform = "scale(1)";
+  setTimeout(() => {
 
-}, 700);
+    // crece
+    ok.style.transform = "scale(1.5)";
+
+  }, 120);
+
+
+  setTimeout(() => {
+
+    // vuelve suavemente al tamaño normal
+    ok.style.transform = "scale(1)";
+
+  }, 950);
 
 
     // desaparece OK
@@ -370,7 +377,7 @@ setTimeout(() => {
 
   line.style.opacity = "1";
 
-}, 1900);
+}, 2200);
 
 
 setTimeout(() => {
@@ -385,21 +392,21 @@ setTimeout(() => {
 
   line.style.opacity = "1";
 
-}, 2160);
+}, 2460);
 
 
 setTimeout(() => {
 
   line.style.opacity = "0";
 
-}, 2290);
+}, 2590);
 
 
     setTimeout(() => {
 
       cont.remove();
 
-    }, 2500);
+    }, 2800);
 
   });
 
