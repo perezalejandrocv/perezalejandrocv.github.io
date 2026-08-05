@@ -260,7 +260,11 @@ const response = await fetch("https://formsubmit.co/8f75a7c7a58d3a8b305f5f132f29
   body: formData
 });
 
-    if (!response.ok) throw new Error("Error en envío");
+    if (!response.ok) {
+  console.log("Estado:", response.status);
+  console.log("Respuesta:", await response.text());
+  throw new Error("Error en envío");
+}
 
     form.reset();
 
