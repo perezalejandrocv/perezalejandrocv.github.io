@@ -302,7 +302,8 @@ function showConfirmation() {
   cont.style.justifyContent = "center";
   cont.style.alignItems = "flex-start";
   cont.style.pointerEvents = "none";
-  cont.style.marginTop = "35px";
+  cont.style.marginTop = "25px";
+  cont.style.zIndex = "9999";
 
 
   const ok = document.createElement("div");
@@ -314,7 +315,9 @@ function showConfirmation() {
   ok.style.fontWeight = "bold";
   ok.style.lineHeight = "1";
   ok.style.opacity = "0";
-  ok.style.transform = "scale(1.8)";
+  ok.style.transform = "scale(0.5)";
+  ok.style.position = "relative";
+  ok.style.zIndex = "9999";
   ok.style.textShadow = "0 0 1px #FFFF00";
   ok.style.transition = "opacity .25s ease, transform 1s ease";
 
@@ -339,8 +342,15 @@ function showConfirmation() {
   requestAnimationFrame(() => {
 
     // aparece OK
-    ok.style.opacity = "1";
-    ok.style.transform = "scale(1)";
+    // aparece OK pequeño
+ok.style.opacity = "1";
+ok.style.transform = "scale(1.5)";
+
+setTimeout(() => {
+
+  ok.style.transform = "scale(1)";
+
+}, 700);
 
 
     // desaparece OK
@@ -348,22 +358,22 @@ function showConfirmation() {
 
       ok.style.opacity = "0";
 
-    }, 1250);
+    }, 1750);
 
 
- // primera línea
+// primera línea
 setTimeout(() => {
 
   line.style.opacity = "1";
 
-}, 1400);
+}, 1900);
 
 
 setTimeout(() => {
 
   line.style.opacity = "0";
 
-}, 1530);
+}, 2030);
 
 
 // segunda línea
@@ -371,21 +381,21 @@ setTimeout(() => {
 
   line.style.opacity = "1";
 
-}, 1660);
+}, 2160);
 
 
 setTimeout(() => {
 
   line.style.opacity = "0";
 
-}, 1790);
+}, 2290);
 
 
     setTimeout(() => {
 
       cont.remove();
 
-    }, 2200);
+    }, 2500);
 
   });
 
