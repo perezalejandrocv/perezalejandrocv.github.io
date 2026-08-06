@@ -283,7 +283,7 @@ if (!response.ok) {
       button.classList.remove("btn-enviado");
       button.disabled = false;
       isSending = false;
-    }, 2000);
+    }, 2500);
 
   } catch (error) {
     console.error("ERROR:", error);
@@ -331,19 +331,28 @@ function showConfirmation() {
   ok.style.transition = "opacity .25s ease, transform 1s ease";
 
 
-  const line = document.createElement("div");
+  const line1 = document.createElement("div");
+  const line2 = document.createElement("div");
+
+  [line1, line2].forEach(line => {
 
   line.style.position = "absolute";
-  line.style.top = "70px";
-  line.style.width = "90vw";
-  line.style.height = "2px";
+  line.style.left = "50%";
+  line.style.transform = "translateX(-50%)";
+  line.style.width = "75vw";
+  line.style.height = "3px";
   line.style.background = "#FFFF00";
   line.style.opacity = "0";
-  line.style.transition = "opacity .1s ease";
+  line.style.transition = "opacity .15s ease";
 
+});
+
+  line1.style.top = "75px";
+  line2.style.top = "115px";
 
   cont.appendChild(ok);
-  cont.appendChild(line);
+  cont.appendChild(line1);
+  cont.appendChild(line2);
 
   button.insertAdjacentElement("afterend", cont);
 
@@ -372,49 +381,51 @@ function showConfirmation() {
   }, 950);
 
 
-    // desaparece OK
-    setTimeout(() => {
-
-      ok.style.opacity = "0";
-
-    }, 2250);
-
-
-// primera línea
+// desaparece OK
 setTimeout(() => {
 
-  line.style.opacity = "1";
+  ok.style.opacity = "0";
 
-}, 2200);
+}, 2500);
 
 
+// línea 1 aparece
 setTimeout(() => {
 
-  line.style.opacity = "0";
+  line1.style.opacity = "1";
 
-}, 2350);
+}, 2700);
 
 
-// segunda línea
+// línea 1 desaparece
 setTimeout(() => {
 
-  line.style.opacity = "1";
+  line1.style.opacity = "0";
 
-}, 2460);
+}, 2900);
 
 
+// línea 2 aparece rápidamente después
 setTimeout(() => {
 
-  line.style.opacity = "0";
+  line2.style.opacity = "1";
 
-}, 2610);
+}, 3050);
+
+
+// línea 2 desaparece
+setTimeout(() => {
+
+  line2.style.opacity = "0";
+
+}, 3250);
 
 
     setTimeout(() => {
 
       cont.remove();
 
-    }, 2800);
+    }, 3500);
 
   });
 
