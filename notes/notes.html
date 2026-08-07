@@ -329,14 +329,12 @@ SEND
 
 <div class="system-line" id="line"></div>
 
-
+<script src="system.js"></script>
 
 <script>
 
 
 const form=document.getElementById("form");
-
-const line=document.getElementById("line");
 
 const textarea=form.querySelector("textarea");
 
@@ -444,17 +442,7 @@ throw new Error("Error en envío");
 
 
 
-showSystemLine();
-
-
-
-setTimeout(()=>{
-
-
-window.location.href="response.html";
-
-
-},3000);
+systemTransition("response.html");
 
 
 
@@ -471,38 +459,6 @@ alert("SYSTEM ERROR");
 
 
 });
-
-
-
-
-
-function showSystemLine(){
-
-
-const line=document.getElementById("line");
-
-
-document.querySelector(".system")
-.style.opacity="0";
-
-
-
-setTimeout(()=>{
-
-
-line.style.opacity="1";
-
-
-line.style.animation=
-"blink .60s infinite";
-
-
-
-},500);
-
-
-
-}
 
 
 

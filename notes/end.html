@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SYSTEM END</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+height:100vh;
+
+background:#000;
+
+color:#00ff66;
+
+font-family:"Courier New", monospace;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+
+}
+
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+repeating-linear-gradient(
+transparent,
+transparent 3px,
+rgba(0,255,100,.05) 4px
+);
+
+pointer-events:none;
+
+}
+
+
+/* contenido */
+
+.system{
+
+text-align:center;
+
+}
+
+
+.message{
+
+font-size:22px;
+
+letter-spacing:3px;
+
+opacity:0;
+
+text-shadow:
+0 0 10px #00ff66,
+0 0 20px #00ff66;
+
+transition:opacity .5s ease;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="system">
+
+<div class="message" id="message">
+FIN DE LA TRANSMISIÓN
+</div>
+
+</div>
+
+
+
+<script>
+
+
+const message=document.getElementById("message");
+
+
+setTimeout(()=>{
+
+message.style.opacity="1";
+
+},700);
+
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -236,7 +236,7 @@ opacity:.2;
 <body>
 
 
-<div class="system" id="system">
+<div class="system">
 
     <div class="core">
         <div class="n" id="enter">
@@ -254,7 +254,6 @@ opacity:.2;
 
 </div>
 
-
 <div class="system-line" id="line"></div>
 
 
@@ -268,37 +267,20 @@ const line=document.getElementById("line");
 
 
 
-enter.addEventListener("click",()=>{
+enter.addEventListener("click", () => {
 
-
-    system.classList.add("fade");
-
-
-    setTimeout(()=>{
-
-        line.style.opacity="1";
-
-        line.style.animation =
-        "blink .60s infinite";
-
-
-    },1000);
-
-
-
-    setTimeout(()=>{
-
-        window.location.href="notes.html";
-
-    },2500);
-
+    systemTransition("notes.html");
 
 });
 
 
 
-</script>
 
+
+</script>
+<div class="system-line" id="line"></div>
+
+<script src="system.js"></script>
 
 </body>
 </html>
