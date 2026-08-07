@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOTES SYSTEM</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+    height:100vh;
+    background:#000;
+    color:#00ff66;
+    font-family:"Courier New", monospace;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+}
+
+
+/* ligera pantalla CRT */
+
+body::after{
+
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+        transparent,
+        transparent 3px,
+        rgba(0,255,100,.06) 4px
+    );
+
+    pointer-events:none;
+
+}
+
+
+
+/* contenedor */
+
+.system{
+
+    text-align:center;
+
+}
+
+
+
+/* círculo */
+
+.core{
+
+    width:210px;
+    height:210px;
+
+    border-radius:50%;
+
+    border:3px solid #00ff66;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin:auto;
+
+    box-shadow:
+    0 0 10px #00ff66,
+    0 0 30px #00ff66,
+    inset 0 0 30px #00ff66;
+
+    animation:pulse 3s infinite;
+
+}
+
+
+
+/* letra N */
+
+.n{
+
+    font-size:120px;
+
+    font-weight:bold;
+
+    color:#00ff66;
+
+    text-shadow:
+    0 0 10px #00ff66,
+    0 0 30px #00ff66;
+
+
+    cursor:pointer;
+
+
+    animation:
+    rotate 8s linear infinite;
+
+}
+
+
+
+/* textos */
+
+.title{
+
+    margin-top:45px;
+
+    font-size:22px;
+
+    letter-spacing:5px;
+
+}
+
+
+.question{
+
+    margin-top:35px;
+
+    font-size:18px;
+
+    letter-spacing:3px;
+
+}
+
+
+
+/* línea sistema */
+
+.system-line{
+
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:70%;
+    height:3px;
+
+    background:#00ff66;
+
+    opacity:0;
+
+    box-shadow:
+    0 0 10px #00ff66,
+    0 0 25px #00ff66;
+
+}
+
+
+
+/* animaciones */
+
+@keyframes rotate{
+
+from{
+    transform:rotateY(0deg);
+}
+
+to{
+    transform:rotateY(360deg);
+}
+
+}
+
+
+
+@keyframes pulse{
+
+
+0%,100%{
+
+    box-shadow:
+    0 0 10px #00ff66,
+    0 0 30px #00ff66,
+    inset 0 0 30px #00ff66;
+
+}
+
+
+50%{
+
+    box-shadow:
+    0 0 20px #00ff66,
+    0 0 60px #00ff66,
+    inset 0 0 50px #00ff66;
+
+}
+
+
+}
+
+
+
+@keyframes blink{
+
+50%{
+opacity:.2;
+}
+
+}
+
+
+
+.fade{
+
+    opacity:0;
+
+    transition:opacity 1s;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="system" id="system">
+
+    <div class="core">
+        <div class="n" id="enter">
+            N
+        </div>
+    </div>
+
+    <div class="title">
+        BIENVENIDO
+    </div>
+
+    <div class="question">
+        ¿QUIERES ENVIAR UN MENSAJE?
+    </div>
+
+</div>
+
+
+<div class="system-line" id="line"></div>
+
+
+
+<script>
+
+
+const enter=document.getElementById("enter");
+const system=document.getElementById("system");
+const line=document.getElementById("line");
+
+
+
+enter.addEventListener("click",()=>{
+
+
+    system.classList.add("fade");
+
+
+    setTimeout(()=>{
+
+        line.style.opacity="1";
+
+        line.style.animation =
+        "blink .60s infinite";
+
+
+    },1000);
+
+
+
+    setTimeout(()=>{
+
+        window.location.href="notes.html";
+
+    },2500);
+
+
+});
+
+
+
+</script>
+
+
+</body>
+</html>
