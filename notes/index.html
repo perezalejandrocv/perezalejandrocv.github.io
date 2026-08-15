@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,8 +19,11 @@ body{
 
     margin:0;
     height:100vh;
+
     background:#000;
+
     color:#00ff66;
+
     font-family:"Courier New", monospace;
 
     display:flex;
@@ -35,7 +40,9 @@ body{
 body::after{
 
     content:"";
+
     position:fixed;
+
     inset:0;
 
     background:
@@ -50,15 +57,17 @@ body::after{
 }
 
 
-
 /* contenedor */
 
 .system{
 
     text-align:center;
 
-}
+    /* subir todo el contenido */
 
+    transform:translateY(-40px);
+
+}
 
 
 /* círculo */
@@ -73,6 +82,7 @@ body::after{
     border:3px solid #00ff66;
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
@@ -88,12 +98,11 @@ body::after{
 }
 
 
-
 /* letra N */
 
 .n{
 
-    font-size:120px;
+    font-size:144px; /* 120px + 20% */
 
     font-weight:bold;
 
@@ -103,15 +112,12 @@ body::after{
     0 0 10px #00ff66,
     0 0 30px #00ff66;
 
-
     cursor:pointer;
-
 
     animation:
     rotate 8s linear infinite;
 
 }
-
 
 
 /* textos */
@@ -138,6 +144,42 @@ body::after{
 }
 
 
+/* cursor único */
+
+.terminal-cursor{
+
+    display:inline-block;
+
+    width:.65em;
+    height:1em;
+
+    margin-left:3px;
+
+    background:#00ff66;
+
+    vertical-align:-0.08em;
+
+    box-shadow:
+    0 0 6px #00ff66,
+    0 0 12px #00ff66;
+
+    animation:terminalCursorBlink 0.8s steps(1) infinite;
+
+}
+
+
+@keyframes terminalCursorBlink{
+
+    0%,49%{
+        opacity:1;
+    }
+
+    50%,100%{
+        opacity:0;
+    }
+
+}
+
 
 /* línea sistema */
 
@@ -161,71 +203,50 @@ body::after{
     0 0 10px #00ff66,
     0 0 25px #00ff66;
 
-}
+    transition:
+    width 250ms ease-out,
+    height 250ms ease-out;
 
+}
 
 
 /* animaciones */
 
 @keyframes rotate{
 
-from{
-    transform:rotateY(0deg);
-}
+    from{
+        transform:rotateY(0deg);
+    }
 
-to{
-    transform:rotateY(360deg);
-}
+    to{
+        transform:rotateY(360deg);
+    }
 
 }
-
 
 
 @keyframes pulse{
 
+    0%,100%{
 
-0%,100%{
+        box-shadow:
+        0 0 10px #00ff66,
+        0 0 30px #00ff66,
+        inset 0 0 30px #00ff66;
 
-    box-shadow:
-    0 0 10px #00ff66,
-    0 0 30px #00ff66,
-    inset 0 0 30px #00ff66;
-
-}
+    }
 
 
-50%{
+    50%{
 
-    box-shadow:
-    0 0 20px #00ff66,
-    0 0 60px #00ff66,
-    inset 0 0 50px #00ff66;
+        box-shadow:
+        0 0 20px #00ff66,
+        0 0 60px #00ff66,
+        inset 0 0 50px #00ff66;
 
-}
-
+    }
 
 }
-
-
-
-@keyframes blink{
-
-50%{
-opacity:.2;
-}
-
-}
-
-
-
-.fade{
-
-    opacity:0;
-
-    transition:opacity 1s;
-
-}
-
 
 
 </style>
@@ -239,33 +260,123 @@ opacity:.2;
 <div class="system">
 
     <div class="core">
+
         <div class="n" id="enter">
             N
         </div>
+
     </div>
 
-    <div class="title">
-        BIENVENIDO
-    </div>
 
-    <div class="question">
-        ¿QUIERES ENVIAR UN MENSAJE?
-    </div>
+    <div class="title" id="title"></div>
+
+
+    <div class="question" id="question"></div>
 
 </div>
+
 
 <div class="system-line" id="line"></div>
 
 
+<script src="system.js"></script>
 
 <script>
 
+const enter = document.getElementById("enter");
 
-const enter=document.getElementById("enter");
-const system=document.getElementById("system");
-const line=document.getElementById("line");
+const title = document.getElementById("title");
+
+const question = document.getElementById("question");
 
 
+/*
+    CURSOR ÚNICO
+
+    El mismo cursor acompaña primero
+    a BIENVENIDO y después a la pregunta.
+*/
+
+const cursor = document.createElement("span");
+
+cursor.className = "terminal-cursor";
+
+
+function typeText(element, text, speed, callback){
+
+    let index = 0;
+
+    element.innerHTML = "";
+
+    element.appendChild(cursor);
+
+
+    function writeCharacter(){
+
+        if(index < text.length){
+
+            /*
+                Quitamos temporalmente el cursor,
+                escribimos el carácter y lo volvemos
+                a colocar al final.
+            */
+
+            cursor.remove();
+
+            element.textContent += text[index];
+
+            element.appendChild(cursor);
+
+            index++;
+
+            setTimeout(writeCharacter, speed);
+
+        }else{
+
+            if(callback){
+                callback();
+            }
+
+        }
+
+    }
+
+
+    writeCharacter();
+
+}
+
+
+/* primero BIENVENIDO */
+
+typeText(
+    title,
+    "BIENVENIDO",
+    50,
+    () => {
+
+        setTimeout(() => {
+
+            /*
+                El MISMO cursor pasa
+                a la segunda frase.
+            */
+
+            cursor.remove();
+
+            typeText(
+                question,
+                "¿QUIERES ENVIAR UN MENSAJE?",
+                50
+            );
+
+        }, 300);
+
+    }
+);
+
+
+/* entrar */
 
 enter.addEventListener("click", () => {
 
@@ -273,14 +384,9 @@ enter.addEventListener("click", () => {
 
 });
 
-
-
-
-
 </script>
-<div class="system-line" id="line"></div>
 
-<script src="system.js"></script>
 
 </body>
+
 </html>

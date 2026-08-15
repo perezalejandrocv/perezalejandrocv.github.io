@@ -73,7 +73,7 @@ transition:opacity .5s ease;
 
 .message{
 
-font-size:22px;
+font-size:18px;
 
 letter-spacing:3px;
 
@@ -154,29 +154,29 @@ opacity:.25;
 
 .system-line{
 
-position:fixed;
+    position:fixed;
 
-left:50%;
+    left:50%;
+    top:50%;
 
-top:50%;
+    transform:translate(-50%,-50%);
 
-transform:translate(-50%,-50%);
+    width:70%;
+    height:3px;
 
-width:70%;
+    background:#00ff66;
 
-height:3px;
+    opacity:0;
 
-background:#00ff66;
+    box-shadow:
+    0 0 10px #00ff66,
+    0 0 25px #00ff66;
 
-opacity:0;
-
-box-shadow:
-
-0 0 10px #00ff66,
-0 0 25px #00ff66;
+    transition:
+    width 250ms ease-out,
+    height 250ms ease-out;
 
 }
-
 
 
 </style>
@@ -190,12 +190,7 @@ box-shadow:
 <div class="system">
 
 
-<div class="message">
-
-¿DESEAS ENVIAR<br>
-OTRO MENSAJE?
-
-</div>
+<div class="message" id="message"></div>
 
 
 
@@ -232,30 +227,67 @@ CERRAR SESIÓN
 
 <script>
 
+const message = document.getElementById("message");
 
 const yes = document.getElementById("yes");
 
 const close = document.getElementById("close");
 
 
+function typeResponse(){
+
+    const text = "¿DESEAS ENVIAR\nOTRO MENSAJE?";
+
+    let index = 0;
+
+    function writeCharacter(){
+
+        if(index < text.length){
+
+            const char = text[index];
+
+            if(char === "\n"){
+
+                message.innerHTML += "<br>";
+
+            }else{
+
+                message.innerHTML += char;
+
+            }
+
+            index++;
+
+            setTimeout(writeCharacter, 60);
+
+        }
+
+    }
+
+    writeCharacter();
+
+}
+
+
+
+typeResponse();
+
 
 yes.addEventListener("click",()=>{
 
-systemTransition("notes.html");
+    systemTransition("notes.html");
 
 });
-
 
 
 close.addEventListener("click",()=>{
 
-systemTransition("end.html");
+    systemTransition("end.html");
 
 });
 
-
-
 </script>
+
 
 
 </body>

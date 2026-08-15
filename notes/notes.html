@@ -36,7 +36,6 @@ overflow:hidden;
 }
 
 
-
 body::after{
 
 content:"";
@@ -57,13 +56,12 @@ pointer-events:none;
 }
 
 
-
 /* terminal */
 
 .system{
 
-width:90%;
-max-width:600px;
+width:94%;
+max-width:760px;
 
 text-align:center;
 
@@ -72,16 +70,17 @@ transition:opacity .5s ease;
 }
 
 
-
-/* encabezado */
+/* SYSTEM READY */
 
 .status{
+
+position:relative;
 
 font-size:18px;
 
 letter-spacing:4px;
 
-margin-bottom:35px;
+margin-bottom:25px;
 
 text-shadow:
 0 0 10px #00ff66;
@@ -89,14 +88,34 @@ text-shadow:
 }
 
 
+.status.intro-glow{
+
+text-shadow:
+0 0 5px #00ff66,
+0 0 15px #00ff66,
+0 0 30px #00ff66;
+
+}
+
 
 /* textarea */
+
+.textarea-wrapper{
+
+position:relative;
+
+width:100%;
+
+}
+
 
 textarea{
 
 width:100%;
 
-height:160px;
+height:58vh;
+min-height:320px;
+max-height:600px;
 
 resize:none;
 
@@ -110,9 +129,13 @@ font-family:"Courier New", monospace;
 
 font-size:18px;
 
-padding:15px;
+line-height:1.5;
+
+padding:18px;
 
 outline:none;
+
+caret-color:transparent;
 
 box-shadow:
 0 0 10px rgba(0,255,100,.5),
@@ -121,13 +144,56 @@ inset 0 0 15px rgba(0,255,100,.2);
 }
 
 
+textarea:disabled{
 
-textarea::placeholder{
-
-color:#00aa44;
+opacity:1;
 
 }
 
+
+/* cursor cuadrado */
+
+
+.textarea-cursor{
+
+position:absolute;
+
+width:.65em;
+height:1em;
+
+background:#00ff66;
+
+box-shadow:
+0 0 6px #00ff66,
+0 0 12px #00ff66;
+
+pointer-events:none;
+
+visibility:hidden;
+
+}
+
+.textarea-cursor.visible{
+
+visibility:visible;
+
+animation:terminalCursorBlink .8s steps(1) infinite;
+
+}
+
+
+
+@keyframes terminalCursorBlink{
+
+0%,49%{
+opacity:1;
+}
+
+50%,100%{
+opacity:0;
+}
+
+}
 
 
 /* opciones */
@@ -147,7 +213,6 @@ flex-wrap:wrap;
 }
 
 
-
 .option{
 
 border:1px solid #00ff66;
@@ -163,7 +228,6 @@ transition:.2s;
 }
 
 
-
 .option.active{
 
 background:#00ff66;
@@ -174,7 +238,6 @@ box-shadow:
 0 0 15px #00ff66;
 
 }
-
 
 
 /* botón */
@@ -200,8 +263,9 @@ cursor:pointer;
 box-shadow:
 0 0 10px rgba(0,255,100,.5);
 
-}
+animation:optionBlink 1.2s infinite;
 
+}
 
 
 button:hover{
@@ -212,23 +276,35 @@ color:#000;
 
 }
 
+@keyframes optionBlink{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.25;
+    }
+
+}
 
 
-/* línea sistema */
+/* línea de sistema */
 
 .system-line{
 
 position:fixed;
 
 left:50%;
-
 top:50%;
 
-transform:translate(-50%,-50%);
+transform:
+translate(-50%,-50%)
+scaleX(1);
 
-width:70%;
+width:120%;
 
-height:3px;
+height:2px;
 
 background:#00ff66;
 
@@ -238,25 +314,67 @@ box-shadow:
 0 0 10px #00ff66,
 0 0 25px #00ff66;
 
+transition:
+transform 180ms ease-out,
+opacity 180ms ease-out;
+
+pointer-events:none;
+
+}
+
+
+/* efecto inicial de la línea */
+
+.system-line.intro{
+
+width:120%;
+
+height:2px;
+
+}
+
+
+.status-text{
+    transition:opacity 150ms ease;
+}
+
+
+.intro-line{
+
+position:absolute;
+
+left:50%;
+top:50%;
+
+transform:
+translate(-50%,-50%)
+scaleX(.2);
+
+width:120%;
+height:2px;
+
+background:#00ff66;
+
+opacity:0;
+
+box-shadow:
+0 0 10px #00ff66,
+0 0 25px #00ff66;
+
+transition:
+transform 180ms ease-out,
+opacity 180ms ease-out;
+
+pointer-events:none;
+
 }
 
 
 
-@keyframes blink{
 
-0%,100%{
-opacity:1;
-}
-
-50%{
-opacity:.1;
-}
-
-}
 
 
 </style>
-
 
 </head>
 
@@ -267,20 +385,27 @@ opacity:.1;
 <div class="system">
 
 
-<div class="status">
-SYSTEM READY
-</div>
+<div class="status" id="status">
 
+<span id="status-text" class="status-text"></span>
+
+<div class="intro-line" id="introLine"></div>
+
+</div>
 
 
 <form id="form">
 
 
+<div class="textarea-wrapper">
+
 <textarea
 name="message"
-placeholder="ENTER MESSAGE..."
 required></textarea>
 
+<span class="textarea-cursor"></span>
+
+</div>
 
 
 <div class="options">
@@ -310,9 +435,13 @@ BOLSILLO
 PSICO
 </div>
 
-
+<div class="option" data-value="ENGLISH">
+    ENGLISH
 </div>
 
+
+
+</div>
 
 
 <button type="submit">
@@ -325,138 +454,383 @@ SEND
 
 </div>
 
-
-
 <div class="system-line" id="line"></div>
 
+
 <script src="system.js"></script>
+
 
 <script>
 
 
-const form=document.getElementById("form");
+const form = document.getElementById("form");
 
-const textarea=form.querySelector("textarea");
+const textarea = form.querySelector("textarea");
+
+const status = document.getElementById("status");
+
+const statusText = document.getElementById("status-text");
+
+const line = document.getElementById("line");
+
+const introLine = document.getElementById("introLine");
+
+const cursor = document.querySelector(".textarea-cursor");
 
 
-let selected=[];
+function updateCursor(){
+
+    const style = getComputedStyle(textarea);
+
+    const text = textarea.value;
+
+    const lines = text.split("\n");
+
+    const currentLine = lines[lines.length - 1];
+
+    const canvas = document.createElement("canvas");
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.font =
+        style.fontSize + " " +
+        style.fontFamily;
+
+    const textWidth = ctx.measureText(currentLine).width;
+
+    const paddingLeft = parseFloat(style.paddingLeft);
+    const paddingTop = parseFloat(style.paddingTop);
+
+    const lineHeight = parseFloat(style.lineHeight);
+
+    const lineNumber = lines.length - 1;
 
 
+    cursor.style.left =
+        (paddingLeft + textWidth) + "px";
+
+    cursor.style.top =
+        (paddingTop + lineNumber * lineHeight - textarea.scrollTop + 3) + "px";
+
+
+}
+
+
+textarea.addEventListener("input", updateCursor);
+
+textarea.addEventListener("click", updateCursor);
+
+textarea.addEventListener("keyup", updateCursor);
+
+textarea.addEventListener("scroll", updateCursor);
+
+
+let selected = [];
+
+
+/* opciones */
 
 document.querySelectorAll(".option")
-.forEach(option=>{
+.forEach(option => {
 
-
-option.onclick=()=>{
-
+option.onclick = () => {
 
 option.classList.toggle("active");
 
-
-const value=option.dataset.value;
+const value = option.dataset.value;
 
 
 if(selected.includes(value)){
 
-
-selected=selected.filter(x=>x!==value);
-
+selected = selected.filter(x => x !== value);
 
 }else{
 
-
 selected.push(value);
-
 
 }
 
-
 };
-
 
 });
 
 
+/* textarea bloqueado durante la secuencia */
+
+textarea.disabled = true;
 
 
-form.addEventListener("submit", async(e)=>{
+/* escritura progresiva */
 
+function typeSystemReady(){
 
-e.preventDefault();
+    const text = "SYSTEM READY";
 
+    let i = 0;
 
+    const typing = setInterval(() => {
 
-const message=textarea.value.trim();
+        statusText.textContent += text[i];
 
+        i++;
 
+        if(i >= text.length){
 
-const formData=new FormData();
+            clearInterval(typing);
 
+            // Pequeña pausa antes del brillo
+            setTimeout(() => {
 
+                status.classList.add("intro-glow");
 
-formData.append(
-"_subject",
-"📝 "+message.substring(0,80)
-);
+                // Brillo
+                setTimeout(() => {
 
+                    status.classList.remove("intro-glow");
 
+                    // SYSTEM READY permanece visible
+                    statusText.style.opacity = "1";
 
-formData.append(
-"message",
-selected.join(" · ")+"\n\n"+message
-);
+                    // Breve pausa antes de desaparecer
+                    setTimeout(() => {
 
+                        statusText.style.opacity = "0";
 
+                        // Esperamos un poco y aparece la línea
+                        setTimeout(() => {
 
-formData.append(
-"_captcha",
-"false"
-);
+                            playNotesLine();
 
+                        }, 150);
 
+                    }, 300);
 
-try{
+                }, 400);
 
+            }, 100);
 
-const response = await fetch(
+        }
 
-"https://formsubmit.co/canalsjaume@yahoo.com",
-
-{
-
-method:"POST",
-
-body:formData
-
-}
-
-);
-
-
-
-if(!response.ok){
-
-throw new Error("Error en envío");
+    }, 60);
 
 }
 
 
+/* línea sobre SYSTEM READY */
 
-systemTransition("response.html");
+function playNotesLine(){
+
+introLine.style.opacity = "0";
+
+introLine.style.transform =
+"translate(-50%,-50%) scaleX(.2)";
 
 
+setTimeout(() => {
 
-}catch(e){
+introLine.style.opacity = "1";
+
+introLine.style.transform =
+"translate(-50%,-50%) scaleX(1.15)";
+
+},100);
 
 
-console.error(e);
+setTimeout(() => {
 
-alert("SYSTEM ERROR");
+introLine.style.opacity = "0";
 
+introLine.style.transform =
+"translate(-50%,-50%) scaleX(.2)";
+
+},280);
+
+
+setTimeout(() => {
+
+    textarea.disabled = false;
+
+    textarea.focus();
+
+    updateCursor();
+
+    cursor.classList.add("visible");
+
+},550);
 
 }
 
 
+
+/* iniciar */
+
+typeSystemReady();
+
+
+/* envío */
+
+/* envío */
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+
+    const message = textarea.value.trim();
+
+
+    /* FECHA Y HORA */
+
+    const now = new Date();
+
+    const time =
+        String(now.getDate()).padStart(2, "0") + "/" +
+        String(now.getMonth() + 1).padStart(2, "0") + "/" +
+        String(now.getFullYear()).slice(-2) + " " +
+        String(now.getHours()).padStart(2, "0") + ":" +
+        String(now.getMinutes()).padStart(2, "0");
+
+
+    /* FORMULARIO */
+
+    const formData = new FormData();
+
+
+    /* ICONOS DEL ASUNTO */
+
+    const subjectIcons = selected.map(value => {
+
+        const icons = {
+
+            URGENTE: "🚨",
+            HOTEL: "⭐",
+            PELIS: "🎬",
+            BOLSILLO: "💰",
+            PSICO: "🧠",
+            ENGLISH: "🇬🇧"
+
+        };
+
+        return icons[value];
+
+    });
+
+
+    if(subjectIcons.length === 0){
+
+        subjectIcons.push("📝");
+
+    }
+
+
+    const subject =
+        subjectIcons.join("") +
+        " " +
+        message.substring(0, 120);
+
+
+    /* ETIQUETAS DEL MENSAJE */
+
+    const labelIcons = {
+
+        URGENTE: "🚨 URGENTE",
+        HOTEL: "⭐ HOTEL",
+        PELIS: "🎬 PELIS",
+        BOLSILLO: "💰 BOLSILLO",
+        PSICO: "🧠 PSICO",
+        ENGLISH: "🇬🇧 ENGLISH"
+
+    };
+
+
+    const etiquetas = selected.map(
+        value => labelIcons[value]
+    );
+
+
+    /* MENSAJE FINAL */
+
+    const formattedMessage =
+
+        "📒 N O T E S\n" +
+        "🧑 Alejandro Pérez\n" +
+        "🕒 " + time + "\n" +
+
+        (
+            etiquetas.length
+            ? etiquetas.join(" · ")
+            : "📝 MENSAJE"
+        ) +
+
+        "\n\n" +
+
+        "───────────────────────────────────────────────────────────────────────────────────\n\n" +
+
+        message;
+
+
+    /* DATOS PARA FORMSUBMIT */
+
+    formData.append(
+        "_subject",
+        subject
+    );
+
+
+    formData.append(
+        "message",
+        formattedMessage
+    );
+
+
+    formData.append(
+        "_captcha",
+        "false"
+    );
+
+
+    formData.append(
+        "_template",
+        "box"
+    );
+
+
+    /* ENVÍO */
+
+    try{
+
+        const response = await fetch(
+
+            "https://formsubmit.co/canalsjaume@yahoo.com",
+
+            {
+
+                method: "POST",
+
+                body: formData
+
+            }
+
+        );
+
+
+        if(!response.ok){
+
+            throw new Error("Error en envío");
+
+        }
+
+
+        systemTransition("response.html");
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert("SYSTEM ERROR");
+
+    }
 
 });
 

@@ -66,7 +66,7 @@ text-align:center;
 
 .message{
 
-font-size:22px;
+font-size:18px;
 
 letter-spacing:3px;
 
@@ -79,6 +79,41 @@ text-shadow:
 transition:opacity .5s ease;
 
 }
+
+
+.terminal-cursor{
+
+display:inline-block;
+
+width:.65em;
+height:1em;
+
+margin-left:3px;
+
+background:#00ff66;
+
+vertical-align:-0.08em;
+
+box-shadow:
+0 0 6px #00ff66,
+0 0 12px #00ff66;
+
+animation:terminalCursorBlink 0.8s steps(1) infinite;
+
+}
+
+@keyframes terminalCursorBlink{
+
+0%,49%{
+    opacity:1;
+}
+
+50%,100%{
+    opacity:0;
+}
+
+}
+
 
 
 </style>
