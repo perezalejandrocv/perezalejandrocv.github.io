@@ -63,9 +63,17 @@ pointer-events:none;
 width:94%;
 max-width:760px;
 
+height:100vh;
+
+display:flex;
+flex-direction:column;
+
 text-align:center;
 
 transition:opacity .5s ease;
+
+padding-top:70px;
+padding-bottom:15px;
 
 }
 
@@ -113,15 +121,15 @@ textarea{
 
 width:100%;
 
-height:58vh;
-min-height:320px;
-max-height:600px;
+height:62vh;
+min-height:0;
+max-height:none;
 
 resize:none;
 
 background:#000;
 
-border:1px solid #00ff66;
+border:none;
 
 color:#00ff66;
 
@@ -138,8 +146,7 @@ outline:none;
 caret-color:transparent;
 
 box-shadow:
-0 0 10px rgba(0,255,100,.5),
-inset 0 0 15px rgba(0,255,100,.2);
+inset 0 0 15px rgba(0,255,100,.12);
 
 }
 
@@ -152,6 +159,78 @@ opacity:1;
 
 
 /* cursor cuadrado */
+
+
+/* líneas creadas al pulsar ENTER */
+
+.text-line-effects{
+
+position:absolute;
+
+left:0;
+top:0;
+
+width:100%;
+height:100%;
+
+pointer-events:none;
+
+overflow:hidden;
+
+}
+
+
+.text-line-effect{
+
+position:absolute;
+
+left:15%;
+
+width:70%;
+
+height:2px;
+
+background:#00ff66;
+
+opacity:0;
+
+box-shadow:
+0 0 6px #00ff66,
+0 0 15px #00ff66;
+
+transform:scaleX(.2);
+
+transform-origin:center;
+
+transition:
+transform 180ms ease-out,
+opacity 180ms ease-out;
+
+}
+
+
+.text-line-effect.show{
+
+opacity:1;
+
+transform:scaleX(1);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .textarea-cursor{
@@ -200,7 +279,7 @@ opacity:0;
 
 .options{
 
-margin-top:25px;
+margin-top:auto;
 
 display:flex;
 
@@ -209,6 +288,8 @@ justify-content:center;
 gap:10px;
 
 flex-wrap:wrap;
+
+padding-top:12px;
 
 }
 
@@ -244,7 +325,8 @@ box-shadow:
 
 button{
 
-margin-top:35px;
+margin-top:12px;
+margin-bottom:0;
 
 background:#000;
 
@@ -318,16 +400,6 @@ color:#000;
 }
 
 
-/* efecto inicial de la línea */
-
-.system-line.intro{
-
-width:120%;
-
-height:2px;
-
-}
-
 
 .status-text{
     transition:opacity 150ms ease;
@@ -336,7 +408,7 @@ height:2px;
 
 .intro-line{
 
-position:absolute;
+position:fixed;
 
 left:50%;
 top:50%;
@@ -345,8 +417,8 @@ transform:
 translate(-50%,-50%)
 scaleX(.2);
 
-width:120%;
-height:2px;
+width:70%;
+height:3px;
 
 background:#00ff66;
 
@@ -393,6 +465,8 @@ pointer-events:none;
 
 
 <div class="textarea-wrapper">
+
+<div class="text-line-effects" id="textLineEffects"></div>
 
 <textarea
 name="message"
@@ -472,6 +546,9 @@ const introLine = document.getElementById("introLine");
 
 const cursor = document.querySelector(".textarea-cursor");
 
+const textLineEffects =
+    document.getElementById("textLineEffects");
+
 
 function updateCursor(){
 
@@ -510,6 +587,97 @@ function updateCursor(){
 
 }
 
+/* efecto de línea al pulsar ENTER */
+
+function createTextLineEffect(lineNumber){
+
+    const style = getComputedStyle(textarea);
+
+    const paddingTop =
+        parseFloat(style.paddingTop);
+
+    const lineHeight =
+        parseFloat(style.lineHeight);
+
+    const line = document.createElement("div");
+
+    line.className = "text-line-effect";
+
+    line.dataset.line = lineNumber;
+
+    line.style.top =
+        (
+            paddingTop +
+            (lineNumber * lineHeight) +
+            lineHeight - 2
+        ) + "px";
+
+    textLineEffects.appendChild(line);
+
+    requestAnimationFrame(() => {
+
+        line.classList.add("show");
+
+    });
+
+}
+
+textarea.addEventListener("keydown", (e) => {
+
+    if(e.key !== "Enter") return;
+
+    const lines =
+        textarea.value.split("\n");
+
+    const currentLine =
+        lines.length - 1;
+
+    createTextLineEffect(currentLine);
+
+});
+
+function updateTextLineEffects(){
+
+    const style =
+        getComputedStyle(textarea);
+
+    const paddingTop =
+        parseFloat(style.paddingTop);
+
+    const lineHeight =
+        parseFloat(style.lineHeight);
+
+    const effects =
+        textLineEffects.querySelectorAll(
+            ".text-line-effect"
+        );
+
+    effects.forEach(effect => {
+
+        const lineNumber =
+            parseInt(effect.dataset.line);
+
+        effect.style.top =
+            (
+                paddingTop +
+                (lineNumber * lineHeight) +
+                lineHeight - 2 -
+                textarea.scrollTop
+            ) + "px";
+
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
 
 textarea.addEventListener("input", updateCursor);
 
@@ -517,7 +685,13 @@ textarea.addEventListener("click", updateCursor);
 
 textarea.addEventListener("keyup", updateCursor);
 
-textarea.addEventListener("scroll", updateCursor);
+textarea.addEventListener("scroll", () => {
+
+    updateCursor();
+
+    updateTextLineEffects();
+
+});
 
 
 let selected = [];
