@@ -63,17 +63,9 @@ pointer-events:none;
 width:94%;
 max-width:760px;
 
-height:100vh;
-
-display:flex;
-flex-direction:column;
-
 text-align:center;
 
 transition:opacity .5s ease;
-
-padding-top:70px;
-padding-bottom:15px;
 
 }
 
@@ -82,16 +74,27 @@ padding-bottom:15px;
 
 .status{
 
-position:relative;
+position:absolute;
+
+left:0;
+top:50%;
+
+width:100%;
+
+transform:translateY(-50%);
 
 font-size:18px;
 
 letter-spacing:4px;
 
-margin-bottom:25px;
+text-align:center;
 
 text-shadow:
 0 0 10px #00ff66;
+
+pointer-events:none;
+
+z-index:2;
 
 }
 
@@ -121,15 +124,16 @@ textarea{
 
 width:100%;
 
-height:62vh;
-min-height:0;
-max-height:none;
+height:68vh;
+min-height:420px;
+max-height:700px;
 
 resize:none;
 
 background:#000;
 
 border:none;
+outline:none;
 
 color:#00ff66;
 
@@ -141,12 +145,7 @@ line-height:1.5;
 
 padding:18px;
 
-outline:none;
-
 caret-color:transparent;
-
-box-shadow:
-inset 0 0 15px rgba(0,255,100,.12);
 
 }
 
@@ -159,78 +158,6 @@ opacity:1;
 
 
 /* cursor cuadrado */
-
-
-/* líneas creadas al pulsar ENTER */
-
-.text-line-effects{
-
-position:absolute;
-
-left:0;
-top:0;
-
-width:100%;
-height:100%;
-
-pointer-events:none;
-
-overflow:hidden;
-
-}
-
-
-.text-line-effect{
-
-position:absolute;
-
-left:15%;
-
-width:70%;
-
-height:2px;
-
-background:#00ff66;
-
-opacity:0;
-
-box-shadow:
-0 0 6px #00ff66,
-0 0 15px #00ff66;
-
-transform:scaleX(.2);
-
-transform-origin:center;
-
-transition:
-transform 180ms ease-out,
-opacity 180ms ease-out;
-
-}
-
-
-.text-line-effect.show{
-
-opacity:1;
-
-transform:scaleX(1);
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .textarea-cursor{
@@ -279,7 +206,7 @@ opacity:0;
 
 .options{
 
-margin-top:auto;
+margin-top:25px;
 
 display:flex;
 
@@ -288,8 +215,6 @@ justify-content:center;
 gap:10px;
 
 flex-wrap:wrap;
-
-padding-top:12px;
 
 }
 
@@ -325,8 +250,7 @@ box-shadow:
 
 button{
 
-margin-top:12px;
-margin-bottom:0;
+margin-top:35px;
 
 background:#000;
 
@@ -375,39 +299,6 @@ color:#000;
 
 .system-line{
 
-    position:fixed;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:70%;
-    height:3px;
-
-    background:#00ff66;
-
-    opacity:0;
-
-    box-shadow:
-    0 0 10px #00ff66,
-    0 0 25px #00ff66;
-
-    transition:
-    width 250ms ease-out,
-    height 250ms ease-out;
-
-}
-
-
-
-.status-text{
-    transition:opacity 150ms ease;
-}
-
-
-.intro-line{
-
 position:fixed;
 
 left:50%;
@@ -415,10 +306,11 @@ top:50%;
 
 transform:
 translate(-50%,-50%)
-scaleX(.2);
+scaleX(1);
 
-width:70%;
-height:3px;
+width:120%;
+
+height:2px;
 
 background:#00ff66;
 
@@ -437,7 +329,84 @@ pointer-events:none;
 }
 
 
+/* efecto inicial de la línea */
 
+.system-line.intro{
+
+width:120%;
+
+height:2px;
+
+}
+
+
+.status-text{
+    transition:opacity 150ms ease;
+}
+
+
+.intro-line{
+
+position:absolute;
+
+left:50%;
+top:50%;
+
+transform:
+translate(-50%,-50%)
+scaleX(.2);
+
+width:120%;
+height:2px;
+
+background:#00ff66;
+
+opacity:0;
+
+box-shadow:
+0 0 10px #00ff66,
+0 0 25px #00ff66;
+
+transition:
+transform 180ms ease-out,
+opacity 180ms ease-out;
+
+pointer-events:none;
+
+}
+
+
+.entry-line{
+
+position:absolute;
+
+left:50%;
+
+height:2px;
+
+width:120%;
+
+background:#00ff66;
+
+opacity:0;
+
+box-shadow:
+0 0 10px #00ff66,
+0 0 25px #00ff66;
+
+transform:
+translate(-50%,-50%)
+scaleX(.2);
+
+transition:
+transform 180ms ease-out,
+opacity 180ms ease-out;
+
+pointer-events:none;
+
+z-index:3;
+
+}
 
 
 
@@ -452,6 +421,16 @@ pointer-events:none;
 <div class="system">
 
 
+<form id="form">
+
+<div class="textarea-wrapper">
+
+<textarea
+name="message"
+required></textarea>
+
+<span class="textarea-cursor"></span>
+
 <div class="status" id="status">
 
 <span id="status-text" class="status-text"></span>
@@ -460,19 +439,7 @@ pointer-events:none;
 
 </div>
 
-
-<form id="form">
-
-
-<div class="textarea-wrapper">
-
-<div class="text-line-effects" id="textLineEffects"></div>
-
-<textarea
-name="message"
-required></textarea>
-
-<span class="textarea-cursor"></span>
+<div class="entry-line" id="entryLine"></div>
 
 </div>
 
@@ -546,8 +513,7 @@ const introLine = document.getElementById("introLine");
 
 const cursor = document.querySelector(".textarea-cursor");
 
-const textLineEffects =
-    document.getElementById("textLineEffects");
+const entryLine = document.getElementById("entryLine");
 
 
 function updateCursor(){
@@ -587,9 +553,30 @@ function updateCursor(){
 
 }
 
+
+textarea.addEventListener("input", updateCursor);
+
+textarea.addEventListener("click", updateCursor);
+
+textarea.addEventListener("keyup", updateCursor);
+
+textarea.addEventListener("scroll", updateCursor);
+
+const lineSound = new Audio("sound.mp3");
+
+
 /* efecto de línea al pulsar ENTER */
 
-function createTextLineEffect(lineNumber){
+textarea.addEventListener("keydown", (e) => {
+
+    if(e.key !== "Enter") return;
+
+    e.preventDefault();
+
+lineSound.currentTime = 0;
+
+lineSound.play().catch(() => {});
+
 
     const style = getComputedStyle(textarea);
 
@@ -599,97 +586,74 @@ function createTextLineEffect(lineNumber){
     const lineHeight =
         parseFloat(style.lineHeight);
 
-    const line = document.createElement("div");
-
-    line.className = "text-line-effect";
-
-    line.dataset.line = lineNumber;
-
-    line.style.top =
-        (
-            paddingTop +
-            (lineNumber * lineHeight) +
-            lineHeight - 2
-        ) + "px";
-
-    textLineEffects.appendChild(line);
-
-    requestAnimationFrame(() => {
-
-        line.classList.add("show");
-
-    });
-
-}
-
-textarea.addEventListener("keydown", (e) => {
-
-    if(e.key !== "Enter") return;
-
     const lines =
         textarea.value.split("\n");
 
     const currentLine =
         lines.length - 1;
 
-    createTextLineEffect(currentLine);
-
-});
-
-function updateTextLineEffects(){
-
-    const style =
-        getComputedStyle(textarea);
-
-    const paddingTop =
-        parseFloat(style.paddingTop);
-
-    const lineHeight =
-        parseFloat(style.lineHeight);
-
-    const effects =
-        textLineEffects.querySelectorAll(
-            ".text-line-effect"
-        );
-
-    effects.forEach(effect => {
-
-        const lineNumber =
-            parseInt(effect.dataset.line);
-
-        effect.style.top =
-            (
-                paddingTop +
-                (lineNumber * lineHeight) +
-                lineHeight - 2 -
-                textarea.scrollTop
-            ) + "px";
-
-    });
-
-}
+    const lineY =
+        paddingTop +
+        currentLine * lineHeight +
+        lineHeight / 2 -
+        textarea.scrollTop;
 
 
+    /* insertar el salto de línea */
+
+    const start =
+        textarea.selectionStart;
+
+    const end =
+        textarea.selectionEnd;
+
+    textarea.setRangeText(
+        "\n",
+        start,
+        end,
+        "end"
+    );
 
 
+    /* posición visual de la línea */
+
+    entryLine.style.top =
+        lineY + "px";
 
 
+    /* estado inicial */
+
+    entryLine.style.opacity = "0";
+
+    entryLine.style.transform =
+        "translate(-50%,-50%) scaleX(.2)";
 
 
+    /* aparición y expansión */
+
+    setTimeout(() => {
+
+        entryLine.style.opacity = "1";
+
+        entryLine.style.transform =
+            "translate(-50%,-50%) scaleX(1.15)";
+
+    }, 100);
 
 
+    /* desaparición */
 
-textarea.addEventListener("input", updateCursor);
+    setTimeout(() => {
 
-textarea.addEventListener("click", updateCursor);
+        entryLine.style.opacity = "0";
 
-textarea.addEventListener("keyup", updateCursor);
+        entryLine.style.transform =
+            "translate(-50%,-50%) scaleX(.2)";
 
-textarea.addEventListener("scroll", () => {
+    }, 280);
+
 
     updateCursor();
-
-    updateTextLineEffects();
 
 });
 
@@ -990,7 +954,6 @@ form.addEventListener("submit", async (e) => {
         }
 
 
-        
         systemTransition("response.html");
 
 
