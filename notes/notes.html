@@ -112,11 +112,9 @@ text-shadow:
 /* textarea */
 
 .textarea-wrapper{
-
-position:relative;
-
-width:100%;
-
+    position:relative;
+    width:100%;
+    transform:translateY(-20px);
 }
 
 
@@ -134,6 +132,8 @@ background:#000;
 
 border:none;
 outline:none;
+
+overflow:hidden;
 
 color:#00ff66;
 
@@ -205,17 +205,11 @@ opacity:0;
 /* opciones */
 
 .options{
-
-margin-top:3px;
-
-display:flex;
-
-justify-content:center;
-
-gap:10px;
-
-flex-wrap:wrap;
-
+    margin-top:-20px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
 
@@ -515,6 +509,8 @@ const cursor = document.querySelector(".textarea-cursor");
 
 const entryLine = document.getElementById("entryLine");
 
+const MAX_LINES = 14;
+
 
 function updateCursor(){
 
@@ -571,11 +567,23 @@ textarea.addEventListener("keydown", (e) => {
 
     if(e.key !== "Enter") return;
 
+    const lines = textarea.value.split("\n");
+
+    /* límite de 14 líneas */
+
+    if(lines.length >= MAX_LINES){
+
+        e.preventDefault();
+
+        return;
+
+    }
+
     e.preventDefault();
 
-lineSound.currentTime = 0;
+    lineSound.currentTime = 0;
 
-lineSound.play().catch(() => {});
+    lineSound.play().catch(() => {});
 
 
     const style = getComputedStyle(textarea);
@@ -586,17 +594,13 @@ lineSound.play().catch(() => {});
     const lineHeight =
         parseFloat(style.lineHeight);
 
-    const lines =
-        textarea.value.split("\n");
-
     const currentLine =
         lines.length - 1;
 
     const lineY =
         paddingTop +
         currentLine * lineHeight +
-        lineHeight / 2 -
-        textarea.scrollTop;
+        lineHeight / 2;
 
 
     /* insertar el salto de línea */
@@ -629,7 +633,7 @@ lineSound.play().catch(() => {});
         "translate(-50%,-50%) scaleX(.2)";
 
 
-    /* aparición y expansión */
+    /* aparición */
 
     setTimeout(() => {
 
