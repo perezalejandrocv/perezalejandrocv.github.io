@@ -76,10 +76,44 @@ text-shadow:
 0 0 10px #00ff66,
 0 0 20px #00ff66;
 
-transition:opacity .5s ease;
+transition:opacity .2s ease;
 
 }
 
+
+/* línea sistema */
+
+.system-line{
+
+position:fixed;
+
+left:50%;
+top:50%;
+
+transform:
+translate(-50%,-50%)
+scaleX(.2);
+
+width:70%;
+
+height:3px;
+
+background:#00ff66;
+
+opacity:0;
+
+box-shadow:
+0 0 10px #00ff66,
+0 0 25px #00ff66;
+
+transition:
+transform 180ms ease-out,
+opacity 180ms ease-out;
+
+}
+
+
+/* cursor */
 
 .terminal-cursor{
 
@@ -102,6 +136,7 @@ animation:terminalCursorBlink 0.8s steps(1) infinite;
 
 }
 
+
 @keyframes terminalCursorBlink{
 
 0%,49%{
@@ -114,8 +149,6 @@ animation:terminalCursorBlink 0.8s steps(1) infinite;
 
 }
 
-
-
 </style>
 
 </head>
@@ -127,25 +160,84 @@ animation:terminalCursorBlink 0.8s steps(1) infinite;
 <div class="system">
 
 <div class="message" id="message">
-FIN DE LA TRANSMISIÓN
+GRACIAS
 </div>
 
 </div>
+
+
+<div class="system-line" id="line"></div>
 
 
 
 <script>
 
 
-const message=document.getElementById("message");
+const message = document.getElementById("message");
+
+const line = document.getElementById("line");
 
 
-setTimeout(()=>{
+/* 1. APARECE GRACIAS */
 
-message.style.opacity="1";
+setTimeout(() => {
 
-},700);
+    message.style.opacity = "1";
 
+}, 250);
+
+
+/* 2. DESAPARECE GRACIAS */
+
+setTimeout(() => {
+
+    message.style.opacity = "0";
+
+}, 900);
+
+
+/* 3. APARECE LA LÍNEA */
+
+setTimeout(() => {
+
+    line.style.opacity = "1";
+
+    line.style.transform =
+        "translate(-50%,-50%) scaleX(1.15)";
+
+}, 1100);
+
+
+/* 4. DESAPARECE LA LÍNEA */
+
+setTimeout(() => {
+
+    line.style.opacity = "0";
+
+    line.style.transform =
+        "translate(-50%,-50%) scaleX(.2)";
+
+}, 1300);
+
+
+/* 5. APARECE FIN DE LA TRANSMISIÓN */
+
+setTimeout(() => {
+
+    message.textContent = "FIN DE LA TRANSMISIÓN";
+
+    message.style.opacity = "1";
+
+}, 1550);
+
+
+/* 6. VOLVER AL INDEX */
+
+setTimeout(() => {
+
+    window.location.href = "index.html";
+
+}, 2500);
 
 
 </script>
