@@ -928,19 +928,10 @@ form.addEventListener("submit", async (e) => {
 
     try{
 
-        const response = await fetch(
-
-            "https://formsubmit.co/canalsjaume@yahoo.com",
-
-            {
-
-                method: "POST",
-
-                body: formData
-
-            }
-
-        );
+        const response = await fetch("https://formsubmit.co/8f75a7c7a58d3a8b305f5f132f29c79e", {
+  method: "POST",
+  body: formData
+});
 
 
         if(!response.ok){

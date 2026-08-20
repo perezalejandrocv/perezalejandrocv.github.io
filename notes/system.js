@@ -28,7 +28,7 @@ function systemTransition(destination) {
 
         notificationSound.play().catch(() => {});
 
-    }, 430);
+    }, 390);
 
 
     // LÍNEA
@@ -143,7 +143,7 @@ setTimeout(() => {
 
     element.classList.remove("system-ready-flash");
 
-}, 390);
+}, 400);
 
 
 }
