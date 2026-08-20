@@ -28,7 +28,7 @@ function systemTransition(destination) {
 
         notificationSound.play().catch(() => {});
 
-    }, 390);
+    }, 370);
 
 
     // LÍNEA
