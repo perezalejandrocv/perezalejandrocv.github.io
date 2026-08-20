@@ -72,7 +72,7 @@ body::after{
 
     .system{
 
-        transform:translateY(-120px);
+        transform:translateY(-140px);
 
     }
 
@@ -287,6 +287,12 @@ body::after{
 <script src="system.js"></script>
 
 <script>
+
+const redirectionSound = new Audio("redirection.mp3");
+
+redirectionSound.currentTime = 0;
+
+redirectionSound.play().catch(() => {});
 
 const enter = document.getElementById("enter");
 

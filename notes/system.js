@@ -1,64 +1,74 @@
 const notificationSound = new Audio("bell-notification.mp3");
+notificationSound.preload = "auto";
 
 function systemTransition(destination) {
 
-notificationSound.play();
-
-const system = document.querySelector(".system");
-const line = document.getElementById("line");
-
-const introLine = document.getElementById("introLine");
+    const system = document.querySelector(".system");
+    const line = document.getElementById("line");
 
 
-if (system) {
-    system.style.opacity = "0";
-}
-
-line.style.animation = "none";
-
-// Estado inicial de la línea
-line.style.opacity = "0";
-line.style.width = "70%";
-line.style.height = "3px";
-line.style.transform = "translate(-50%,-50%) scaleX(1)";
+    if (system) {
+        system.style.opacity = "0";
+    }
 
 
-
-// Primer pulso
-setTimeout(() => {
-
-    line.style.opacity = "1";
-    line.style.width = "85%";
-    line.style.height = "2px";
-
-}, 500);
-
-setTimeout(() => {
+    line.style.animation = "none";
 
     line.style.opacity = "0";
+    line.style.width = "70%";
+    line.style.height = "3px";
+    line.style.transform =
+        "translate(-50%,-50%) scaleX(1)";
 
-}, 590);
 
-// Segundo pulso
-setTimeout(() => {
+    // SONIDO
+    setTimeout(() => {
 
-    line.style.opacity = "1";
+        notificationSound.currentTime = 0;
 
-}, 690);
+        notificationSound.play().catch(() => {});
 
-setTimeout(() => {
+    }, 430);
 
-    line.style.opacity = "0";
 
-}, 780);
+    // LÍNEA
+    setTimeout(() => {
 
-// Cambio de pantalla
-setTimeout(() => {
+        line.style.opacity = "1";
+        line.style.width = "85%";
+        line.style.height = "2px";
 
-    window.location.href = destination;
+    }, 500);
 
-}, 1050);
 
+    setTimeout(() => {
+
+        line.style.opacity = "0";
+
+    }, 590);
+
+
+    // Segundo pulso
+    setTimeout(() => {
+
+        line.style.opacity = "1";
+
+    }, 690);
+
+
+    setTimeout(() => {
+
+        line.style.opacity = "0";
+
+    }, 780);
+
+
+    // Cambio
+    setTimeout(() => {
+
+        window.location.href = destination;
+
+    }, 1400);
 
 }
 
@@ -133,7 +143,7 @@ setTimeout(() => {
 
     element.classList.remove("system-ready-flash");
 
-}, 400);
+}, 390);
 
 
 }
