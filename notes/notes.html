@@ -161,30 +161,31 @@ opacity:1;
 
 
 .textarea-cursor{
+    display:block;
 
-position:absolute;
+    position:absolute;
 
-width:.65em;
-height:1em;
+    width:.65em;
+    height:1em;
 
-background:#00ff66;
+    background:#00ff66;
 
-box-shadow:
-0 0 6px #00ff66,
-0 0 12px #00ff66;
+    box-shadow:
+        0 0 6px #00ff66,
+        0 0 12px #00ff66;
 
-pointer-events:none;
+    pointer-events:none;
 
-visibility:hidden;
-
+    visibility:hidden;
 }
 
 .textarea-cursor.visible{
+    visibility:visible;
 
-visibility:visible;
-
-animation:terminalCursorBlink .8s steps(1) infinite;
-
+    animation:
+        terminalCursorBlink
+        .8s steps(1)
+        infinite;
 }
 
 
@@ -508,38 +509,200 @@ const MAX_LINES = 20;
 
 function updateCursor(){
 
-    const style = getComputedStyle(textarea);
+    const style =
+        getComputedStyle(textarea);
 
-    const text = textarea.value;
 
-    const lines = text.split("\n");
+    /* =========================================
+       RECTÁNGULOS REALES
+       ========================================= */
 
-    const currentLine = lines[lines.length - 1];
+    const textareaRect =
+        textarea.getBoundingClientRect();
 
-    const canvas = document.createElement("canvas");
+    const wrapperRect =
+        textarea.parentElement.getBoundingClientRect();
 
-    const ctx = canvas.getContext("2d");
 
-    ctx.font =
-        style.fontSize + " " +
+    /* =========================================
+       CREAR ESPEJO
+       ========================================= */
+
+    const mirror =
+        document.createElement("div");
+
+
+    mirror.style.position =
+        "absolute";
+
+    mirror.style.left =
+        (textareaRect.left - wrapperRect.left) + "px";
+
+    mirror.style.top =
+        (textareaRect.top - wrapperRect.top) + "px";
+
+    mirror.style.width =
+        textareaRect.width + "px";
+
+    mirror.style.height =
+        textareaRect.height + "px";
+
+
+    mirror.style.boxSizing =
+        "border-box";
+
+    mirror.style.padding =
+        style.padding;
+
+    mirror.style.border =
+        style.border;
+
+
+    /* =========================================
+       MISMA TIPOGRAFÍA
+       ========================================= */
+
+    mirror.style.fontFamily =
         style.fontFamily;
 
-    const textWidth = ctx.measureText(currentLine).width;
+    mirror.style.fontSize =
+        style.fontSize;
 
-    const paddingLeft = parseFloat(style.paddingLeft);
-    const paddingTop = parseFloat(style.paddingTop);
+    mirror.style.fontWeight =
+        style.fontWeight;
 
-    const lineHeight = parseFloat(style.lineHeight);
+    mirror.style.fontStyle =
+        style.fontStyle;
 
-    const lineNumber = lines.length - 1;
+    mirror.style.lineHeight =
+        style.lineHeight;
 
+    mirror.style.letterSpacing =
+        style.letterSpacing;
+
+    mirror.style.textIndent =
+        style.textIndent;
+
+    mirror.style.textTransform =
+        style.textTransform;
+
+mirror.style.textAlign =
+    style.textAlign;
+
+
+    /* =========================================
+       MISMO COMPORTAMIENTO DEL TEXTO
+       ========================================= */
+
+    mirror.style.whiteSpace =
+        "pre-wrap";
+
+    mirror.style.wordWrap =
+        "break-word";
+
+    mirror.style.overflowWrap =
+        "break-word";
+
+    mirror.style.overflow =
+        "hidden";
+
+
+    mirror.style.visibility =
+        "hidden";
+
+    mirror.style.pointerEvents =
+        "none";
+
+
+    /* =========================================
+       TEXTO HASTA EL CARET REAL
+       ========================================= */
+
+    const before =
+        textarea.value.substring(
+            0,
+            textarea.selectionStart
+        );
+
+
+    mirror.appendChild(
+        document.createTextNode(before)
+    );
+
+
+    /* =========================================
+       MARCADOR EN LA POSICIÓN DEL CARET
+       ========================================= */
+
+    const marker =
+        document.createElement("span");
+
+    marker.textContent =
+        "\u200b";
+
+
+    mirror.appendChild(marker);
+
+
+    /* =========================================
+       AÑADIR ESPEJO
+       ========================================= */
+
+    textarea.parentElement.appendChild(
+        mirror
+    );
+
+
+    /* =========================================
+       POSICIÓN DEL CARET
+       ========================================= */
+
+    const markerRect =
+        marker.getBoundingClientRect();
+
+
+    /*
+     * El marker y el textarea están ahora
+     * en exactamente el mismo sistema
+     * de coordenadas de pantalla.
+     */
+
+    let left =
+        markerRect.left -
+        textareaRect.left;
+
+    let top =
+        markerRect.top -
+        textareaRect.top;
+
+
+    /* =========================================
+       COMPENSAR SCROLL INTERNO
+       ========================================= */
+
+    left -=
+        textarea.scrollLeft;
+
+    top -=
+        textarea.scrollTop;
+
+
+    /* =========================================
+       POSICIÓN FINAL
+       ========================================= */
 
     cursor.style.left =
-        (paddingLeft + textWidth) + "px";
+        left + "px";
 
     cursor.style.top =
-        (paddingTop + lineNumber * lineHeight - textarea.scrollTop + 3) + "px";
+        (top + 1) + "px";
 
+
+    /* =========================================
+       ELIMINAR ESPEJO
+       ========================================= */
+
+    mirror.remove();
 
 }
 
@@ -580,19 +743,100 @@ textarea.addEventListener("keydown", (e) => {
 
     const style = getComputedStyle(textarea);
 
-    const paddingTop =
-        parseFloat(style.paddingTop);
+const textareaRect =
+    textarea.getBoundingClientRect();
 
-    const lineHeight =
-        parseFloat(style.lineHeight);
+const wrapperRect =
+    textarea.parentElement.getBoundingClientRect();
 
-    const currentLine =
-        lines.length - 1;
 
-    const lineY =
-        paddingTop +
-        currentLine * lineHeight +
-        lineHeight / 2;
+/* crear espejo para localizar
+   exactamente la posición visual del caret */
+
+const mirror =
+    document.createElement("div");
+
+mirror.style.position = "absolute";
+
+mirror.style.left =
+    (textareaRect.left - wrapperRect.left) + "px";
+
+mirror.style.top =
+    (textareaRect.top - wrapperRect.top) + "px";
+
+mirror.style.width =
+    textareaRect.width + "px";
+
+mirror.style.height =
+    textareaRect.height + "px";
+
+mirror.style.boxSizing = "border-box";
+
+mirror.style.padding = style.padding;
+
+mirror.style.border = style.border;
+
+mirror.style.fontFamily = style.fontFamily;
+mirror.style.fontSize = style.fontSize;
+mirror.style.fontWeight = style.fontWeight;
+mirror.style.fontStyle = style.fontStyle;
+mirror.style.lineHeight = style.lineHeight;
+mirror.style.letterSpacing = style.letterSpacing;
+mirror.style.textIndent = style.textIndent;
+mirror.style.textTransform = style.textTransform;
+
+mirror.style.whiteSpace = "pre-wrap";
+mirror.style.wordWrap = "break-word";
+mirror.style.overflowWrap = "break-word";
+mirror.style.overflow = "hidden";
+
+mirror.style.visibility = "hidden";
+mirror.style.pointerEvents = "none";
+
+
+/* texto hasta el caret */
+
+const before =
+    textarea.value.substring(
+        0,
+        textarea.selectionStart
+    );
+
+
+mirror.appendChild(
+    document.createTextNode(before)
+);
+
+
+/* marcador */
+
+const marker =
+    document.createElement("span");
+
+marker.textContent = "\u200b";
+
+mirror.appendChild(marker);
+
+textarea.parentElement.appendChild(mirror);
+
+
+/* posición visual */
+
+const markerRect =
+    marker.getBoundingClientRect();
+
+
+const lineY =
+    markerRect.top -
+    textareaRect.top -
+    textarea.scrollTop +
+    parseFloat(style.lineHeight) / 2 -
+    2;
+
+
+/* eliminar espejo */
+
+mirror.remove();
 
 
     /* insertar el salto de línea */
@@ -604,17 +848,26 @@ textarea.addEventListener("keydown", (e) => {
         textarea.selectionEnd;
 
     textarea.setRangeText(
-        "\n",
-        start,
-        end,
-        "end"
-    );
+    "\n",
+    start,
+    end,
+    "end"
+);
 
 
-    /* posición visual de la línea */
+/* reiniciar parpadeo del cursor */
 
-    entryLine.style.top =
-        lineY + "px";
+cursor.classList.remove("visible");
+
+void cursor.offsetWidth;
+
+cursor.classList.add("visible");
+
+
+/* posición visual de la línea */
+
+entryLine.style.top =
+    lineY + "px";
 
 
     /* estado inicial */
