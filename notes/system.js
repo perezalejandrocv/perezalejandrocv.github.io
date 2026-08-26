@@ -14,11 +14,12 @@ function systemTransition(destination) {
 
     line.style.animation = "none";
 
-    line.style.opacity = "0";
-    line.style.width = "70%";
-    line.style.height = "3px";
-    line.style.transform =
-        "translate(-50%,-50%) scaleX(1)";
+line.style.opacity = "0";
+line.style.width = "70%";
+line.style.height = "3px";
+line.style.transform =
+    "translate(-50%,-50%) scaleX(.2)";
+
 
 
     // SONIDO
@@ -34,11 +35,15 @@ function systemTransition(destination) {
     // LÍNEA
     setTimeout(() => {
 
-        line.style.opacity = "1";
-        line.style.width = "85%";
-        line.style.height = "2px";
+    line.style.opacity = "1";
+    line.style.width = "85%";
+    line.style.height = "2px";
 
-    }, 500);
+    line.style.transform =
+        "translate(-50%,-50%) scaleX(1.15)";
+
+}, 500);
+
 
 
     setTimeout(() => {
@@ -51,16 +56,23 @@ function systemTransition(destination) {
     // Segundo pulso
     setTimeout(() => {
 
-        line.style.opacity = "1";
+    line.style.opacity = "1";
 
-    }, 690);
+    line.style.transform =
+        "translate(-50%,-50%) scaleX(1.15)";
+
+}, 690);
 
 
     setTimeout(() => {
 
-        line.style.opacity = "0";
+    line.style.opacity = "0";
 
-    }, 780);
+    line.style.transform =
+        "translate(-50%,-50%) scaleX(.2)";
+
+}, 780);
+
 
 
     // Cambio
