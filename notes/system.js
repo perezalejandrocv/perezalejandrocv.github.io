@@ -36,8 +36,8 @@ line.style.transform =
     setTimeout(() => {
 
     line.style.opacity = "1";
-    line.style.width = "85%";
-    line.style.height = "2px";
+    line.style.width = "70%";
+    line.style.height = "3px";
 
     line.style.transform =
         "translate(-50%,-50%) scaleX(1.15)";
