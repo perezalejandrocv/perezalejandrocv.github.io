@@ -1107,9 +1107,9 @@ form.addEventListener("submit", async (e) => {
 
 
     const subject =
-        subjectIcons.join("") +
-        " " +
-        message.substring(0, 120);
+    subjectIcons.join("") +
+    " " +
+    message.replace(/\r?\n/g, " ").substring(0, 120);
 
 
     /* ETIQUETAS DEL MENSAJE */
@@ -1149,7 +1149,7 @@ form.addEventListener("submit", async (e) => {
 
         "───────────────────────────────────────────────────────────────────────────────────\n\n" +
 
-        message.split(/\r?\n/).join(" ");
+        message;
 
 
     /* DATOS PARA FORMSUBMIT */
