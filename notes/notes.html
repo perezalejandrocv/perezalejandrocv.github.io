@@ -1149,7 +1149,7 @@ form.addEventListener("submit", async (e) => {
 
         "───────────────────────────────────────────────────────────────────────────────────\n\n" +
 
-        message.replace(/\r?\n/g, " ");
+        message.split(/\r?\n/).join(" ");
 
 
     /* DATOS PARA FORMSUBMIT */
